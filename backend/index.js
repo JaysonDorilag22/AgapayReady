@@ -1,7 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-
+import testRouter from './routes/test.route.js'
 const app = express();
 const PORT = process.env.PORT || 4000;
 
@@ -17,6 +17,11 @@ mongoose
     console.log(err);
   });
 
-app.listen(PORT, () => {
+  //Routers
+  app.use('/api/test', testRouter);
+
+
+
+app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
