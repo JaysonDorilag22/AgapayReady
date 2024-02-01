@@ -1,31 +1,25 @@
-import { useState } from 'react';
-import axios from 'axios';
-import './App.css';
+import { useState } from "react";
+import axios from "axios";
+import Header from "./Components/Header";
+import LandingPage from "./Pages/landingPage";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
-function App() {
-  const [responseData, setResponseData] = useState(null);
-
-  const handleSubmit = async () => {
-    try {
-      const response = await axios.get('/api/test/test');
-      setResponseData(response.data);
-      console.log(response.data);  // Log the response to the console
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
-
+const App = () => {
   return (
-    <>
-      <button onClick={handleSubmit}>Test Backend Connection</button>
-      {responseData && (
-        <div>
-          <p>Response from the server:</p>
-          <pre>{JSON.stringify(responseData, null, 2)}</pre>
-        </div>
-      )}
-    </>
+    <Router>
+      <>
+      <Header/>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+        </Routes>
+      </>
+    </Router>
   );
-}
+};
 
 export default App;
