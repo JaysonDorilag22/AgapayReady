@@ -2,6 +2,8 @@ import User from "../models/user.model.js";
 import jwt from 'jsonwebtoken';
 import bcryptjs from 'bcryptjs';
 
+
+//sign up
 export const signup = async (req, res, next) => {
     const { firstname, lastname, email, password } = req.body;
     const hashedPassword = bcryptjs.hashSync(password, 12); 
@@ -10,7 +12,7 @@ export const signup = async (req, res, next) => {
       // Check if the email already exists
       const existingUser = await User.findOne({ email });
       if (existingUser) {
-        return res.status(400).json({ error: 'Email is already taken. Please choose another one.' });
+        return res.status(400).json({ error: 'Email is already taken' });
       }
 
       // If the email is not taken, create a new user
@@ -23,7 +25,7 @@ export const signup = async (req, res, next) => {
     }
 };
 
-
+//sign up
 export const signin = async (req, res, next) => {
     const { email, password } = req.body;
     try {

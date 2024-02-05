@@ -58,7 +58,7 @@ export default function Header() {
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn bg-black text-white">Sign In</a>
+        <a className="btn bg-black  rounded px-12 py-3 text-white">Sign In</a>
       </div>
     </div>
   );
