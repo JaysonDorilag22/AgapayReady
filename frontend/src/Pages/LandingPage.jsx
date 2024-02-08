@@ -5,11 +5,15 @@ import { Link } from "react-router-dom";
 import Footer from "../Components/Footer";
 import Features from "../Components/Features";
 import Banner from "../Components/Banner";
+import Forms from "../Components/Forms";
+import ShuffleHero from "../Components/ShuffleHero";
+import Blog from "../Components/Blog";
 export default function landingPage() {
   return (
     <div>
+    <ShuffleHero/>
 
-      <section className="bg-gray-50">
+      {/* <section className="bg-gray-50">
         <div className="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-screen lg:items-center">
           <div className="mx-auto max-w-xxl text-center">
             <h1 className="text-3xl font-extrabold sm:text-5xl">
@@ -41,9 +45,12 @@ export default function landingPage() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       <Banner/>
       <Features/>
+      <div className="divider divider-error"></div>
+      <Blog/>
+      <Forms/>
       <Footer />
       
     </div>

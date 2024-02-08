@@ -7,25 +7,16 @@ export default function Banner() {
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <div className="bg-black p-8 md:p-12 lg:px-16 lg:py-24">
             <div className="mx-auto max-w-xl text-center">
-              <h2 className="text-2xl font-bold text-white md:text-3xl">
+              <h2 className="text-2xl font-bold text-white md:text-3xl text-left">
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit
               </h2>
 
-              <p className="hidden text-white/90 sm:mt-4 sm:block">
+              <p className="hidden text-white/90 sm:mt-4 sm:block text-left">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et,
                 egestas tempus tellus etiam sed. Quam a scelerisque amet
                 ullamcorper eu enim et fermentum, augue. Aliquet amet volutpat
                 quisque ut interdum tincidunt duis.
               </p>
-
-              <div className="mt-4 md:mt-8">
-                <a
-                  href="#"
-                  className="inline-block rounded border border-white bg-white px-12 py-3 text-sm font-medium text-black transition hover:bg-transparent hover:text-white focus:outline-none focus:ring focus:ring-grey-400"
-                >
-                  Get Started Today
-                </a>
-              </div>
             </div>
           </div>
 
