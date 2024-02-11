@@ -14,7 +14,7 @@ export default function Mapping() {
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/streets-v11',
       center: [121.03536967321583, 14.509284182080165],
-      zoom: 15, // Default zoom
+      zoom: 17, // Default zoom
     });
 
     newMap.on('load', async () => {

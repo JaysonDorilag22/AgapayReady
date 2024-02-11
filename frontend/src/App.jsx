@@ -9,6 +9,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
+import Blog from "./Components/Blog";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/map" element={<Map />} />
+          <Route path="/blog" element={<Blog />} />
         </Routes>
       </>
     </Router>

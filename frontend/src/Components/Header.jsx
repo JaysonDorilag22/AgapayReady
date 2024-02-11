@@ -63,7 +63,9 @@ export default function Header() {
             </Link>
           </li>
           <li>
+          <Link to={"/blog"}>
             <a>Blog</a>
+            </Link>
           </li>
           <li>
             <a>About</a>
