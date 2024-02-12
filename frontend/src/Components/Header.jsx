@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import ViteLogo from "../../public/vite.png"; // Import the Vite logo image
 
 export default function Header() {
   return (
@@ -27,16 +28,14 @@ export default function Header() {
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-            <Link to={"/"}>
-              <a>Home</a>
+              <Link to={"/"}>
+                <a>Home</a>
               </Link>
             </li>
             <li>
-            <Link to={"/map"}>
-
-              <a>Map</a>
-            </Link>
-
+              <Link to={"/map"}>
+                <a>Map</a>
+              </Link>
             </li>
             <li>
               <a>Blog</a>
@@ -47,33 +46,38 @@ export default function Header() {
           </ul>
         </div>
         <Link to={"/"}>
-        <a className="ml-3 text-xl">AgapayReady</a>
+          {/* Replace the text with the Vite logo */}
+          <img src={ViteLogo} alt="Vite Logo" className="w-20" />
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-          <Link to={"/"}>
+            <Link to={"/"}>
               <a>Home</a>
-              </Link>
-          </li>
-          <li>
-          <Link to={"/map"}>
-            <a>Map</a>
             </Link>
           </li>
           <li>
-          <Link to={"/blog"}>
-            <a>Blog</a>
+            <Link to={"/map"}>
+              <a>Map</a>
             </Link>
           </li>
           <li>
-            <a>About</a>
+            <Link to={"/blog"}>
+              <a>Blog</a>
+            </Link>
+          </li>
+          <li>
+          <Link to={"/dashboard"}>
+              <a>Dashboard</a>
+            </Link>
           </li>
         </ul>
       </div>
       <div className="navbar-end">
+      <Link to={"/register"}>
         <a className="btn bg-black  rounded px-12 py-3 text-white">Sign In</a>
+        </Link>
       </div>
     </div>
   );

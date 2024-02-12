@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 
 const ShuffleHero = () => {
   return (
@@ -15,9 +16,11 @@ const ShuffleHero = () => {
         Your trusted partner in emergency response. Be prepared, stay
               safe, and act fast with AgapayReady.
         </p>
+        <Link to={'/register'}>
         <button className="bg-red-500 text-white font-medium py-2 px-4 rounded transition-all hover:bg-red-600 active:scale-95">
           Register Now
         </button>
+        </Link>
       </div>
       <ShuffleGrid />
     </section>
@@ -44,31 +47,31 @@ const shuffle = (array) => {
 const squareData = [
   {
     id: 1,
-    src: "https://images.unsplash.com/photo-1547347298-4074fc3086f0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
+    src: "https://images.metronewscentral.net/LJFN7Wa5lH643-taguig.jpg",
   },
   {
     id: 2,
-    src: "https://images.unsplash.com/photo-1510925758641-869d353cecc7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+    src: "https://mb.com.ph/media/disaster2_5141e2b1ed/disaster2_5141e2b1ed.jpg",
   },
   {
     id: 3,
-    src: "https://images.unsplash.com/photo-1629901925121-8a141c2a42f4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+    src: "https://media.philstar.com/photos/2023/08/07/taguig-center-disaster-management_2023-08-07_17-54-25.jpg",
   },
   {
     id: 4,
-    src: "https://images.unsplash.com/photo-1580238053495-b9720401fd45?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+    src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQF2obcSsxcEqlUASJljecgWWPmVHmzkHUPBA&usqp=CAU",
   },
   {
     id: 5,
-    src: "https://images.unsplash.com/photo-1569074187119-c87815b476da?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1325&q=80",
+    src: "https://pia.gov.ph/uploads/2023/07/e9d62ac9903a70f2e7c9decfdf14dd78-800-1200.jpg",
   },
   {
     id: 6,
-    src: "https://images.unsplash.com/photo-1556817411-31ae72fa3ea0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
+    src: "https://pia.gov.ph/uploads/2023/07/03cafec07381294c54c2c9b61ec4660c.jpg",
   },
   {
     id: 7,
-    src: "https://images.unsplash.com/photo-1599586120429-48281b6f0ece?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80",
+    src: "https://mb.com.ph/media/Taguig_July302023_C_92c078f30a/Taguig_July302023_C_92c078f30a.jpg",
   },
   {
     id: 8,

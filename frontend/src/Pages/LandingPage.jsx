@@ -8,12 +8,26 @@ import Banner from "../Components/Banner";
 import Forms from "../Components/Forms";
 import ShuffleHero from "../Components/ShuffleHero";
 import Blog from "../Components/Blog";
+import Graphs from "../Components/Graphs";
+import Sender from "../Components/Sender";
+
 export default function landingPage() {
   return (
     <div>
     <ShuffleHero/>
+    <Sender/>
+      <Banner/>
+      <Features/>
+      {/* <div className="divider divider-error"></div> */}
+      <Blog/>
+      <Forms/>
+      {/* <Graphs/> */}
+      {/* <Footer /> */}
+    </div>
+  );
+}
 
-      {/* <section className="bg-gray-50">
+ {/* <section className="bg-gray-50">
         <div className="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-screen lg:items-center">
           <div className="mx-auto max-w-xxl text-center">
             <h1 className="text-3xl font-extrabold sm:text-5xl">
@@ -46,13 +60,3 @@ export default function landingPage() {
           </div>
         </div>
       </section> */}
-      <Banner/>
-      <Features/>
-      <div className="divider divider-error"></div>
-      <Blog/>
-      <Forms/>
-      <Footer />
-      
-    </div>
-  );
-}

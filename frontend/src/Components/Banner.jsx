@@ -8,14 +8,13 @@ export default function Banner() {
           <div className="bg-black p-8 md:p-12 lg:px-16 lg:py-24">
             <div className="mx-auto max-w-xl text-center">
               <h2 className="text-2xl font-bold text-white md:text-3xl text-left">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit
+                Your Comprehensive Solution for Campus Safety and Resilience
               </h2>
 
               <p className="hidden text-white/90 sm:mt-4 sm:block text-left">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et,
-                egestas tempus tellus etiam sed. Quam a scelerisque amet
-                ullamcorper eu enim et fermentum, augue. Aliquet amet volutpat
-                quisque ut interdum tincidunt duis.
+                Discover peace of mind in every crisis. AgapayReady keeps you
+                informed and empowered during emergencies at TUP-Taguig. From
+                real-time updates to intuitive guidance, stay safe with us.
               </p>
             </div>
           </div>
