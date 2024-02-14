@@ -1,9 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
 import Header from "./Components/Header";
-import LandingPage from "./Pages/landingPage";
-import RegisterPage from "./Pages/Register"
-import Map from "./Pages/Map";
+import LandingPage from "./Pages/Common/LandingPage";
+import RegisterPage from "./Pages/Common/Register"
+import Map from "./Pages/Common/Map";
 import {
   BrowserRouter as Router,
   Routes,
@@ -12,7 +12,8 @@ import {
 } from "react-router-dom";
 import Blog from "./Components/Blog";
 import Footer from "./Components/Footer";
-import Dashboard from "./Pages/Dashboard";
+import UserDashboard from "./Pages/User/Dashboard";
+import Login from "./Components/Login";
 
 const App = () => {
   return (
@@ -24,9 +25,8 @@ const App = () => {
           <Route path="/map" element={<Map />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-
-
+          <Route path="/user/dashboard" element={<UserDashboard />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
         <Footer/>
       </>

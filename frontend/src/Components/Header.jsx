@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import ViteLogo from "../../public/vite.png"; // Import the Vite logo image
+import ViteLogo from "../assets/services/vite.png";
+
 
 export default function Header() {
   return (
@@ -76,7 +77,7 @@ export default function Header() {
       </div>
       <div className="navbar-end">
       <Link to={"/register"}>
-        <a className="btn bg-black  rounded px-12 py-3 text-white">Sign In</a>
+        <a className="btn bg-black  rounded px-12 py-3 text-white hover:text-black">Register</a>
         </Link>
       </div>
     </div>

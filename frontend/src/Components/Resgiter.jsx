@@ -1,6 +1,51 @@
-import React from "react";
-import Vite from "../../public/vite.png";
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import Vite from "../assets/services/vite.png";
+import axios from "axios";
+
+
 export default function Forms() {
+  const [formData, setFormData] = useState({
+    firstname: "",
+    lastname: "",
+    email: "",
+    password: "",
+    password_confirmation: "",
+    marketing_accept: false,
+  });
+
+  const [passwordError, setPasswordError] = useState("");
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (formData.password !== formData.password_confirmation) {
+      setPasswordError("Passwords do not match");
+      return;
+    }
+
+    try {
+      const response = await axios.post("/api/v1/register", formData);
+      if (response.status === 201) {
+        // Registration successful
+        console.log("Registration successful");
+        navigate('/login');
+      } else {
+        // Registration failed
+        console.error("Registration failed");
+      }
+    } catch (error) {
+      console.error("Error occurred:", error);
+    }
+  };
   return (
     <section className="bg-white">
       <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
@@ -47,7 +92,10 @@ export default function Forms() {
               </p>
             </div>
 
-            <form action="#" className="mt-8 grid grid-cols-6 gap-6">
+            <form
+              onSubmit={handleSubmit}
+              className="mt-8 grid grid-cols-6 gap-6"
+            >
               <div className="col-span-6 sm:col-span-3">
                 <label
                   htmlFor="FirstName"
@@ -59,7 +107,9 @@ export default function Forms() {
                 <input
                   type="text"
                   id="FirstName"
-                  name="first_name"
+                  name="firstname"
+                  value={formData.firstname}
+                  onChange={handleChange}
                   className="input mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                 />
               </div>
@@ -75,7 +125,9 @@ export default function Forms() {
                 <input
                   type="text"
                   id="LastName"
-                  name="last_name"
+                  name="lastname"
+                  value={formData.lastname}
+                  onChange={handleChange}
                   className="input mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                 />
               </div>
@@ -93,6 +145,8 @@ export default function Forms() {
                   type="email"
                   id="Email"
                   name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   className="input mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                 />
               </div>
@@ -110,6 +164,8 @@ export default function Forms() {
                   type="password"
                   id="Password"
                   name="password"
+                  value={formData.password}
+                  onChange={handleChange}
                   className="input mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                 />
               </div>
@@ -126,8 +182,15 @@ export default function Forms() {
                   type="password"
                   id="PasswordConfirmation"
                   name="password_confirmation"
-                  className="input mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  value={formData.password_confirmation}
+                  onChange={handleChange}
+                  className={`input mt-1 w-full rounded-md border ${
+                    passwordError ? "border-red-600" : "border-gray-200"
+                  } bg-white text-sm text-gray-700 shadow-sm`}
                 />
+                {passwordError && (
+            <p className="mt-2 text-sm text-red-600">{passwordError}</p>
+          )}
               </div>
 
               <div className="col-span-6">
@@ -169,10 +232,11 @@ export default function Forms() {
 
                 <p className="mt-4 text-sm text-gray-500 sm:mt-0">
                   Already have an account?
-                  <a href="#" className="text-gray-700 underline">
+                  <Link to={"/login"}>
+                  <a className="text-gray-700 underline">
                     Log in
                   </a>
-                  .
+                  .</Link>
                 </p>
               </div>
             </form>

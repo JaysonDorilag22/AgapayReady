@@ -20,8 +20,8 @@ mongoose
   });
 
   //Routers
-  app.use('/api/test', testRouter);
-  app.use('/api/user', userRouter);
+  app.use('/api/v1', testRouter);
+  app.use('/api/v1', userRouter);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on port ${PORT}`);

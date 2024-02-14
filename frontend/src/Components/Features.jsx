@@ -1,7 +1,4 @@
 import React from "react";
-import EvacuationSVG from "../assets/services/Evacuation.svg";
-import DrillsSVG from "../assets/services/EmergencyDrills.svg";
-import ContactsSVG from "../assets/services/Contacts.svg";
 import { FaMapMarkedAlt } from "react-icons/fa";
 import { FaPhoneAlt } from "react-icons/fa";
 import { RiGuideFill } from "react-icons/ri";

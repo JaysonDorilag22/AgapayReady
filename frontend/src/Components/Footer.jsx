@@ -1,5 +1,5 @@
 import React from 'react';
-import Vite from "../../public/vite.png";
+import Vite from "../assets/services/vite.png";
 
 export default function Footer() {
   return (

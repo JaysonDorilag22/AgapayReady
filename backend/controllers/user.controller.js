@@ -4,7 +4,7 @@ import bcryptjs from 'bcryptjs';
 
 
 //sign up
-export const signup = async (req, res, next) => {
+export const register = async (req, res, next) => {
     const { firstname, lastname, email, password } = req.body;
     const hashedPassword = bcryptjs.hashSync(password, 12); 
   
@@ -26,7 +26,7 @@ export const signup = async (req, res, next) => {
 };
 
 //sign up
-export const signin = async (req, res, next) => {
+export const login = async (req, res, next) => {
     const { email, password } = req.body;
     try {
       const validUser = await User.findOne({ email });
