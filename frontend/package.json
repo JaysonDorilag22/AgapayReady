@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.18",
+    "@heroicons/react": "^2.1.1",
     "@mapbox/mapbox-gl-directions": "^4.2.0",
     "@mapbox/mapbox-gl-geocoder": "^5.0.2",
     "axios": "^1.6.7",

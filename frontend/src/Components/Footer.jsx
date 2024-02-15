@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="footer p-10 bg-base-200 text-base-content">
       <aside>
-        <img src={Vite} alt="Vite Logo" className="h-12 w-12" />
+        <img src={Vite} alt="Vite Logo" className="h-20 w-auto" />
         <p>AgapayReady<br/>Emergency Response App since 2024</p>
       </aside> 
       <nav>

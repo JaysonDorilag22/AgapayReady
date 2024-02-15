@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.placeholder{
+    @apply input mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm
+}

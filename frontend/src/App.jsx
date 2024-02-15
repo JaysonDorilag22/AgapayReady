@@ -14,6 +14,7 @@ import Blog from "./Components/Blog";
 import Footer from "./Components/Footer";
 import UserDashboard from "./Pages/User/Dashboard";
 import Login from "./Components/Login";
+import EvacuationGuidelines from "./Pages/Common/EvacuationGuidelines";
 
 const App = () => {
   return (
@@ -27,6 +28,8 @@ const App = () => {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/user/dashboard" element={<UserDashboard />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/evacuation/guidelines" element={<EvacuationGuidelines />} />
+
         </Routes>
         <Footer/>
       </>

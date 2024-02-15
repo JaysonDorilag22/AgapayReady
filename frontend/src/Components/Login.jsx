@@ -27,7 +27,7 @@ export default function Login() {
       if (response.status === 200) {
         // Login successful
         console.log("Login successful");
-        navigate('/user/dashboard');
+        navigate("/user/dashboard");
       } else {
         // Login failed
         setLoginError("Invalid email or password");
@@ -41,14 +41,16 @@ export default function Login() {
     <section className="bg-white">
       <main className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">
         <div className="max-w-xl lg:max-w-3xl">
-        <div className="flex items-center justify-center">
-      <img src={Vite} alt="Vite Logo" className="w-40" />
-    </div>
-
+          <div className="flex items-center justify-center">
+            <img src={Vite} alt="Vite Logo" className="w-40" />
+          </div>
 
           <form onSubmit={handleSubmit} className="mt-8 grid grid-cols-6 gap-6">
             <div className="col-span-6">
-              <label htmlFor="Email" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="Email"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Email
               </label>
 
@@ -58,12 +60,15 @@ export default function Login() {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="input mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                className="placeholder"
               />
             </div>
 
             <div className="col-span-6">
-              <label htmlFor="Password" className="block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="Password"
+                className="block text-sm font-medium text-gray-700"
+              >
                 Password
               </label>
 
@@ -73,9 +78,11 @@ export default function Login() {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className="input mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                className="placeholder"
               />
-              {loginError && <p className="mt-2 text-sm text-red-600">{loginError}</p>}
+              {loginError && (
+                <p className="mt-2 text-sm text-red-600">{loginError}</p>
+              )}
             </div>
 
             <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
@@ -84,7 +91,11 @@ export default function Login() {
               </button>
 
               <p className="mt-4 text-sm text-gray-500 sm:mt-0">
-                Don't have an account? <Link to="/register" className="text-gray-700 underline">Register</Link>.
+                Don't have an account?{" "}
+                <Link to="/register" className="text-gray-700 underline">
+                  Register
+                </Link>
+                .
               </p>
             </div>
           </form>
