@@ -5,17 +5,14 @@ const CategoryGuidelinesSchema = new mongoose.Schema(
     name: {
       type: String,
       required: true,
-      unique: true,
     },
     short_description: {
         type: String,
         required: true,
-        unique: true,
       },
     description: {
       type: String,
       required: true,
-      unique: true,
     },
     image: {
       type: String,

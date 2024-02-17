@@ -32,7 +32,7 @@ export default function Mapping() {
           data: {
             type: 'Feature',
             properties: {},
-            geometry: data.routes[0].geometry, // Use the geometry from the API response
+            geometry: data.routes[0].geometry, 
           },
         },
         layout: {

@@ -1,15 +1,18 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
+import cloudinary from 'cloudinary';
+
 import testRouter from './routes/test.route.js'
 import  userRouter from './routes/user.route.js';
 import categoryGuidelinesRouter from './routes/guidelines/category.guidelines.route.js';
-import cloudinary from 'cloudinary';
 
 const app = express();
 const PORT = process.env.PORT || 4000;
 
 app.use(express.json());
+app.use(cookieParser());
 dotenv.config();
 
 //Cloudinary

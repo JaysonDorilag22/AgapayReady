@@ -27,7 +27,7 @@ export default function Login() {
       if (response.status === 200) {
         // Login successful
         console.log("Login successful");
-        navigate("/user/dashboard");
+        navigate("/user/Profile");
       } else {
         // Login failed
         setLoginError("Invalid email or password");

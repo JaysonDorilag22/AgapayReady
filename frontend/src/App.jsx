@@ -1,20 +1,27 @@
-import { useState } from "react";
-import axios from "axios";
-import Header from "./Components/Header";
-import LandingPage from "./Pages/Common/LandingPage";
-import RegisterPage from "./Pages/Common/Register"
-import Map from "./Pages/Common/Map";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Navigate,
 } from "react-router-dom";
-import Blog from "./Components/Blog";
+
+//components
+import Header from "./Components/Header";
 import Footer from "./Components/Footer";
-import UserDashboard from "./Pages/User/Dashboard";
+import Map from "./Pages/Common/Map";
+import Blog from "./Components/Blog";
 import Login from "./Components/Login";
+
+//Page
+import LandingPage from "./Pages/Common/LandingPage";
+import RegisterPage from "./Pages/Common/Register"
+
+//common
 import EvacuationGuidelines from "./Pages/Common/EvacuationGuidelines";
+
+//user
+import UserDashboard from "./Pages/User/Dashboard";
+import Profile from "./Pages/User/Profile";
+
 
 const App = () => {
   return (
@@ -22,13 +29,19 @@ const App = () => {
       <>
       <Header/>
         <Routes>
+          {/* pages */}
           <Route path="/" element={<LandingPage />} />
           <Route path="/map" element={<Map />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/user/dashboard" element={<UserDashboard />} />
           <Route path="/login" element={<Login />} />
+
+          {/* commmon */}
           <Route path="/evacuation/guidelines" element={<EvacuationGuidelines />} />
+
+          {/* user */}
+          <Route path="/user/dashboard" element={<UserDashboard />} />
+          <Route path="/user/profile" element={<Profile />} />
 
         </Routes>
         <Footer/>
