@@ -29,7 +29,7 @@ export const register = async (req, res, next) => {
       lastname,
       email, 
       password: hashedPassword,
-      avatar: avatarUrl // Assuming you have an 'avatar' field in your User model
+      avatar: avatarUrl 
     });
     await newUser.save();
 
@@ -65,15 +65,15 @@ export const register = async (req, res, next) => {
 //   }
 // };
 
-//sign up
+//login
 export const login = async (req, res, next) => {
   const { email, password } = req.body;
   try {
     const validUser = await User.findOne({ email });
-    if (!validUser) return next(errorHandler(404, "User not found!"));
+    if (!validUser) return next(404, "User not found!");
 
     const validPassword = bcryptjs.compareSync(password, validUser.password);
-    if (!validPassword) return next(errorHandler(401, "Wrong credentials!"));
+    if (!validPassword) return next(401, "Wrong credentials!");
 
     const token = jwt.sign(
       { id: validUser._id, role: validUser.role },
