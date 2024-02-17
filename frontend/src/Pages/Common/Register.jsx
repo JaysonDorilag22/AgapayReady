@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Vite from "../../assets/services/vite.png";
 import axios from "axios";
@@ -11,7 +11,9 @@ export default function() {
     lastname: '',
     email: '',
     password: '',
-    avatar: null // Add this line to handle avatar upload
+    departmentId: '',
+    avatar: null, 
+    departments: []
   });
 
   const handleChange = (e) => {
@@ -22,10 +24,25 @@ export default function() {
     setFormData({ ...formData, avatar: e.target.files[0] });
   };
 
+  useEffect(() => {
+    fetchDepartments(); // Fetch departments when component mounts
+  }, []);
+
+  const fetchDepartments = async () => {
+    try {
+      const response = await axios.get('/api/v1/departments');
+      setFormData(prevState => ({ ...prevState, departments: response.data }));
+    } catch (error) {
+      console.error('Error fetching departments', error);
+      // Handle error, e.g., show error message
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { firstname, lastname, email, password, avatar } = formData;
+
+    const { firstname, lastname, email, password, avatar, departmentId } = formData;
 
     try {
       const formDataToSend = new FormData();
@@ -33,6 +50,7 @@ export default function() {
       formDataToSend.append('lastname', lastname);
       formDataToSend.append('email', email);
       formDataToSend.append('password', password);
+      formDataToSend.append('departmentId', departmentId);
       formDataToSend.append('avatar', avatar); // Append the avatar file
 
       await axios.post('/api/v1/register', formDataToSend, {
@@ -176,6 +194,22 @@ export default function() {
             </div>
       
             <input type="file" name="avatar" accept="image/*" onChange={handleFileChange} />
+
+            <div className="col-span-6 sm:col-span-3">
+                <label htmlFor="Department" className="block text-sm font-medium text-gray-700">Department</label>
+                <select
+                  id="Department"
+                  name="departmentId"
+                  value={formData.departmentId}
+                  onChange={handleChange}
+                  className="input mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                >
+                  <option value="">Select Department</option>
+                  {formData.departments.map(department => (
+                    <option key={department._id} value={department._id}>{department.name}</option>
+                  ))}
+                </select>
+              </div>
 
             <div className="col-span-6">
               <label htmlFor="MarketingAccept" className="flex gap-4">
