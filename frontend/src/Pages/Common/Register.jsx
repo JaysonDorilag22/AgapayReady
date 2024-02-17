@@ -191,10 +191,8 @@ export default function() {
                 onChange={handleChange}
                 className="input mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
               />
-            </div>
-      
-            <input type="file" name="avatar" accept="image/*" onChange={handleFileChange} />
 
+            </div>
             <div className="col-span-6 sm:col-span-3">
                 <label htmlFor="Department" className="block text-sm font-medium text-gray-700">Department</label>
                 <select
@@ -210,6 +208,12 @@ export default function() {
                   ))}
                 </select>
               </div>
+
+            <div className="col-span-6 sm:col-span-6">
+            <label htmlFor="Avatar" className="block text-sm font-medium text-gray-700">Profile</label>
+            <input type="file" className="file-input file-input-bordered w-full max-w-xs"  name="avatar" accept="image/*" onChange={handleFileChange} />
+
+            </div>
 
             <div className="col-span-6">
               <label htmlFor="MarketingAccept" className="flex gap-4">
