@@ -9,28 +9,40 @@ const handleErrors = (err) => {
 
 // Create a new guideline
 export const createGuideline = async (req, res) => {
-  try {
-    const { name, description, category, steps } = req.body;
-    // Upload image to Cloudinary if provided
-    let imageUrl;
-    if (req.file) {
-      const result = await cloudinary.v2.uploader.upload(req.file.path);
-      imageUrl = result.secure_url;
+    try {
+      const { name, description, category, steps } = req.body;
+      // Upload image to Cloudinary if provided
+      let imageUrl;
+      if (req.file) {
+        const result = await cloudinary.v2.uploader.upload(req.file.path);
+        imageUrl = result.secure_url;
+      }
+      
+      // Upload images for each step if provided
+      const uploadedSteps = [];
+      for (const step of steps) {
+        let stepImageUrl;
+        if (step.image) {
+          const stepResult = await cloudinary.v2.uploader.upload(step.image);
+          stepImageUrl = stepResult.secure_url;
+        }
+        uploadedSteps.push({ stepNumber: step.stepNumber, description: step.description, image: stepImageUrl });
+      }
+      
+      const newGuideline = new Guideline({
+        name,
+        description,
+        image: imageUrl,
+        category,
+        steps: uploadedSteps
+      });
+      const savedGuideline = await newGuideline.save();
+      res.status(201).json(savedGuideline);
+    } catch (err) {
+      handleErrors(err);
+      res.status(400).json({ error: 'Failed to create guideline' });
     }
-    const newGuideline = new Guideline({
-      name,
-      description,
-      image: imageUrl,
-      category,
-      steps
-    });
-    const savedGuideline = await newGuideline.save();
-    res.status(201).json(savedGuideline);
-  } catch (err) {
-    handleErrors(err);
-    res.status(400).json({ error: 'Failed to create guideline' });
-  }
-};
+  };
 
 // Get all guidelines
 export const getAllGuidelines = async (req, res) => {
@@ -60,26 +72,39 @@ export const getGuidelineById = async (req, res) => {
 
 // Update a guideline by ID
 export const updateGuidelineById = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { name, description, category, steps } = req.body;
-    const updatedData = {};
-    if (name) updatedData.name = name;
-    if (description) updatedData.description = description;
-    if (category) updatedData.category = category;
-    if (steps) updatedData.steps = steps;
-    // Update image if provided
-    if (req.file) {
-      const result = await cloudinary.v2.uploader.upload(req.file.path);
-      updatedData.image = result.secure_url;
+    try {
+      const { id } = req.params;
+      const { name, description, category, steps } = req.body;
+      const updatedData = {};
+      if (name) updatedData.name = name;
+      if (description) updatedData.description = description;
+      if (category) updatedData.category = category;
+      
+      // Upload images for each step if provided
+      const uploadedSteps = [];
+      for (const step of steps) {
+        let stepImageUrl;
+        if (step.image) {
+          const stepResult = await cloudinary.v2.uploader.upload(step.image);
+          stepImageUrl = stepResult.secure_url;
+        }
+        uploadedSteps.push({ stepNumber: step.stepNumber, description: step.description, image: stepImageUrl });
+      }
+      updatedData.steps = uploadedSteps;
+      
+      // Update image if provided
+      if (req.file) {
+        const result = await cloudinary.v2.uploader.upload(req.file.path);
+        updatedData.image = result.secure_url;
+      }
+      
+      const updatedGuideline = await Guideline.findByIdAndUpdate(id, updatedData, { new: true });
+      res.status(200).json(updatedGuideline);
+    } catch (err) {
+      handleErrors(err);
+      res.status(500).json({ error: 'Failed to update guideline' });
     }
-    const updatedGuideline = await Guideline.findByIdAndUpdate(id, updatedData, { new: true });
-    res.status(200).json(updatedGuideline);
-  } catch (err) {
-    handleErrors(err);
-    res.status(500).json({ error: 'Failed to update guideline' });
-  }
-};
+  };
 
 // Delete a guideline by ID
 export const deleteGuidelineById = async (req, res) => {
