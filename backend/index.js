@@ -7,6 +7,7 @@ import cloudinary from 'cloudinary';
 import testRouter from './routes/test.route.js'
 import userRouter from './routes/user.route.js';
 import contactRouter from './routes/contacts/contacts.route.js'
+import guidelineRouter from './routes/guidelines/guidelines.route.js'
 
 //categories
 import departmentRouter from './routes/department.route.js';
@@ -40,6 +41,8 @@ mongoose
   //Routers
   app.use('/api/v1', testRouter);
   app.use('/api/v1', contactRouter);
+  app.use('/api/v1', guidelineRouter);
+
 
   //categories
   app.use('/api/v1', departmentRouter);
