@@ -6,10 +6,12 @@ import cloudinary from 'cloudinary';
 
 import testRouter from './routes/test.route.js'
 import userRouter from './routes/user.route.js';
+import contactRouter from './routes/contacts/contacts.route.js'
+
+//categories
 import departmentRouter from './routes/department.route.js';
 import categoryGuidelinesRouter from './routes/guidelines/category.guidelines.route.js';
 import categoryContactsRouter from "./routes/contacts/category.contacts.route.js";
-// import categoryContactsRouter from './routes/contacts/category.guidelines.route.js';
 
 
 const app = express();
@@ -37,11 +39,15 @@ mongoose
 
   //Routers
   app.use('/api/v1', testRouter);
+  app.use('/api/v1', contactRouter);
+
+  //categories
+  app.use('/api/v1', departmentRouter);
   app.use('/api/v1', categoryGuidelinesRouter);
   app.use('/api/v2', categoryContactsRouter);
 
+  //others
   app.use('/api/v1', userRouter);
-  app.use('/api/v1', departmentRouter);
 
 
 
