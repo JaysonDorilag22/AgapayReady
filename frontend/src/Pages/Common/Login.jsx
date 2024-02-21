@@ -1,16 +1,24 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Vite from "../assets/services/vite.png";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  logInStart,
+  logInSuccess,
+  logInFailure,
+} from "../../Redux/user/userSlice";
+import Vite from "../../assets/services/vite.png";
 import axios from "axios";
 
 export default function Login() {
+  const { loading, error } = useSelector((state) => state.user);
+  const [loginError, setLoginError] = useState("");
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-
-  const [loginError, setLoginError] = useState("");
-  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
@@ -23,17 +31,30 @@ export default function Login() {
     e.preventDefault();
 
     try {
+      dispatch(logInStart());
+
       const response = await axios.post("/api/v1/login", formData);
       if (response.status === 200) {
-        // Login successful
-        console.log("Login successful");
-        navigate("/user/Profile");
+        if (response.data.role === "Admin") {
+          // If user is admin, navigate to the dashboard
+          dispatch(logInSuccess(response.data));
+          console.log("Login successful");
+          navigate("/admin/dashboard");
+        } else {
+          // If user is not admin, navigate to the user profile
+          dispatch(logInSuccess(response.data));
+          console.log("Login successful");
+          navigate("/user/Profile");
+        }
       } else {
         // Login failed
+        dispatch(logInFailure());
         setLoginError("Invalid email or password");
       }
     } catch (error) {
       console.error("Error occurred:", error);
+      dispatch(logInFailure());
+      setLoginError("An error occurred while logging in");
     }
   };
 
@@ -86,8 +107,11 @@ export default function Login() {
             </div>
 
             <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
-              <button className="inline-block shrink-0 rounded-md border border-red-600 bg-red-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-red-600 focus:outline-none focus:ring active:text-red-500">
-                Log In
+              <button
+                disabled={loading}
+                className="inline-block shrink-0 rounded-md border border-red-600 bg-red-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-red-600 focus:outline-none focus:ring active:text-red-500"
+              >
+                {loading ? "Loading..." : "Log In"}
               </button>
 
               <p className="mt-4 text-sm text-gray-500 sm:mt-0">

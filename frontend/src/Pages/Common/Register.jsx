@@ -73,11 +73,11 @@ export default function() {
     <section className="bg-white">
     <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
       <section className="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
-        {/* <img
+        <img
           alt="Night"
           src="https://sa.kapamilya.com/absnews/abscbnnews/media/2022/news/11/10/earthquake-drill-students-epa-1.jpg"
           className="absolute inset-0 h-full w-full object-cover opacity-80"
-        /> */}
+        />
 
         <div className="hidden lg:relative lg:block lg:p-12">
           <a className="block text-white" href="/">
@@ -211,7 +211,7 @@ export default function() {
 
             <div className="col-span-6 sm:col-span-6">
             <label htmlFor="Avatar" className="block text-sm font-medium text-gray-700">Profile</label>
-            <input type="file" className="file-input file-input-bordered w-full max-w-xs"  name="avatar" accept="image/*" onChange={handleFileChange} />
+            <input type="file" className="file-input file-input-bordered w-full "  name="avatar" accept="image/*" onChange={handleFileChange} />
 
             </div>
 

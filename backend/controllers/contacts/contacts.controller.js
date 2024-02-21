@@ -5,29 +5,31 @@ import CategoryContacts from '../../models/category.contacts.model.js';
 
 export const createContacts = async (req, res) => {
   try {
-    const { name, description, phone, categoryContactsId } = req.body;
-    const { path } = req.file;
+    const { name, description, phone, category } = req.body;
+    let { image } = req.body;
 
-    const uploadedImage = await cloudinary.uploader.upload(path);
+    // Check if image is provided
+    if (req.file) {
+        const result = await cloudinary.uploader.upload(req.file.path);
+        image = result.secure_url;
+    }
 
-    const categorycontacts = await  CategoryContacts.findById(categoryContactsId);
-    
-    if (!categorycontacts) return res.status(401).send({ message: "Category not found" });
-
-    const newContacts = new Contacts({
-      name,
-      description,
-      phone,
-      image: uploadedImage.secure_url,
-      category: categoryContactsId
+    // Create new guideline instance
+    const newContact = new Contacts({
+        name,
+        description,
+        image,
+        phone,
+        category
     });
 
-    const savedContacts = await newContacts.save();
+    // Save the guideline to the database
+    const savedContact = await newContact.save();
 
-    res.status(201).json(savedContacts);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
+    res.status(201).json(savedContact);
+} catch (error) {
+    errorHandler(res, error);
+}
 };
 
 export const getAllContacts = async (req, res) => {

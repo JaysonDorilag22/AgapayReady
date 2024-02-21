@@ -1,5 +1,5 @@
 import React from 'react'
-import Mapping from '../../Components/Mapping'
+import Mapping from '../../components/Mapping'
 export default function Map() {
   return (
     <div>

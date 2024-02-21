@@ -8,12 +8,13 @@ import testRouter from './routes/test.route.js'
 import userRouter from './routes/user.route.js';
 import contactRouter from './routes/contacts/contacts.route.js'
 import guidelineRouter from './routes/guidelines/guidelines.route.js'
+import stepRouter from './routes/guidelines/step.route.js'
+
 
 //categories
 import departmentRouter from './routes/department.route.js';
 import categoryGuidelinesRouter from './routes/guidelines/category.guidelines.route.js';
 import categoryContactsRouter from "./routes/contacts/category.contacts.route.js";
-
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -42,6 +43,7 @@ mongoose
   app.use('/api/v1', testRouter);
   app.use('/api/v1', contactRouter);
   app.use('/api/v1', guidelineRouter);
+  app.use('/api/v1', stepRouter);
 
 
   //categories
