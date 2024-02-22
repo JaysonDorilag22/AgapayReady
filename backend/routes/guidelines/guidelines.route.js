@@ -1,14 +1,13 @@
 import express from 'express';
 import multer from 'multer';
 import { createGuideline, getAllGuidelines, getGuidelineById, updateGuidelineById, deleteGuidelineById, getGuidelineWithSteps } from '../../controllers/guidelines/guidelines.controller.js';
-import { verifyToken } from '../../middleware/verifyToken.js';
 import { isAdmin } from '../../middleware/isAdmin.js';
 
 const router = express.Router();
 const upload = multer({ dest: 'uploads/' });
 
 // Create a new guideline
-router.post('/guidelines', upload.single('image'), verifyToken, isAdmin, createGuideline);
+router.post('/guidelines', upload.single('image'), createGuideline);
 
 // Get all guidelines
 router.get('/guidelines', getAllGuidelines);

@@ -1,7 +1,6 @@
 import express from 'express';
 import multer from 'multer';
 import { createCategory, deleteCategoryById, getAllCategories, getCategoryById, updateCategoryById } from '../../controllers/contacts/category.contacts.controller.js';
-
 const router = express.Router();
 const upload = multer({ dest: 'uploads/' }); 
 

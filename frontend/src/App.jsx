@@ -21,6 +21,7 @@ import GuidelineTable from "./Pages/Admin/guidelines/GuidelineTable";
 import GuidelineSteps from "./Pages/Admin/guidelines/GuidelineSteps";
 import UpdateCategoryContacts from "./Pages/Admin/contacts/UpdateCategoryContacts";
 import UpdateCategoryGuidelines from "./Pages/Admin/guidelines/UpdateCategoryGuidelines";
+import UpdateGuidelines from "./Pages/Admin/guidelines/UpdateGuidelines";
 
 const AdminRoutesWrapper = ({ element }) => {
   const userRole = useSelector((state) => state.user.currentUser?.role);
@@ -69,6 +70,8 @@ const App = () => {
         {/* Update */}
         <Route path="/admin/update/category/contacts/:categoryId" element={<AdminRoutesWrapper element={<UpdateCategoryContacts />} />} />
         <Route path="/admin/update/category/guidelines/:categoryId" element={<AdminRoutesWrapper element={<UpdateCategoryGuidelines />} />} />
+        <Route path="/admin/update/guidelines/:guidelineId" element={<AdminRoutesWrapper element={<UpdateGuidelines />} />} />
+
 
         {/* Tables */}
         <Route path="/admin/guideline/table" element={<AdminRoutesWrapper element={<GuidelineTable />} />} />
