@@ -11,7 +11,7 @@ export default function ContactsTable() {
 
   const fetchContacts = async () => {
     try {
-      const response = await axios.get("/api/v1/contacts");
+      const response = await axios.get(`${import.meta.env.VITE_PORT}/api/v1/contacts`);
       setContacts(response.data);
     } catch (error) {
       console.error("Error fetching contacts:", error);
@@ -19,7 +19,6 @@ export default function ContactsTable() {
   };
   return (
     <div className="max-w-4xl mx-auto mt-8">
-    <h2 className="text-2xl font-bold mb-4">Contacts</h2>
     <div className="overflow-x-auto">
       <table className="table-auto w-full">
         <thead>

@@ -33,7 +33,7 @@ export default function Login() {
     try {
       dispatch(logInStart());
 
-      const response = await axios.post("/api/v1/login", formData);
+      const response = await axios.post(`${import.meta.env.VITE_PORT}/api/v1/login`, formData);
       if (response.status === 200) {
         if (response.data.role === "Admin") {
           // If user is admin, navigate to the dashboard

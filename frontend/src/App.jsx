@@ -1,8 +1,6 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-
-// Page Components
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import LandingPage from "./Pages/Common/LandingPage";
@@ -10,28 +8,27 @@ import Map from "./Pages/Common/Map";
 import Blog from "./components/Blog";
 import RegisterPage from "./Pages/Common/Register";
 import Login from "./Pages/Common/Login";
-
-// Common Components
 import EvacuationGuidelines from "./Pages/Common/EvacuationGuidelines";
-
-// User Components
 import UserDashboard from "./Pages/User/Dashboard";
 import Profile from "./Pages/User/Profile";
-
-// Admin Components
 import AdminDashboard from "./Pages/Admin/AdminDashboard";
 import CreateGuidelines from "./Pages/Admin/guidelines/CreateGuidelines";
 import CreateSteps from "./Pages/Admin/guidelines/CreateSteps";
 import CreateContacts from "./Pages/Admin/contacts/CreateContacts";
+import CreateCategoryContacts from "./Pages/Admin/contacts/CreateCategoryContacts";
+import CreateCategoryGuidelines from "./Pages/Admin/guidelines/CreateCategoryGuidelines";
 import GuidelineTable from "./Pages/Admin/guidelines/GuidelineTable";
 import GuidelineSteps from "./Pages/Admin/guidelines/GuidelineSteps";
 
 const AdminRoutesWrapper = ({ element }) => {
   const userRole = useSelector((state) => state.user.currentUser?.role);
+  const navigate = useNavigate();
 
-  if (userRole !== "Admin") {
-    return <Navigate to="/" />;
-  }
+  useEffect(() => {
+    if (userRole !== "Admin") {
+      navigate("/"); // Redirect to home if user is not admin
+    }
+  }, [userRole, navigate]);
 
   return <>{element}</>;
 };
@@ -65,6 +62,8 @@ const App = () => {
         <Route path="/admin/create/steps" element={<AdminRoutesWrapper element={<CreateSteps />} />} />
         <Route path="/admin/create/contacts" element={<AdminRoutesWrapper element={<CreateContacts />} />} />
         <Route path="/admin/guideline/table" element={<AdminRoutesWrapper element={<GuidelineTable />} />} />
+        <Route path="/admin/create/category/contacts" element={<AdminRoutesWrapper element={<CreateCategoryContacts />} />} />
+        <Route path="/admin/create/category/guidelines" element={<AdminRoutesWrapper element={<CreateCategoryGuidelines />} />} />
         <Route path="/guidelines/:guidelineId" element={<AdminRoutesWrapper element={<GuidelineSteps />} />} />
         <Route path="/admin/dashboard" element={<AdminRoutesWrapper element={<AdminDashboard />} />} />
       </Routes>

@@ -11,7 +11,7 @@ export default function GuidelineTable() {
 
   const fetchGuidelines = async () => {
     try {
-      const response = await axios.get('/api/v1/guidelines');
+      const response = await axios.get(`${import.meta.env.VITE_PORT}/api/v1/guidelines`);
       setGuidelines(response.data);
     } catch (error) {
       console.error('Error fetching guidelines:', error);
@@ -20,7 +20,6 @@ export default function GuidelineTable() {
 
   return (
     <div className="max-w-4xl mx-auto mt-8">
-      <h2 className="text-2xl font-bold mb-4">Guidelines</h2>
       <div className="overflow-x-auto">
         <table className="table-auto w-full">
           <thead>

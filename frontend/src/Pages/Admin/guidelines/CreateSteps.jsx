@@ -16,7 +16,7 @@ export default function CreateSteps() {
 
   const fetchGuidelines = async () => {
     try {
-      const response = await axios.get("/api/v1/guidelines");
+      const response = await axios.get(`${import.meta.env.VITE_PORT}/api/v1/guidelines`);
       setGuidelines(response.data);
     } catch (error) {
       console.error("Error fetching guidelines:", error);
@@ -38,9 +38,10 @@ export default function CreateSteps() {
     formDataToSend.append("description", formData.description);
     formDataToSend.append("image", formData.image);
     formDataToSend.append("guideline", formData.guideline); // Update property name
+          // `${import.meta.env.VITE_PORT}/api/v1/login`
 
     try {
-      const response = await axios.post("/api/v1/steps", formDataToSend, {
+      const response = await axios.post(`${import.meta.env.VITE_PORT}/api/v1/steps`, formDataToSend, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
