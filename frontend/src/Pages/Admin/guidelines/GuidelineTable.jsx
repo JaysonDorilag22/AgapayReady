@@ -21,7 +21,7 @@ export default function GuidelineTable() {
   return (
     <div className="max-w-4xl mx-auto mt-8">
       <div className="overflow-x-auto">
-        <table className="table-auto w-full">
+        <table className="table-auto w-full text-sm">
           <thead>
             <tr>
               <th className="px-4 py-2">Name</th>

@@ -53,7 +53,7 @@ export default function CreateCategoryContacts() {
         <Sidemenu />
       </section>
       <div className="flex-1 ml-64 mr-4 mt-8 p-4 rounded shadow">
-      <h1 className="text-2xl font-bold mb-4">Create Guidelines Category</h1>
+      <h1 className="text-2xl font-bold mb-4">Create Contacts Category</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block mb-1 font-semibold">Name:</label>

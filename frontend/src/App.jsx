@@ -19,6 +19,7 @@ import CreateCategoryContacts from "./Pages/Admin/contacts/CreateCategoryContact
 import CreateCategoryGuidelines from "./Pages/Admin/guidelines/CreateCategoryGuidelines";
 import GuidelineTable from "./Pages/Admin/guidelines/GuidelineTable";
 import GuidelineSteps from "./Pages/Admin/guidelines/GuidelineSteps";
+import UpdateCategoryContacts from "./Pages/Admin/contacts/UpdateCategoryContacts";
 
 const AdminRoutesWrapper = ({ element }) => {
   const userRole = useSelector((state) => state.user.currentUser?.role);
@@ -58,12 +59,17 @@ const App = () => {
         <Route path="/user/profile" element={<Profile />} />
 
         {/* admin */}
+        {/* Create */}
         <Route path="/admin/create/guidelines" element={<AdminRoutesWrapper element={<CreateGuidelines />} />} />
         <Route path="/admin/create/steps" element={<AdminRoutesWrapper element={<CreateSteps />} />} />
         <Route path="/admin/create/contacts" element={<AdminRoutesWrapper element={<CreateContacts />} />} />
-        <Route path="/admin/guideline/table" element={<AdminRoutesWrapper element={<GuidelineTable />} />} />
         <Route path="/admin/create/category/contacts" element={<AdminRoutesWrapper element={<CreateCategoryContacts />} />} />
         <Route path="/admin/create/category/guidelines" element={<AdminRoutesWrapper element={<CreateCategoryGuidelines />} />} />
+        {/* Update */}
+        <Route path="/admin/update/category/contacts/:categoryId" element={<AdminRoutesWrapper element={<UpdateCategoryContacts />} />} />
+
+        {/* Tables */}
+        <Route path="/admin/guideline/table" element={<AdminRoutesWrapper element={<GuidelineTable />} />} />
         <Route path="/guidelines/:guidelineId" element={<AdminRoutesWrapper element={<GuidelineSteps />} />} />
         <Route path="/admin/dashboard" element={<AdminRoutesWrapper element={<AdminDashboard />} />} />
       </Routes>
