@@ -19,10 +19,16 @@ import categoryContactsRouter from "./routes/contacts/category.contacts.route.js
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-app.use(express.json());
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something went wrong!');
+});
+
 app.use(cookieParser());
+app.use(express.json());
 app.use(cors());
 dotenv.config();
+
 
 //Cloudinary
 cloudinary.config({

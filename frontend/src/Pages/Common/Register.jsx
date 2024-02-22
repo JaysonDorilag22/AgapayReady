@@ -53,7 +53,7 @@ export default function() {
       formDataToSend.append('departmentId', departmentId);
       formDataToSend.append('avatar', avatar); // Append the avatar file
 
-      await axios.post('/api/v1/register', formDataToSend, {
+      await axios.post(`${import.meta.env.VITE_PORT}/api/v1/register`, formDataToSend, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

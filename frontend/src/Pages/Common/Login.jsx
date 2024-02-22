@@ -34,26 +34,26 @@ export default function Login() {
       dispatch(logInStart());
 
       const response = await axios.post(`${import.meta.env.VITE_PORT}/api/v1/login`, formData);
-      if (response.status === 200) {
-        if (response.data.role === "Admin") {
-          // If user is admin, navigate to the dashboard
-          dispatch(logInSuccess(response.data));
-          console.log("Login successful");
-          navigate("/admin/dashboard");
-        } else {
-          // If user is not admin, navigate to the user profile
-          dispatch(logInSuccess(response.data));
-          console.log("Login successful");
-          navigate("/user/Profile");
-        }
+      if (response.data.success === false) {
+        dispatch(logInFailureInFailure("Invalid email or password."));
+        dispatch(logInSuccess(false));
+
+        toast.error("Invalid email or password. Please try again.");
+
+        return;
+      }
+
+      dispatch(logInSuccess(response.data));
+
+      if (response.data.role === 'Admin') {
+        navigate('/admin/dashboard');
       } else {
-        // Login failed
-        dispatch(logInFailure());
-        setLoginError("Invalid email or password");
+        navigate('/user/profile');
       }
     } catch (error) {
       console.error("Error occurred:", error);
       dispatch(logInFailure());
+      dispatch(logInSuccess(false));
       setLoginError("An error occurred while logging in");
     }
   };

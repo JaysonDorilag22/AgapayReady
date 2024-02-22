@@ -18,6 +18,16 @@ export default function ContactsTable() {
       console.error("Error fetching contacts:", error);
     }
   };
+
+  const handleDelete = async (contactId) => {
+    try {
+      await axios.delete(`${import.meta.env.VITE_PORT}/api/v1/contacts/${contactId}`);
+      // If deletion is successful, update the state to remove the deleted guideline
+      setContacts(contacts.filter(contact => contact._id !== contactId));
+    } catch (error) {
+      console.error('Error deleting contacts:', error);
+    }
+  };
   return (
     <div className="max-w-4xl mx-auto mt-8">
     <div className="overflow-x-auto">
@@ -46,10 +56,11 @@ export default function ContactsTable() {
               </td>
               <td className="border px-4 py-2">
               <div className="flex">
-                <Link to={`/admin/update/category/contacts/`} className="mr-2">
+                <Link to={`/admin/update/contacts/${contact._id}`} className="mr-2">
                   <AiOutlineEdit className="text-blue-500" />
                 </Link>
-                <button>
+                <button onClick={() => handleDelete(contact._id)}>
+
                   <AiOutlineDelete className="text-red-500" />
                 </button>
               </div>
