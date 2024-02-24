@@ -65,98 +65,15 @@ export default function Features() {
               </dl>
             </div>
           </div>
-          <Mapping
+          {/* <Mapping
             alt="Product screenshot"
             className="w-[48rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0"
             width={2432}
             height={1442}
-          />
+          /> */}
         </div>
       </div>
     </div>
-    // <div className="mx-auto max-w-10xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-
-    //   <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:items-center md:gap-8">
-    //     <div className="rounded-2xl border border-gray-300 p-6 shadow-sm sm:px-8 lg:p-12">
-    //       <div className="text-center">
-    //         <img
-    //           src={EvacuationSVG}
-    //           alt="Evacuation Guide"
-    //           className="mx-auto max-w-xs"
-    //         />{" "}
-    //       </div>
-
-    //       <div className="mt-6 space-y-2">
-    //         <h1 className="font-extrabold text-3xl text-red-700">
-    //           Evacuation Guide
-    //         </h1>
-    //         <p className="flex items-center gap-1 justify-center">
-    //           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam
-    //           nobis in error repellat voluptatibus ad.
-    //         </p>
-    //       </div>
-
-    //       <a
-    //         href="#"
-    //         className="mt-8 block rounded-md border border-red-600 bg-white px-12 py-3 text-center text-sm font-medium text-red-600 hover:ring-1 hover:ring-red-600 focus:outline-none focus:ring active:text-red-500"
-    //       >
-    //         Show Demo
-    //       </a>
-    //     </div>
-
-    //     <div className="rounded-2xl border border-gray-300 p-6 shadow-sm sm:px-8 lg:p-12">
-    //       <div className="text-center">
-    //         <img
-    //           src={DrillsSVG}
-    //           alt="Emergency Drills"
-    //           className="mx-auto max-w-xs"
-    //         />{" "}
-    //       </div>
-
-    //       <div className="mt-6 space-y-2">
-    //         <h1 className="font-extrabold text-3xl text-red-700">
-    //           Emergency Drills
-    //         </h1>
-    //         <p className="flex items-center gap-1 justify-center">
-    //           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam
-    //           nobis in error repellat voluptatibus ad.
-    //         </p>
-    //       </div>
-
-    //       <a
-    //         href="#"
-    //         className="mt-8 block rounded-md border border-red-600 bg-white px-12 py-3 text-center text-sm font-medium text-red-600 hover:ring-1 hover:ring-red-600 focus:outline-none focus:ring active:text-red-500"
-    //       >
-    //         Show Demo
-    //       </a>
-    //     </div>
-    //     <div className="rounded-2xl border border-gray-300 p-6 shadow-sm sm:px-8 lg:p-12">
-    //       <div className="text-center">
-    //         <img
-    //           src={ContactsSVG}
-    //           alt="Contact Support"
-    //           className="mx-auto max-w-xs"
-    //         />{" "}
-    //       </div>
-
-    //       <div className="mt-6 space-y-2">
-    //         <h1 className="font-extrabold text-3xl text-red-700">
-    //           Contact Support
-    //         </h1>
-    //         <p className="flex items-center gap-1 justify-center">
-    //           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam
-    //           nobis in error repellat voluptatibus ad.
-    //         </p>
-    //       </div>
-
-    //       <a
-    //         href="#"
-    //         className="mt-8 block rounded-md border border-red-600 bg-white px-12 py-3 text-center text-sm font-medium text-red-600 hover:ring-1 hover:ring-red-600 focus:outline-none focus:ring active:text-red-500"
-    //       >
-    //         Show Demo
-    //       </a>
-    //     </div>
-    //   </div>
-    // </div>
+ 
   );
 }

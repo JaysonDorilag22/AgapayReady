@@ -29,7 +29,7 @@ export default function CreateCategoryContacts() {
     formDataToSend.append("image", formData.image);
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_PORT}/api/v2/categories`, formDataToSend, {
+      const response = await axios.post(`/api/v2/categories`, formDataToSend, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

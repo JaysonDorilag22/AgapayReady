@@ -48,6 +48,7 @@ export const register = async (req, res, next) => {
 
 
 //login
+
 export const login = async (req, res, next) => {
   const { email, password } = req.body;
   try {
@@ -59,6 +60,8 @@ export const login = async (req, res, next) => {
 
     const token = jwt.sign({ id: validUser._id, role: validUser.role }, process.env.JWT_SECRET);
     const { password: pass, ...rest } = validUser._doc;
+
+    console.log("Generated token:", token); // Add this line to log the token
 
     res
       .cookie('access_token', token, { httpOnly: true })

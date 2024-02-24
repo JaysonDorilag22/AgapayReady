@@ -8,6 +8,7 @@ import {
 } from "../../Redux/user/userSlice";
 import Vite from "../../assets/services/vite.png";
 import axios from "axios";
+import Cookies from 'js-cookie';
 
 export default function Login() {
   const { loading, error } = useSelector((state) => state.user);
@@ -32,8 +33,9 @@ export default function Login() {
 
     try {
       dispatch(logInStart());
+      // const response = await axios.post(`${import.meta.env.VITE_PORT}/api/v1/login`, formData);
 
-      const response = await axios.post(`${import.meta.env.VITE_PORT}/api/v1/login`, formData);
+      const response = await axios.post(`/api/v1/login`, formData);
       if (response.data.success === false) {
         dispatch(logInFailureInFailure("Invalid email or password."));
         dispatch(logInSuccess(false));
@@ -42,7 +44,7 @@ export default function Login() {
 
         return;
       }
-
+      Cookies.set('access_token', response.data.access_token);
       dispatch(logInSuccess(response.data));
 
       if (response.data.role === 'Admin') {

@@ -13,7 +13,7 @@ export default function GuidelineSteps() {
     const fetchGuidelineAndSteps = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_PORT}/api/v1/guidelines/${guidelineId}/steps`
+          `/api/v1/guidelines/${guidelineId}/steps`
           // `${import.meta.env.VITE_PORT}/api/v1/login`
         );
         const { guideline, steps } = response.data;

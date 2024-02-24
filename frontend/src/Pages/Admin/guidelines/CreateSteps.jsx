@@ -41,7 +41,7 @@ export default function CreateSteps() {
           // `${import.meta.env.VITE_PORT}/api/v1/login`
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_PORT}/api/v1/steps`, formDataToSend, {
+      const response = await axios.post(`/api/v1/steps`, formDataToSend, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

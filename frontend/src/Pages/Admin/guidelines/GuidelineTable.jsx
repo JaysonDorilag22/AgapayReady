@@ -12,7 +12,7 @@ export default function GuidelineTable() {
 
   const fetchGuidelines = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_PORT}/api/v1/guidelines`);
+      const response = await axios.get(`/api/v1/guidelines`);
       setGuidelines(response.data);
     } catch (error) {
       console.error('Error fetching guidelines:', error);
@@ -21,7 +21,7 @@ export default function GuidelineTable() {
 
   const handleDelete = async (guidelineId) => {
     try {
-      await axios.delete(`${import.meta.env.VITE_PORT}/api/v1/guidelines/${guidelineId}`);
+      await axios.delete(`/api/v1/guidelines/${guidelineId}`);
       // If deletion is successful, update the state to remove the deleted guideline
       setGuidelines(guidelines.filter(guideline => guideline._id !== guidelineId));
     } catch (error) {

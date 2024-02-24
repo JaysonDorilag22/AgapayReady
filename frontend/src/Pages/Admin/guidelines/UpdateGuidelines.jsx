@@ -23,7 +23,7 @@ export default function UpdateGuidelines() {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_PORT}/api/v1/categories`);
+      const response = await axios.get(`/api/v1/categories`);
       setCategories(response.data); 
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -32,7 +32,7 @@ export default function UpdateGuidelines() {
 
   const fetchGuidelineData = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_PORT}/api/v1/guidelines/${guidelineId}`);
+      const response = await axios.get(`/api/v1/guidelines/${guidelineId}`);
       const { name, description, image, category } = response.data; // Assuming your API returns guideline data
       setFormData({ name, description, image, category }); 
       if (image) {
@@ -76,7 +76,7 @@ console.log(formData.image);
     formDataToSend.append("category", formData.category); 
 
     try {
-      const response = await axios.put(`${import.meta.env.VITE_PORT}/api/v1/guidelines/${guidelineId}`, formDataToSend, {
+      const response = await axios.put(`/api/v1/guidelines/${guidelineId}`, formDataToSend, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

@@ -20,7 +20,7 @@ export default function CreateGuidelines() {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_PORT}/api/v1/categories`);
+      const response = await axios.get(`/api/v1/categories`);
       setCategories(response.data); // Set categories in state
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -45,7 +45,7 @@ export default function CreateGuidelines() {
     formDataToSend.append("category", formData.category); // Use formData.category directly
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_PORT}/api/v1/guidelines`, formDataToSend, {
+      const response = await axios.post(`/api/v1/guidelines`, formDataToSend, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
