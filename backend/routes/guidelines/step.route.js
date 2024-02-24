@@ -6,7 +6,7 @@ const router = express.Router();
 const upload = multer({ dest: 'uploads/' });
 
 // Create a new steps
-router.post('/steps', upload.single('image'), createStep);
+router.post('/steps', upload.single('image'), verifyToken, isAdmin, createStep);
 
 // Get all steps
 router.get('/steps', getAllSteps);
@@ -15,9 +15,9 @@ router.get('/steps', getAllSteps);
 router.get('/steps/:id', getStepById);
 
 // Update a steps by ID
-router.put('/steps/:id', upload.none(), updateStepById);
+router.put('/steps/:id', upload.single(), verifyToken, isAdmin, updateStepById);
 
 // Delete a steps by ID
-router.delete('/steps/:id', deleteStepById);
+router.delete('/steps/:id', verifyToken, isAdmin, deleteStepById);
 
 export default router;
