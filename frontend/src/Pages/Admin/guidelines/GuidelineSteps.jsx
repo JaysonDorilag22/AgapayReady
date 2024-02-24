@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import Sidemenu from "../../../components/Sidemenu";
 import { AiOutlineClose, AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import Loader from "../../../components/Loader";
 export default function GuidelineSteps() {
   const { guidelineId } = useParams();
   const [guideline, setGuideline] = useState({});
@@ -78,7 +79,7 @@ export default function GuidelineSteps() {
     }
   };
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div className="flex justify-center items-center h-screen"><Loader/></div>;
   if (error) return <div>Error: {error.message}</div>;
 
   return (
