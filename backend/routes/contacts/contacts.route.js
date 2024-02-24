@@ -2,6 +2,7 @@ import express from 'express';
 import multer from 'multer';
 import { createContacts, deleteContactById, getAllContacts, getContactById, updateContactById } from '../../controllers/contacts/contacts.controller.js';
 import { isAdmin } from '../../middleware/isAdmin.js';
+import { verifyToken } from '../../middleware/verify.js';
 
 
 

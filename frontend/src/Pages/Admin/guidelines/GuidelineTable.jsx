@@ -51,7 +51,7 @@ export default function GuidelineTable() {
                   <img src={guideline.image} alt={guideline.name} className="h-10 w-10 object-cover" />
                 </td>
                 <td className="border px-4 py-2">
-                <Link to={`/guidelines/${guideline._id}`} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                <Link to={`/admin/guidelines/${guideline._id}`} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
                     Steps
                   </Link>
                 </td>

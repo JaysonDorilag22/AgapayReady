@@ -23,6 +23,8 @@ import UpdateCategoryContacts from "./Pages/Admin/contacts/UpdateCategoryContact
 import UpdateCategoryGuidelines from "./Pages/Admin/guidelines/UpdateCategoryGuidelines";
 import UpdateGuidelines from "./Pages/Admin/guidelines/UpdateGuidelines";
 import UpdateContacts from "./Pages/Admin/contacts/UpdateContacts";
+import CreateDepartment from "./Pages/Admin/department/CreateDepartment";
+import UpdateDepartment from "./Pages/Admin/department/UpdateDepartment";
 
 const AdminRoutesWrapper = ({ element }) => {
   const userRole = useSelector((state) => state.user.currentUser?.role);
@@ -60,25 +62,26 @@ const App = () => {
         {/* user */}
         <Route path="/user/dashboard" element={<UserDashboard />} />
         <Route path="/user/profile" element={<Profile />} />
-
         {/* admin */}
         {/* Create */}
-        <Route path="/admin/create/guidelines" element={<AdminRoutesWrapper element={<CreateGuidelines />} />} />
         <Route path="/admin/create/steps" element={<AdminRoutesWrapper element={<CreateSteps />} />} />
+        <Route path="/admin/create/departments" element={<AdminRoutesWrapper element={<CreateDepartment />} />} />
         <Route path="/admin/create/contacts" element={<AdminRoutesWrapper element={<CreateContacts />} />} />
+        <Route path="/admin/create/guidelines" element={<AdminRoutesWrapper element={<CreateGuidelines />} />} />
         <Route path="/admin/create/category/contacts" element={<AdminRoutesWrapper element={<CreateCategoryContacts />} />} />
         <Route path="/admin/create/category/guidelines" element={<AdminRoutesWrapper element={<CreateCategoryGuidelines />} />} />
         {/* Update */}
+        <Route path="/admin/update/departments/:departmentId" element={<AdminRoutesWrapper element={<UpdateDepartment />} />} />
+        <Route path="/admin/update/contacts/:contactId" element={<AdminRoutesWrapper element={<UpdateContacts />} />} />
+        <Route path="/admin/update/guidelines/:guidelineId" element={<AdminRoutesWrapper element={<UpdateGuidelines />} />} />
         <Route path="/admin/update/category/contacts/:categoryId" element={<AdminRoutesWrapper element={<UpdateCategoryContacts />} />} />
         <Route path="/admin/update/category/guidelines/:categoryId" element={<AdminRoutesWrapper element={<UpdateCategoryGuidelines />} />} />
-        <Route path="/admin/update/guidelines/:guidelineId" element={<AdminRoutesWrapper element={<UpdateGuidelines />} />} />
-        <Route path="/admin/update/contacts/:contactId" element={<AdminRoutesWrapper element={<UpdateContacts />} />} />
 
 
 
         {/* Tables */}
         <Route path="/admin/guideline/table" element={<AdminRoutesWrapper element={<GuidelineTable />} />} />
-        <Route path="/guidelines/:guidelineId" element={<AdminRoutesWrapper element={<GuidelineSteps />} />} />
+        <Route path="/admin/guidelines/:guidelineId" element={<AdminRoutesWrapper element={<GuidelineSteps />} />} />
         <Route path="/admin/dashboard" element={<AdminRoutesWrapper element={<AdminDashboard />} />} />
       </Routes>
 

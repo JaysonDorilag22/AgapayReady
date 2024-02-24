@@ -1,6 +1,8 @@
 import express from 'express';
 import multer from 'multer';
 import { createStep, deleteStepById, getAllSteps, getStepById, updateStepById } from '../../controllers/guidelines/step.controller.js';
+import { verifyToken } from '../../middleware/verify.js';
+import { isAdmin } from '../../middleware/isAdmin.js';
 
 const router = express.Router();
 const upload = multer({ dest: 'uploads/' });

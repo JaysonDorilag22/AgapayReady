@@ -2,6 +2,7 @@ import express from 'express';
 import multer from 'multer';
 import { createGuideline, getAllGuidelines, getGuidelineById, updateGuidelineById, deleteGuidelineById, getGuidelineWithSteps } from '../../controllers/guidelines/guidelines.controller.js';
 import { isAdmin } from '../../middleware/isAdmin.js';
+import { verifyToken } from '../../middleware/verify.js';
 
 const router = express.Router();
 const upload = multer({ dest: 'uploads/' });

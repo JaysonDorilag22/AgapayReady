@@ -1,10 +1,12 @@
 import React from "react";
+import AOS from 'aos';
 import { FaMapMarkedAlt } from "react-icons/fa";
 import { FaPhoneAlt } from "react-icons/fa";
 import { RiGuideFill } from "react-icons/ri";
 import { MdOutlineUpdate } from "react-icons/md";
 import Mapping from "./Mapping";
 export default function Features() {
+  AOS.init();
   const features = [
     {
       name: "Evacuation guide",

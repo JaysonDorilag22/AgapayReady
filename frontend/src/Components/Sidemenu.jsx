@@ -21,6 +21,7 @@ export default function Sidemenu() {
 
       if (data.success === false) {
         dispatch(deleteUserFailure(data.message));
+        navigate("/")
         return;
       }
       dispatch(deleteUserSuccess(data));
@@ -99,6 +100,14 @@ export default function Sidemenu() {
                     className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
                   >
                     Contacts
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to={"/admin/create/departments"}
+                    className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                  >
+                    Department
                   </Link>
                 </li>
               </ul>
