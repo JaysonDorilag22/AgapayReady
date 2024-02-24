@@ -17,7 +17,7 @@ router.get('/guidelines', getAllGuidelines);
 router.get('/guidelines/:id', getGuidelineById);
 
 // Update a guideline by ID
-router.put('/guidelines/:id', upload.none(), verifyToken, isAdmin, updateGuidelineById);
+router.put('/guidelines/:id', upload.single('image'), verifyToken, isAdmin, updateGuidelineById);
 
 // Delete a guideline by ID
 router.delete('/guidelines/:id', verifyToken, isAdmin, deleteGuidelineById);

@@ -25,6 +25,7 @@ import UpdateGuidelines from "./Pages/Admin/guidelines/UpdateGuidelines";
 import UpdateContacts from "./Pages/Admin/contacts/UpdateContacts";
 import CreateDepartment from "./Pages/Admin/department/CreateDepartment";
 import UpdateDepartment from "./Pages/Admin/department/UpdateDepartment";
+import UpdateSteps from "./Pages/Admin/guidelines/UpdateSteps";
 
 const AdminRoutesWrapper = ({ element }) => {
   const userRole = useSelector((state) => state.user.currentUser?.role);
@@ -71,6 +72,7 @@ const App = () => {
         <Route path="/admin/create/category/contacts" element={<AdminRoutesWrapper element={<CreateCategoryContacts />} />} />
         <Route path="/admin/create/category/guidelines" element={<AdminRoutesWrapper element={<CreateCategoryGuidelines />} />} />
         {/* Update */}
+        <Route path="/admin/update/steps/:stepId" element={<AdminRoutesWrapper element={<UpdateSteps />} />} />
         <Route path="/admin/update/departments/:departmentId" element={<AdminRoutesWrapper element={<UpdateDepartment />} />} />
         <Route path="/admin/update/contacts/:contactId" element={<AdminRoutesWrapper element={<UpdateContacts />} />} />
         <Route path="/admin/update/guidelines/:guidelineId" element={<AdminRoutesWrapper element={<UpdateGuidelines />} />} />

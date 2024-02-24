@@ -17,7 +17,7 @@ router.get('/steps', getAllSteps);
 router.get('/steps/:id', getStepById);
 
 // Update a steps by ID
-router.put('/steps/:id', upload.single(), verifyToken, isAdmin, updateStepById);
+router.put('/steps/:id', upload.single('image'), verifyToken, isAdmin, updateStepById);
 
 // Delete a steps by ID
 router.delete('/steps/:id', verifyToken, isAdmin, deleteStepById);

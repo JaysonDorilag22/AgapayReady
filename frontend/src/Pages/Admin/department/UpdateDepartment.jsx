@@ -5,15 +5,13 @@ import axios from 'axios';
 import Sidemenu from '../../../components/Sidemenu';
 
 export default function UpdateDepartment() {
-  const { departmentId } = useParams(); // Get departmentId from URL parameters
- const navigate = useNavigate();
+  const { departmentId } = useParams(); 
   const [formData, setFormData] = useState({
     name: '',
     description: ''
   });
 
   useEffect(() => {
-    // Fetch department data when the component mounts
     const fetchDepartment = async () => {
       try {
         const response = await axios.get(`/api/v1/departments/${departmentId}`);
@@ -24,7 +22,6 @@ export default function UpdateDepartment() {
         });
       } catch (error) {
         console.error('Error fetching department:', error);
-        // Handle errors, such as showing an error message to the user
       }
     };
 

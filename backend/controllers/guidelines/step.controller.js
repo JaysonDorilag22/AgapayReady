@@ -62,16 +62,16 @@ export const updateStepById = async (req, res) => {
         const { id } = req.params;
         const { stepNumber, description, guideline } = req.body;
         let { imageUrl } = req.body;
-
-        const step = await Step.findById(id);
-        if (!step) {
-            return res.status(404).json({ message: "Step not found" });
-        }
-
+        
         // Check if image is provided
         if (req.file) {
             const result = await cloudinary.uploader.upload(req.file.path);
             imageUrl = result.secure_url;
+        }
+
+        const step = await Step.findById(id);
+        if (!step) {
+            return res.status(404).json({ message: "Step not found" });
         }
 
         // Update step fields
