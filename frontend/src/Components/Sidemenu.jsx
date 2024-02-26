@@ -39,12 +39,12 @@ export default function Sidemenu() {
 
         <ul className="mt-6 space-y-1">
           <li>
-            <a
-              href="#"
-              className="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700"
-            >
-              General
-            </a>
+          <Link
+                    to={"/admin/dashboard"}
+                    className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                  >
+                    General
+                  </Link>
           </li>
 
           <li>
