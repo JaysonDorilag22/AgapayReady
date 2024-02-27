@@ -87,7 +87,7 @@ export default function AdminDashboard() {
         <ambientLight intensity={5} />
         <spotLight position={[20, 10, 10]} angle={0.15} penumbra={1} />
         <pointLight position={[-10, -10, -10]} />
-        <Model url="/models/romancoin/scene.gltf" />
+        <Model url="/models/thecontrolroom/scene.gltf" />
         <OrbitControls />
       </Canvas>
     </div>
