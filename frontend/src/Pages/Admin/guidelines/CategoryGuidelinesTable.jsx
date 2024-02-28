@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
-import { AiOutlineEdit, AiOutlineDelete } from 'react-icons/ai';
+import { FaTrash, FaPen } from "react-icons/fa";
 import axios from 'axios';
 
 
 export default function CategoryGuidelinesTable() {
   const [categories, setCategories] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [itemsPerPage] = useState(7);
 
   useEffect(() => {
     fetchGuidelines();
-  }, []);
+  }, [currentPage]);
 
   const fetchGuidelines = async () => {
     try {
-      const response = await axios.get(`/api/v1/categories`);
-      setCategories(response.data);
+      const response = await axios.get(`/api/v1/categories/pagination?page=${currentPage}&limit=${itemsPerPage}`);
+      setCategories(response.data.categories);
+      setTotalPages(response.data.totalPages);
     } catch (error) {
       console.error('Error fetching guidelines:', error);
     }
@@ -22,14 +26,17 @@ export default function CategoryGuidelinesTable() {
   const handleDelete = async (categoryId) => {
     try {
       await axios.delete(`/api/v1/categories/${categoryId}`);
-      // If deletion is successful, update the state to remove the deleted category
       setCategories(categories.filter(category => category._id !== categoryId));
     } catch (error) {
       console.error('Error deleting category:', error);
     }
   };
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
   return (
-    <div className="max-w-4xl mx-auto mt-8">
+    <div className="w-full mx-auto mt-8 flex justify-center">
     <div className="overflow-x-auto">
       <table className="table-auto w-full text-sm">
         <thead>
@@ -51,10 +58,10 @@ export default function CategoryGuidelinesTable() {
               <td className="border px-4 py-2">
               <div className="flex">
                 <Link to={`/admin/update/category/guidelines/${category._id}`} className="mr-2">
-                  <AiOutlineEdit className="text-blue-500" />
+                  <FaPen className="text-blue-500" />
                 </Link>
                 <button onClick={() => handleDelete(category._id)}>
-                      <AiOutlineDelete className="text-red-500" />
+                      <FaTrash className="text-red-500" />
                     </button>
               </div>
             </td>
@@ -62,6 +69,17 @@ export default function CategoryGuidelinesTable() {
           ))}
         </tbody>
       </table>
+      <div className="flex justify-center mt-4">
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+              key={index + 1}
+              onClick={() => paginate(index + 1)}
+              className={`mx-1 px-3 py-1 rounded ${currentPage === index + 1 ? 'bg-gray-800 text-white' : 'bg-gray-200 text-gray-800'}`}
+            >
+              {index + 1}
+            </button>
+          ))}
+        </div>
     </div>
   </div>
   )

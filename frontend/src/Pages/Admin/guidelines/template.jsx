@@ -1,68 +1,9 @@
-import React, { useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import CategoryGuidelinesTable from "./CategoryGuidelinesTable";
-import axios from "axios";
-import AdminNavbar from "../../../components/AdminNavbar";
-
-export default function CreateCategoryGuidelines() {
-  const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    short_description: "",
-    description: "",
-    image: null,
-  });
-
-  const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: name === "image" ? files[0] : value,
-    }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-
-    const formDataToSend = new FormData();
-    formDataToSend.append("name", formData.name);
-    formDataToSend.append("short_description", formData.short_description);
-    formDataToSend.append("description", formData.description);
-    formDataToSend.append("image", formData.image);
-
-    try {
-      const response = await axios.post(`/api/v1/categories`, formDataToSend, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      toast.success("Category created successfully");
-
-      console.log("Guideline category created:", response.data);
-      setLoading(false);
-
-      setFormData({
-        name: "",
-        short_description: "",
-        description: "",
-        image: null,
-      });
-    } catch (error) {
-      toast.error("Error creating category");
-
-      console.error("Error creating guideline category:", error);
-    }
-  };
-
-  return (
-    <>
+ <>
       <AdminNavbar />
       <div className="flex">
         <div className="w-full m-3">
           <ToastContainer />
-          <h1 className="text-3xl font-bold mb-3 text-center">Guidelines Category</h1>
+          <h1 className="text-3xl font-bold mb-3 text-center">Guidelines</h1>
           <div className="flex flex-col md:flex-row border rounded p-4">
             {" "}
             <div className="md:mr-5 flex-1 mb-5 md:mb-0">
@@ -136,5 +77,3 @@ export default function CreateCategoryGuidelines() {
         </div>
       </div>
     </>
-  );
-}

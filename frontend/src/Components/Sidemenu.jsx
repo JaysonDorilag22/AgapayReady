@@ -16,12 +16,14 @@ export default function Sidemenu() {
   const handlelogout = async () => {
     try {
       dispatch(logOutUserStart());
-      const response = await axios.get(`${import.meta.env.VITE_PORT}/api/v1/logout`);
+      const response = await axios.get(
+        `${import.meta.env.VITE_PORT}/api/v1/logout`
+      );
       const data = await response.data;
 
       if (data.success === false) {
         dispatch(deleteUserFailure(data.message));
-        navigate("/")
+        navigate("/");
         return;
       }
       dispatch(deleteUserSuccess(data));
@@ -39,12 +41,12 @@ export default function Sidemenu() {
 
         <ul className="mt-6 space-y-1">
           <li>
-          <Link
-                    to={"/admin/dashboard"}
-                    className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-                  >
-                    General
-                  </Link>
+            <Link
+              to={"/admin/dashboard"}
+              className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+            >
+              General
+            </Link>
           </li>
 
           <li>
@@ -68,21 +70,21 @@ export default function Sidemenu() {
                 </span>
               </summary>
               <li>
-                  <Link
-                    to={"/admin/create/category/contacts"}
-                    className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-                  >
-                    Contacts Category
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to={"/admin/create/category/guidelines"}
-                    className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-                  >
-                    Guidelines Category
-                  </Link>
-                </li>
+                <Link
+                  to={"/admin/create/category/contacts"}
+                  className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                >
+                  Contacts Category
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to={"/admin/create/category/guidelines"}
+                  className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+                >
+                  Guidelines Category
+                </Link>
+              </li>
 
               <ul className="mt-2 space-y-1 px-4">
                 <li>
@@ -133,7 +135,7 @@ export default function Sidemenu() {
           </li>
           <li>
             <Link
-              to={'/admin/report'}
+              to={"/admin/report"}
               className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
             >
               Reports
@@ -162,12 +164,12 @@ export default function Sidemenu() {
 
               <ul className="mt-2 space-y-1 px-4">
                 <li>
-                  <a
-                    href="#"
+                  <Link
+                    to={"/admin/profile"}
                     className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
                   >
-                    Details
-                  </a>
+                    Profile
+                  </Link>
                 </li>
 
                 <li>
@@ -180,13 +182,13 @@ export default function Sidemenu() {
                 </li>
 
                 <li>
-                    <Link
-                    to= "/"
-                      onClick={handlelogout}
-                      className="w-full rounded-lg px-4 py-2 text-sm font-medium text-gray-500 [text-align:_inherit] hover:bg-gray-100 hover:text-gray-700"
-                    >
-                      Logout
-                    </Link>
+                  <Link
+                    to="/"
+                    onClick={handlelogout}
+                    className="w-full rounded-lg px-4 py-2 text-sm font-medium text-gray-500 [text-align:_inherit] hover:bg-gray-100 hover:text-gray-700"
+                  >
+                    Logout
+                  </Link>
                 </li>
               </ul>
             </details>

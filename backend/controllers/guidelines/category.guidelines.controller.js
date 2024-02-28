@@ -32,6 +32,27 @@ export const getAllCategories = async (req, res) => {
   }
 };
 
+
+export const getAllCategoriesPagination = async (req, res) => {
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 5;
+    const skip = (page - 1) * limit;
+
+    const categories = await CategoryGuidelines.find().skip(skip).limit(limit);
+    const totalCategoryGuidelines = await CategoryGuidelines.countDocuments();
+
+    res.status(200).json({
+      categories,
+      currentPage: page,
+      totalPages: Math.ceil(totalCategoryGuidelines / limit)
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+
 export const getCategoryById = async (req, res) => {
   try {
     const category = await CategoryGuidelines.findById(req.params.id);

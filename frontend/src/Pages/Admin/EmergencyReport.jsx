@@ -3,21 +3,17 @@ import axios from 'axios';
 import { io } from 'socket.io-client';
 import Sidemenu from '../../components/Sidemenu';
 
-const socket = io("http://localhost:4000"); // Establish Socket.IO connection
-
+const socket = io("http://localhost:4000"); 
 export default function EmergencyReport() {
   const [reports, setReports] = useState([]);
 
   useEffect(() => {
-    fetchReports(); // Fetch initial reports on component mount
+    fetchReports(); 
 
-    // Listen for new reports in real-time
     socket.on('newEmergencyReport', (newReport) => {
-      // Update reports state by adding the new report to the beginning of the array
       setReports(prevReports => [newReport, ...prevReports]);
     });
 
-    // Clean up event listener on component unmount
     return () => {
       socket.off('newEmergencyReport');
     };
@@ -25,7 +21,7 @@ export default function EmergencyReport() {
 
   const fetchReports = async () => {
     try {
-      const response = await axios.get('/api/v1/report'); // Correct endpoint
+      const response = await axios.get('/api/v1/report'); 
       setReports(response.data);
     } catch (error) {
       console.error('Error fetching emergency reports:', error);

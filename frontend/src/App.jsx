@@ -122,7 +122,8 @@
 // App.js
 
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+
+//socket io
 import { io } from "socket.io-client";
 import {
   BrowserRouter as Router,
@@ -157,6 +158,7 @@ import UpdateDepartment from "./Pages/Admin/department/UpdateDepartment";
 import UpdateSteps from "./Pages/Admin/guidelines/UpdateSteps";
 import EmergencyReport from "./Pages/Admin/EmergencyReport";
 import ToastNotification from "./components/ToastNotification";
+import AdminProfile from "./Pages/Admin/AdminProfile";
 
 const socket = io("http://localhost:4000");
 
@@ -171,7 +173,6 @@ const AdminRoutesWrapper = ({ element }) => {
 
   return <>{element}</>;
 };
-
 const App = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [newReport, setNewReport] = useState(null);
@@ -192,7 +193,7 @@ const App = () => {
 
   return (
     <Router>
-      <Header />
+      {!isAdmin && <Header />}
       <Routes>
         <Route index element={<LandingPage />} />
         <Route path="map" element={<Map />} />
@@ -203,28 +204,38 @@ const App = () => {
         <Route path="user/dashboard" element={<UserDashboard />} />
         <Route path="user/profile" element={<Profile />} />
 
-        <Route path="/admin/dashboard" element={<AdminRoutesWrapper element={<AdminDashboard />} />} />
-        <Route path="/admin/report" element={<AdminRoutesWrapper element={<EmergencyReport />} />} />
-        <Route path="/admin/create/steps" element={<AdminRoutesWrapper element={<CreateSteps />} />} />
-        <Route path="/admin/create/departments" element={<AdminRoutesWrapper element={<CreateDepartment />} />} />
-        <Route path="/admin/create/contacts" element={<AdminRoutesWrapper element={<CreateContacts />} />} />
-        <Route path="/admin/create/guidelines" element={<AdminRoutesWrapper element={<CreateGuidelines />} />} />
-        <Route path="/admin/create/category/contacts" element={<AdminRoutesWrapper element={<CreateCategoryContacts />} />} />
-        <Route path="/admin/create/category/guidelines" element={<AdminRoutesWrapper element={<CreateCategoryGuidelines />} />} />
-        <Route path="/admin/update/steps/:stepId" element={<AdminRoutesWrapper element={<UpdateSteps />} />} />
-        <Route path="/admin/update/departments/:departmentId" element={<AdminRoutesWrapper element={<UpdateDepartment />} />} />
-        <Route path="/admin/update/contacts/:contactId" element={<AdminRoutesWrapper element={<UpdateContacts />} />} />
-        <Route path="/admin/update/guidelines/:guidelineId" element={<AdminRoutesWrapper element={<UpdateGuidelines />} />} />
-        <Route path="/admin/update/category/contacts/:categoryId" element={<AdminRoutesWrapper element={<UpdateCategoryContacts />} />} />
-        <Route path="/admin/update/category/guidelines/:categoryId" element={<AdminRoutesWrapper element={<UpdateCategoryGuidelines />} />} />
-        <Route path="/admin/guideline/table" element={<AdminRoutesWrapper element={<GuidelineTable />} />} />
-        <Route path="/admin/guidelines/:guidelineId" element={<AdminRoutesWrapper element={<GuidelineSteps />} />} />
-
+        <Route
+          path="/admin/*"
+          element={
+            <AdminRoutesWrapper
+              element={<Routes>
+                <Route path="dashboard" element={<AdminDashboard />} />
+                <Route path="report" element={<EmergencyReport />} />
+                <Route path="create/steps" element={<CreateSteps />} />
+                <Route path="create/departments" element={<CreateDepartment />} />
+                <Route path="create/contacts" element={<CreateContacts />} />
+                <Route path="create/guidelines" element={<CreateGuidelines />} />
+                <Route path="create/category/contacts" element={<CreateCategoryContacts />} />
+                <Route path="create/category/guidelines" element={<CreateCategoryGuidelines />} />
+                <Route path="update/steps/:stepId" element={<UpdateSteps />} />
+                <Route path="update/departments/:departmentId" element={<UpdateDepartment />} />
+                <Route path="update/contacts/:contactId" element={<UpdateContacts />} />
+                <Route path="update/guidelines/:guidelineId" element={<UpdateGuidelines />} />
+                <Route path="update/category/contacts/:categoryId" element={<UpdateCategoryContacts />} />
+                <Route path="update/category/guidelines/:categoryId" element={<UpdateCategoryGuidelines />} />
+                <Route path="guideline/table" element={<GuidelineTable />} />
+                <Route path="guidelines/:guidelineId" element={<GuidelineSteps />} />
+                <Route path="profile" element={<AdminProfile />} />
+              </Routes>}
+            />
+          }
+        />
       </Routes>
+      {!isAdmin && <Footer />}
       {isAdmin && <ToastNotification newReport={newReport} />}
-      <Footer />
     </Router>
   );
 };
+
 
 export default App;
