@@ -6,7 +6,7 @@ import {
   logOutUserStart,
   deleteUserFailure,
   deleteUserSuccess,
-} from "../Redux/user/userSlice";
+} from "../Redux/Users/userSlice";
 import Vite from "../assets/services/vite.png";
 export default function Sidemenu() {
   const dispatch = useDispatch();

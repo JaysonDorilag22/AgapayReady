@@ -5,7 +5,7 @@ import {
   logInStart,
   logInSuccess,
   logInFailure,
-} from "../../Redux/user/userSlice";
+} from "../../Redux/Users/userSlice";
 import Vite from "../../assets/services/vite.png";
 import axios from "axios";
 import Cookies from 'js-cookie';
