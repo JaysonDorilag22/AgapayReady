@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
-import ViteLogo from "../assets/services/AgapayReadylogo.png";
+import AgapayReadylogo from "../assets/services/AgapayReadylogo.png";
 import { Dialog, Disclosure, Popover, Transition } from '@headlessui/react';
 import {
   ArrowPathIcon,
@@ -40,7 +40,7 @@ export default function UserNavbar() {
       <div className="flex lg:flex-1">
         <Link to="/" className="-m-1.5 p-1.5">
           <span className="sr-only">Your Company</span>
-          <img className="h-10 w-auto" src={ViteLogo} alt="" />
+          <img className="h-10 w-auto" src={AgapayReadylogo} alt="" />
         </Link>
       </div>
       <div className="flex lg:hidden">
@@ -132,7 +132,7 @@ export default function UserNavbar() {
             <span className="sr-only">Your Company</span>
             <img
               className="h-10 w-auto"
-              src={ViteLogo}
+              src={AgapayReadylogo}
               alt=""
             />
           </Link>
