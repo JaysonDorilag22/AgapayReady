@@ -6,8 +6,8 @@ import {
   Route,
 } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Header from "./Components/Header";
-import UserFooter from "./components/UserFooter";
+import Header from "./components/Header";
+import Footer from "./components/Footer"
 import LandingPage from "./Pages/Common/LandingPage";
 import Map from "./Pages/Common/Map";
 import Blog from "./components/Blog";
@@ -106,7 +106,7 @@ const App = () => {
           }
         />
       </Routes>
-      {!isAdmin && <UserFooter />}
+      {!isAdmin && <Footer />}
       {isAdmin && <ToastNotification newReport={newReport} />}
     </Router>
   );
