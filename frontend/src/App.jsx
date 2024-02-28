@@ -8,7 +8,8 @@ import {
 import { useSelector } from "react-redux";
 // import Header from "./components/Header";
 // import Footer from "./components/Footer"
-import Navbar from "./components/Navbar";
+// import Navbar from "./components/Navbar";
+import UserNavbar from "./components/UserNavbar";
 import UserFooter from "./components/UserFooter";
 import LandingPage from "./Pages/Common/LandingPage";
 import Map from "./Pages/Common/Map";
@@ -70,7 +71,7 @@ const App = () => {
 
   return (
     <Router>
-      {!isAdmin && <Navbar />}
+      {!isAdmin && <UserNavbar />}
       <Routes>
         <Route index element={<LandingPage />} />
         <Route path="map" element={<Map />} />
