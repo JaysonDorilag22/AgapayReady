@@ -6,7 +6,7 @@ import {
   Route,
 } from "react-router-dom";
 import { useSelector } from "react-redux";
-import UserNavbar from "./components/UserNavbar";
+import NavBar from "./components/NavBar"
 import UserFooter from "./components/UserFooter";
 import LandingPage from "./Pages/Common/LandingPage";
 import Map from "./Pages/Common/Map";
@@ -68,7 +68,7 @@ const App = () => {
 
   return (
     <Router>
-      {!isAdmin && <UserNavbar />}
+      {!isAdmin && <NavBar />}
       <Routes>
         <Route index element={<LandingPage />} />
         <Route path="map" element={<Map />} />
