@@ -1,4 +1,5 @@
 import React from 'react'
+import Vite from "../assets/services/vite.png";
 
 function UserFooter() {
   return (
