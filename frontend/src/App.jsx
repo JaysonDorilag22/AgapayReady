@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Navbar from "./components/Navbar"
-import UserFooter from "./components/UserFooter";
+import Footer from "./components/Footer";
 import LandingPage from "./Pages/Common/LandingPage";
 import Map from "./Pages/Common/Map";
 import Blog from "./components/Blog";
@@ -107,7 +107,7 @@ const App = () => {
         />
         {/* Gumana ka naaaaaa */}
       </Routes>
-      {!isAdmin && <UserFooter />}
+      {!isAdmin && <Footer />}
       {isAdmin && <ToastNotification newReport={newReport} />}
     </Router>
   );
