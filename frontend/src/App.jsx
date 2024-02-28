@@ -6,9 +6,6 @@ import {
   Route,
 } from "react-router-dom";
 import { useSelector } from "react-redux";
-// import Header from "./components/Header";
-// import Footer from "./components/Footer"
-// import Navbar from "./components/Navbar";
 import UserNavbar from "./components/UserNavbar";
 import UserFooter from "./components/UserFooter";
 import LandingPage from "./Pages/Common/LandingPage";
