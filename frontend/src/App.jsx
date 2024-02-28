@@ -105,6 +105,7 @@ const App = () => {
             />
           }
         />
+        {/* Gumana ka naaaaaa */}
       </Routes>
       {!isAdmin && <UserFooter />}
       {isAdmin && <ToastNotification newReport={newReport} />}
