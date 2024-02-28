@@ -1,11 +1,11 @@
 import React from 'react';
-import Vite from "../assets/services/vite.png";
+import vite from "../assets/services/vite.png";
 
 export default function Footer() {
   return (
     <div className="footer p-10 bg-base-200 text-base-content">
       <aside>
-        <img src={Vite} alt="Vite Logo" className="h-20 w-auto" />
+        <img src={vite} alt="Vite Logo" className="h-20 w-auto" />
         <p>AgapayReady<br/>Emergency Response App since 2024</p>
       </aside> 
       <nav>
