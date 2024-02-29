@@ -1,4 +1,3 @@
-// ToastNotification.js
 
 import React, { useState, useEffect } from "react";
 import { RiCloseCircleLine } from 'react-icons/ri';
@@ -11,7 +10,7 @@ const ToastNotification = ({ newReport }) => {
       setShowToast(true);
       setTimeout(() => {
         setShowToast(false);
-      }, 5000); // Hide the toast after 5 seconds
+      }, 5000); 
     }
   }, [newReport]);
 
