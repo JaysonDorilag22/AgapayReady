@@ -1,77 +1,70 @@
-import { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
-import AgapayReadylogo from "../assets/services/AgapayReadylogo.png";
-import { Dialog, Disclosure, Popover} from "@headlessui/react";
+import React, { useState} from 'react';
+import { Link } from 'react-router-dom';
+import { Dialog, Disclosure, Popover } from '@headlessui/react';
+import { ArrowPathIcon, Bars3Icon, ChartPieIcon, CursorArrowRaysIcon, FingerPrintIcon, SquaresPlusIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import {
-  ArrowPathIcon,
-  Bars3Icon,
-  ChartPieIcon,
-  CursorArrowRaysIcon,
-  FingerPrintIcon,
-  SquaresPlusIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
-import {
-  ChevronDownIcon,
-  PhoneIcon,
-  PlayCircleIcon,
-} from "@heroicons/react/20/solid";
+    ChevronDownIcon,
+    PhoneIcon,
+    PlayCircleIcon,
+  } from '@heroicons/react/20/solid';
+import AgapayReadylogo from './assets/services/AgapayReadylogo.png';
+
 
 const products = [
-  {
-    name: "Analytics",
-    description: "Get a better understanding of your traffic",
-    to: "/",
-    icon: ChartPieIcon,
-  },
-  {
-    name: "Engagement",
-    description: "Speak directly to your customers",
-    to: "/",
-    icon: CursorArrowRaysIcon,
-  },
-  {
-    name: "Security",
-    description: "Your customers’ data will be safe and secure",
-    to: "/",
-    icon: FingerPrintIcon,
-  },
-  {
-    name: "Integrations",
-    description: "Connect with third-party tools",
-    to: "/",
-    icon: SquaresPlusIcon,
-  },
-  {
-    name: "Automations",
-    description: "Build strategic funnels that will convert",
-    to: "/",
-    icon: ArrowPathIcon,
-  },
-];
+    {
+      name: "Analytics",
+      description: "Get a better understanding of your traffic",
+      to: "/",
+      icon: ChartPieIcon,
+    },
+    {
+      name: "Engagement",
+      description: "Speak directly to your customers",
+      to: "/",
+      icon: CursorArrowRaysIcon,
+    },
+    {
+      name: "Security",
+      description: "Your customers’ data will be safe and secure",
+      to: "/",
+      icon: FingerPrintIcon,
+    },
+    {
+      name: "Integrations",
+      description: "Connect with third-party tools",
+      to: "/",
+      icon: SquaresPlusIcon,
+    },
+    {
+      name: "Automations",
+      description: "Build strategic funnels that will convert",
+      to: "/",
+      icon: ArrowPathIcon,
+    },
+  ];
+  
+  const callsToAction = [
+    { name: "Watch demo", to: "/", icon: PlayCircleIcon },
+    { name: "Contact sales", to: "/", icon: PhoneIcon },
+  ];
+  
+  function classNames(...classes) {
+    return classes.filter(Boolean).join(" ");
+  }
 
-const callsToAction = [
-  { name: "Watch demo", to: "/", icon: PlayCircleIcon },
-  { name: "Contact sales", to: "/", icon: PhoneIcon },
-];
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-
-export default function UserNavbar() {
+export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div className="bg-white">
-      <nav
+    <div className='bg-white'>
+         <nav
         className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
         aria-label="Global"
       >
         <div className="flex lg:flex-1">
           <Link to="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
-            <img className="h-10 w-auto" src={AgapayReadylogo} alt="" />
+            <img className="h-10 w-auto" src={AgapayReadylogo} alt="logo" />
           </Link>
         </div>
         <div className="flex lg:hidden">
@@ -130,7 +123,7 @@ export default function UserNavbar() {
           <div className="flex items-center justify-between">
             <Link to="/" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
-              <img className="h-10 w-auto" src={AgapayReadylogo} alt="" />
+              <img className="h-10 w-auto" src={AgapayReadylogo} alt="logo" />
             </Link>
             <button
               type="button"
@@ -222,5 +215,5 @@ export default function UserNavbar() {
         </Dialog.Panel>
       </Dialog>
     </div>
-  );
+  )
 }
