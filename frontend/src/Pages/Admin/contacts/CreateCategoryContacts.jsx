@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import CategoryContactsTable from './CategoryContactsTable'
-import Sidemenu from '../../../components/Sidemenu'
 import axios from "axios";
 
 export default function CreateCategoryContacts() {
@@ -50,7 +49,6 @@ export default function CreateCategoryContacts() {
   return (
     <div className='flex'>
     <section className="fixed left-0 top-0 bottom-0 w-64 bg-white overflow-y-auto border-r border-gray-200">
-        <Sidemenu />
       </section>
       <div className="flex-1 ml-64 mr-4 mt-8 p-4 rounded shadow">
       <h1 className="text-2xl font-bold mb-4">Create Contacts Category</h1>

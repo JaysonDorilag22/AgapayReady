@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import Sidemenu from "../../../components/Sidemenu";
 import { AiOutlineClose, AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import Loader from "../../../components/Loader";
@@ -84,9 +83,7 @@ export default function GuidelineSteps() {
 
   return (
     <div className="flex">
-      <section className="fixed left-0 top-0 bottom-0 w-64 bg-white overflow-y-auto border-r border-gray-200">
-        <Sidemenu />
-      </section>
+
       <div className="flex-1 ml-64 mr-4 mt-8 p-4">
         <div className="w-full h-auto bg-white rounded-lg shadow-md p-4">
           <h2 className="text-xl font-bold mb-4">{guideline.name}</h2>
