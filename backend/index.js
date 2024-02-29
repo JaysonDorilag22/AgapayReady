@@ -74,7 +74,6 @@ server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
-app.use(express.static(path.join(__dirname, '/frontend/dist')))
 
 io.on('connection', (socket) => {
   console.log(`User connected: ${socket.id}`);
