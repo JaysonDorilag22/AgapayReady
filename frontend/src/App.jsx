@@ -45,7 +45,7 @@ import CreateDepartment from './Pages/Admin/department/CreateDepartment';
 import UpdateDepartment from './Pages/Admin/department/UpdateDepartment';
 
 
-import ToastNotification from './components/ToastNotification';
+import ToastNotification from './Pages/Admin/ToastNotification';
 import GuidelineTable from './Pages/Admin/guidelines/GuidelineTable';
 
 const socket = io("http://localhost:4000");
