@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import Navbar from './Navbar';
 import UserFooter from './UserFooter'
 import LandingPage from './Pages/Common/LandingPage';
-import Blog from './components/Blog';
+import BlogPage from './Pages/Common/BlogPage'
 import Register from './Pages/Common/Register';
 import Login from './Pages/Common/Login';
 import EvacuationGuideines from './Pages/Common/EvacuationGuidelines';
@@ -88,7 +88,7 @@ function App() {
       <Route path='/' element={<LandingPage/>} />
       <Route path='/register' element={<Register/>} />
       <Route path='/login' element={<Login/>} />
-      <Route path='/blog' element={<Blog/>} />
+      <Route path='/blog' element={<BlogPage/>} />
       <Route path='/evacuation/guidelines' element={<EvacuationGuideines/>} />
       <Route path='/user/profile' element={<Profile/>} />
 
