@@ -48,7 +48,7 @@ import UpdateDepartment from './Pages/Admin/department/UpdateDepartment';
 import ToastNotification from './Pages/Admin/ToastNotification';
 import GuidelineTable from './Pages/Admin/guidelines/GuidelineTable';
 
-const socket = io("http://localhost:4000");
+const socket = io('https://agapayready.onrender.com');
 
 const AdminRouterWrapper = ({ element }) => {
   const userRole = useSelector((state) => state.user.currentUser?.role);
