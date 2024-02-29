@@ -24,6 +24,8 @@ dotenv.config();
 const app = express();
 const server = http.createServer(app);
 
+
+app.use(express.static(path.join(__dirname, 'dist')));
 //cors
 const io = new Server(server, {
   cors: {
