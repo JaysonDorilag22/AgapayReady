@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import GuidelineTable from "./GuidelineTable";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import AdminNavbar from "../AdminNavbar";
 export default function CreateGuidelines() {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -74,7 +73,6 @@ export default function CreateGuidelines() {
 
   return (
     <>
-    <AdminNavbar />
     <div className="flex">
       <div className="w-full m-3">
     <ToastContainer/>

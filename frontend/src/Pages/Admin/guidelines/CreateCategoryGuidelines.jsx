@@ -3,7 +3,6 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CategoryGuidelinesTable from "./CategoryGuidelinesTable";
 import axios from "axios";
-import AdminNavbar from "../AdminNavbar";
 
 export default function CreateCategoryGuidelines() {
   const [loading, setLoading] = useState(false);
@@ -58,7 +57,6 @@ export default function CreateCategoryGuidelines() {
 
   return (
     <>
-      <AdminNavbar />
       <div className="flex">
         <div className="w-full m-3">
           <ToastContainer />

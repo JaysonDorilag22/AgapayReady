@@ -5,7 +5,6 @@ import LineChart from "./charts/LineChart";
 // import * as THREE from "three";
 // import { Canvas } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
-import AdminNavbar from "./AdminNavbar";
 import Stats from "./stats/Stats";
 import ReportTable from "./report/ReportTable";
 // import CustomKanban from "./CustomKanban";
@@ -18,7 +17,6 @@ function Model({ url }) {
 export default function AdminDashboard() {
   return (
     <div>
-      <AdminNavbar />
       <div>
         <h1 className="m-10 text-3xl font-bold">Dashboard</h1>
 

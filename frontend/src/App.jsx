@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import { io } from "socket.io-client";
-import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation} from 'react-router-dom';
 import { useSelector } from 'react-redux';
 // Components
 import Navbar from './Navbar';
+import AdminNavbar from './Pages/Admin/AdminNavbar';
+
 import UserFooter from './UserFooter'
 import LandingPage from './Pages/Common/LandingPage';
 import BlogPage from './Pages/Common/BlogPage';
@@ -48,7 +50,7 @@ import UpdateDepartment from './Pages/Admin/department/UpdateDepartment';
 import ToastNotification from './Pages/Admin/ToastNotification';
 import GuidelineTable from './Pages/Admin/guidelines/GuidelineTable';
 
-const socket = io('https://agapayready.onrender.com');
+const socket = io("http://localhost:4000");
 
 const AdminRouterWrapper = ({ element }) => {
   const userRole = useSelector((state) => state.user.currentUser?.role);
@@ -61,6 +63,29 @@ const AdminRouterWrapper = ({ element }) => {
 
   return <>{ element }</>;
 };
+
+function HeaderComponent() {
+  const location = useLocation();
+  const user = useSelector(state => state.user.currentUser);
+
+  // Determine if the current route is an admin route
+  const isAdminRoute = location.pathname.startsWith('/admin');
+  
+  // Add a null check for the user object
+  const isAdminUser = user && user.role === 'Admin'; // Ensure user exists before accessing its properties
+
+  return (
+    <>
+      {/* Render Navbar only if the route is not an admin route */}
+      {!isAdminRoute && <Navbar />}
+      
+      {/* Render AdminNavbar only if the route is an admin route and the user is an admin */}
+      {isAdminRoute && isAdminUser && <AdminNavbar />}
+    </>
+  );
+}
+
+
 
 function App() {
 
@@ -83,7 +108,7 @@ function App() {
 
   return (
     <Router>
-    {!isAdmin && <Navbar/>}
+    <HeaderComponent/>
       <Routes>
       <Route path='/' element={<LandingPage/>} />
       <Route path='/register' element={<Register/>} />
