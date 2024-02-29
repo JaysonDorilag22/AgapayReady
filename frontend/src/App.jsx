@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import Navbar from './Navbar';
 import UserFooter from './UserFooter'
 import LandingPage from './Pages/Common/LandingPage';
-import BlogPage from './Pages/Common/BlogPage'
+import BlogPage from './Pages/Common/BlogPage';
 import Register from './Pages/Common/Register';
 import Login from './Pages/Common/Login';
 import EvacuationGuideines from './Pages/Common/EvacuationGuidelines';
@@ -102,6 +102,7 @@ function App() {
       <Route path='create/guidelines' element={<CreateGuidelines/>} />
       <Route path='create/category/contacts' element={<CreateCategoryContacts/>} />
       <Route path='create/category/guidelines' element={<CreateCategoryGuidelines/>} />
+      <Route path='create/departments' element={<CreateDepartment/>} />
       <Route path='update/steps/:stepId' element={<UpdateSteps/>} />
       <Route path='update/departments/:departmentId' element={<UpdateDepartment/>} />
       <Route path='update/contacts/:contactId' element={<UpdateContacts/>} />
