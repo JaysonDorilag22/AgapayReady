@@ -119,6 +119,7 @@ function App() {
       />
       </Routes>
       {!isAdmin && <UserFooter/>}
+      {isAdmin && <ToastNotification newReport={newReport}/>}
     </Router>
   )
 }
