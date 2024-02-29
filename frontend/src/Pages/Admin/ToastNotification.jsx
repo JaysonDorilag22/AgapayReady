@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { RiCloseCircleLine } from 'react-icons/ri';
 
@@ -15,9 +14,9 @@ const ToastNotification = ({ newReport }) => {
   }, [newReport]);
 
   return (
-    <div className={`fixed top-4 left-4 right-4 p-4 bg-red-500 text-white rounded-md transition-opacity duration-300 ${showToast ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-      <div className="flex items-center">
-        <div className="flex-1">
+    <div className={`fixed top-4 right-4 max-w-sm p-4 bg-red-500 text-white rounded-md transition-opacity duration-300 ${showToast ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+      <div className="flex justify-between items-center">
+        <div>
           <p className="font-semibold">New Emergency Report:</p>
           <p className="text-sm">{newReport?.location} - {newReport?.description}</p>
         </div>
@@ -25,6 +24,8 @@ const ToastNotification = ({ newReport }) => {
           <RiCloseCircleLine size={24} />
         </button>
       </div>
+      {/* Render the image */}
+      {newReport && newReport.image && <img src={newReport.image} alt="Emergency Report" className="w-full h-auto mt-2" />}
     </div>
   );
 };

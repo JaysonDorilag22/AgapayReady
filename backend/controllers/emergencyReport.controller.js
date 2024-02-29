@@ -1,16 +1,22 @@
 import EmergencyReport from "../models/report.model.js";
-import { io } from '../index.js'; // Assuming you have exported the io instance from your app.js file
+import { io } from '../index.js';
+import cloudinary from 'cloudinary';
 
 export const createEmergencyReport = async (req, res) => {
   try {
     const { location, description } = req.body;
+
+    const image = req.file.path; 
+    const uploadedImage = await cloudinary.v2.uploader.upload(image);
+
     const newEmergencyReport = new EmergencyReport({
       location,
-      description
+      description,
+      image: uploadedImage.secure_url 
     });
+    
     await newEmergencyReport.save();
 
-    // Emit the new emergency report to all connected clients
     io.emit('newEmergencyReport', newEmergencyReport);
 
     res.status(201).json({ message: 'Emergency report created successfully' });

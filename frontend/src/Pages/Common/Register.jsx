@@ -25,16 +25,15 @@ export default function Register() {
   };
 
   useEffect(() => {
-    fetchDepartments(); // Fetch departments when component mounts
+    fetchDepartments(); 
   }, []);
-  // `${import.meta.env.VITE_PORT}/api/v1/login`
+
   const fetchDepartments = async () => {
     try {
       const response = await axios.get(`api/v1/departments`);
       setFormData(prevState => ({ ...prevState, departments: response.data }));
     } catch (error) {
       console.error('Error fetching departments', error);
-      // Handle error, e.g., show error message
     }
   };
 
