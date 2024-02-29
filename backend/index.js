@@ -5,7 +5,6 @@ import cloudinary from 'cloudinary';
 import cors from 'cors';
 import http from 'http';
 import { Server } from 'socket.io';
-import path from 'path';
 
 import emergencyReportRouter from './routes/emergencyReport.route.js'
 import testRouter from './routes/test.route.js'
@@ -22,10 +21,8 @@ dotenv.config();
 const app = express();
 const server = http.createServer(app);
 
-// Resolve the directory name using import.meta.url
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
-app.use(express.static(path.join(__dirname, 'dist')));
+
 
 const io = new Server(server, {
   cors: {
@@ -78,10 +75,6 @@ server.listen(PORT, () => {
 });
 
 app.use(express.static(path.join(__dirname, '/frontend/dist')))
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + 'frontend','dist','index.html'));
-})
 
 io.on('connection', (socket) => {
   console.log(`User connected: ${socket.id}`);
