@@ -1,5 +1,5 @@
 import React from "react";
-import PieChart from "./charts/piechart";
+import PieChart from "./charts/PieChart";
 import BarChart from "./charts/BarChart";
 import LineChart from "./charts/LineChart";
 // import * as THREE from "three";
