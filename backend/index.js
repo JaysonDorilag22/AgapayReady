@@ -2,7 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cloudinary from 'cloudinary';
-
+import cors from 'cors';
 //Backend
 //Socket io
 import http from 'http';
@@ -21,7 +21,6 @@ import categoryContactsRouter from "./routes/contacts/category.contacts.route.js
 import cookieParser from "cookie-parser";
 
 dotenv.config();
-
 const app = express();
 const server = http.createServer(app);
 
@@ -36,6 +35,7 @@ const io = new Server(server, {
 
 const PORT = process.env.PORT || 4000;
 
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
