@@ -8,7 +8,7 @@ import { useGLTF } from "@react-three/drei";
 import AdminNavbar from "./AdminNavbar";
 import Stats from "./stats/Stats";
 import ReportTable from "./report/ReportTable";
-import { CustomKanban } from "../../components/CustomKanban";
+import CustomKanban from "./CustomKanban";
 
 function Model({ url }) {
   const gltf = useGLTF(url);
@@ -20,11 +20,11 @@ export default function AdminDashboard() {
     <div>
       <AdminNavbar />
       <div>
-      <h1 className="m-10 text-3xl font-bold">Dashboard</h1>
+        <h1 className="m-10 text-3xl font-bold">Dashboard</h1>
 
         <Stats />
       </div>
-      <div className="divider"></div> 
+      <div className="divider"></div>
       {/* <div className="grow ml-4">
         <h1 className="text-3xl font-bold">ADMIN DASHBOARD</h1>
         <div className="container mx-auto">
@@ -136,7 +136,6 @@ export default function AdminDashboard() {
           <BarChart />
         </div>
         <div className=" rounded-md mr-3">
-
           <LineChart />
         </div>
       </div>
@@ -151,12 +150,10 @@ export default function AdminDashboard() {
         </Canvas>
       </div> */}
       <div>
-        <CustomKanban/>
+        <CustomKanban />
       </div>
       <h1 className="m-10 text-3xl font-bold">Reports</h1>
-      <ReportTable className="m-10"/>
-     
+      <ReportTable className="m-10" />
     </div>
-    
   );
 }
