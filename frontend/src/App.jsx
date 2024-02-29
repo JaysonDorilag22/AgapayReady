@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { io } from "socket.io-client";
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import { useSelector } from 'react-redux';
 // Components
 import Navbar from './Navbar';
