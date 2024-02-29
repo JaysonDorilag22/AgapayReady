@@ -3,11 +3,9 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cloudinary from 'cloudinary';
 import cors from 'cors';
-//Backend
-//Socket io
 import http from 'http';
 import { Server } from 'socket.io';
-
+import path from 'path';
 
 import emergencyReportRouter from './routes/emergencyReport.route.js'
 import testRouter from './routes/test.route.js'
@@ -24,9 +22,11 @@ dotenv.config();
 const app = express();
 const server = http.createServer(app);
 
+// Resolve the directory name using import.meta.url
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
 app.use(express.static(path.join(__dirname, 'dist')));
-//cors
+
 const io = new Server(server, {
   cors: {
     origin: "http://localhost:5173",
@@ -77,9 +77,12 @@ server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
+app.use(express.static(path.join(__dirname, '/frontend/dist')))
 
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + 'frontend','dist','index.html'));
+})
 
-//connect
 io.on('connection', (socket) => {
   console.log(`User connected: ${socket.id}`);
 
