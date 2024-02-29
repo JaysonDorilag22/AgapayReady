@@ -9,7 +9,7 @@ import {
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link } from "react-router-dom"; 
-import logo from "../assets/services/AgapayReadylogo.png";
+import AgapayReadylogo from "../../assets/services/AgapayReadylogo.png";
 
 const navigation = [
   { name: "Dashboard", to: "/admin/dashboard", current: false }, 
@@ -64,7 +64,7 @@ export default function AdminNavbar() {
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <img className="h-8 w-auto" src={logo} alt="Your Company" />
+                  <img className="h-8 w-auto" src={AgapayReadylogo} alt="AgapayReady" />
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
