@@ -6,7 +6,7 @@ import {
   logInSuccess,
   logInFailure,
 } from "../../Redux/Users/userSlice";
-import Vite from "../../assets/services/vite.png";
+import logo from '../../assets/services/vite.png'
 import axios from "axios";
 import Cookies from 'js-cookie';
 
@@ -33,7 +33,6 @@ export default function Login() {
 
     try {
       dispatch(logInStart());
-      // const response = await axios.post(`${import.meta.env.VITE_PORT}/api/v1/login`, formData);
 
       const response = await axios.post(`/api/v1/login`, formData);
       if (response.data.success === false) {
@@ -65,7 +64,7 @@ export default function Login() {
       <main className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">
         <div className="max-w-xl lg:max-w-3xl">
           <div className="flex items-center justify-center">
-            <img src={Vite} alt="Vite Logo" className="w-40" />
+            <img src={logo} alt="logo" className="w-40" />
           </div>
 
           <form onSubmit={handleSubmit} className="mt-8 grid grid-cols-6 gap-6">
