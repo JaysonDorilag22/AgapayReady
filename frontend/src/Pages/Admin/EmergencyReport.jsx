@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { io } from 'socket.io-client';
-import Sidemenu from '../../components/Sidemenu';
 
 const socket = io("http://localhost:4000"); 
 export default function EmergencyReport() {
@@ -29,10 +28,7 @@ export default function EmergencyReport() {
   };
 
   return (
-    <div className='flex'>
-    <section className="fixed left-0 top-0 bottom-0 w-64 bg-white overflow-y-auto border-r border-gray-200">
-        <Sidemenu />
-      </section>
+    <div>
       <div className="flex-1 ml-64 mr-4 mt-8 p-4 rounded shadow">
       <h2 className="text-2xl font-bold mb-4">Emergency Reports</h2>
       <table className="min-w-full divide-y divide-gray-200">
