@@ -3,7 +3,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CategoryGuidelinesTable from "./CategoryGuidelinesTable";
 import axios from "axios";
-import AdminNavbar from "../../../components/AdminNavbar";
+import AdminNavbar from "../AdminNavbar";
 
 export default function CreateCategoryGuidelines() {
   const [loading, setLoading] = useState(false);
