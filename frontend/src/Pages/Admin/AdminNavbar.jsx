@@ -8,11 +8,11 @@ import {
 } from "../../redux/Users/userSlice";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Link } from "react-router-dom"; 
 import logo from "../assets/services/AgapayReadylogo.png";
 
 const navigation = [
-  { name: "Dashboard", to: "/admin/dashboard", current: false }, // Modify href to to
+  { name: "Dashboard", to: "/admin/dashboard", current: false }, 
   { name: "Guidelines", to: "/admin/create/guidelines", current: false }, // Modify href to to
   { name: "Contacts", to: "/admin/create/contacts", current: false }, // Modify href to to
   { name: "Evacution", to: "/evacuation", current: false }, // Modify href to to
