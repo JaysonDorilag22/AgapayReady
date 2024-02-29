@@ -1,6 +1,6 @@
 import React from "react";
+import ShuffleHero from "./ShuffleHero";
 
-import ShuffleHero from "../../components/ShuffleHero";
 export default function landingPage() {
   return (
     <div>
