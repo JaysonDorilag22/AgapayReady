@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import { useSelector } from 'react-redux';
 // Components
 import Navbar from './Navbar';
-import UserFooter from './components/UserFooter';
+import UserFooter from './UserFooter'
 import LandingPage from './Pages/Common/LandingPage';
 import Blog from './components/Blog';
 import Register from './Pages/Common/Register';
