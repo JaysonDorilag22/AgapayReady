@@ -9,7 +9,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: process.env.REACT_APP_BACKEND_URL,
+        target: 'http://localhost:4000',
         secure: false,
         ws: true,
         changeOrigin: true // Add this line to handle CORS properly
