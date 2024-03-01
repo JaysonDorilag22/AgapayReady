@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { io } from "socket.io-client";
-import { BrowserRouter as Router, Routes, Route, useLocation} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -57,15 +57,17 @@ const socket = io(process.env.REACT_APP_BACKEND_URL);
 
 const AdminRouterWrapper = ({ element }) => {
   const userRole = useSelector((state) => state.user.currentUser?.role);
-
+  const navigate = useNavigate();
+  console.log(userRole); // Log userRole instead of role
   useEffect(() => {
     if (userRole !== "Admin") {
-      window.location.href = "/";
+      navigate("/");
     }
-  }, [userRole]);
+  }, [userRole, navigate]);
 
-  return <>{ element }</>;
+  return <>{element}</>;
 };
+
 
 function HeaderComponent() {
   const location = useLocation();

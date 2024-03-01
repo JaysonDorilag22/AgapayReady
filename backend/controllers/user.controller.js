@@ -3,8 +3,9 @@ import Department from "../models/department.model.js";
 import jwt from "jsonwebtoken";
 import bcryptjs from "bcryptjs";
 import cloudinary from "cloudinary";
-import { errorHandler } from '../utils/error.js';
-import dotenv from 'dotenv';
+import { sendToken } from "../utils/jswtToken.js";
+import { errorHandler } from "../utils/error.js";
+import dotenv from "dotenv";
 
 dotenv.config();
 
@@ -33,10 +34,10 @@ export const register = async (req, res, next) => {
     const newUser = new User({
       firstname,
       lastname,
-      email, 
+      email,
       password: hashedPassword,
       avatar: avatarUrl,
-      department: departmentId
+      department: departmentId,
     });
     await newUser.save();
 
@@ -46,10 +47,9 @@ export const register = async (req, res, next) => {
   }
 };
 
-
 //login
 
-export const login = async (req, res, next) => {
+export const login = async (req, res) => {
   const { email, password } = req.body;
   try {
     const validUser = await User.findOne({ email });
@@ -60,8 +60,6 @@ export const login = async (req, res, next) => {
 
     const token = jwt.sign({ id: validUser._id, role: validUser.role }, process.env.JWT_SECRET);
     const { password: pass, ...rest } = validUser._doc;
-
-    console.log("Generated token:", token); // Add this line to log the token
 
     res
       .cookie('access_token', token, { httpOnly: true })
@@ -110,20 +108,22 @@ export const updateUser = async (req, res, next) => {
     // Save updated user information
     await user.save();
 
-    res.status(200).json({ message: "User information updated successfully", user });
+    res
+      .status(200)
+      .json({ message: "User information updated successfully", user });
   } catch (error) {
     errorHandler(error);
   }
 };
-
-
 
 export const logout = async (req, res, next) => {
-  try {
-    res.clearCookie('access_token');
-    res.status(200).json('User has been logged out!');
-  } catch (error) {
-    errorHandler(error);
-  }
-};
+  res.cookie("token", null, {
+    expires: new Date(Date.now()),
+    httpOnly: true,
+  });
 
+  res.status(200).json({
+    success: true,
+    message: "Logged out",
+  });
+};

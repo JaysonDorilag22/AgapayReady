@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   logInStart,
   logInSuccess,
@@ -8,7 +10,6 @@ import {
 } from "../../redux/Users/userSlice";
 import logo from '../../assets/services/vite.png'
 import axios from "axios";
-import Cookies from 'js-cookie';
 
 export default function Login() {
   const { loading, error } = useSelector((state) => state.user);
@@ -30,41 +31,40 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
-        dispatch(logInStart());
+      dispatch(logInStart());
+  
+      const response = await axios.post(`/api/v1/login`, formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      });
+  
+      console.log("Response:", response); // Log the response to inspect the data returned
+  
+      if (response.data.success === false) {
+        dispatch(logInFailure("Invalid email or password."));
+        toast.error("Invalid email or password. Please try again.");
+        return;
+      }
+  
+      dispatch(logInSuccess(response.data));
+  
 
-        const response = await axios.post(`/api/v1/login`, formData, {
-            headers: {
-                "Content-Type": "application/json",
-            },
-            withCredentials: true,
-        });
-
-        if (response.data.success === false) {
-            dispatch(logInFailure("Invalid email or password."));
-            dispatch(logInSuccess(false));
-
-            toast.error("Invalid email or password. Please try again.");
-
-            return;
-        }
-
-        Cookies.set('access_token', response.data.access_token);
-        dispatch(logInSuccess(response.data));
-
-        if (response.data.role === 'Admin') {
-            navigate('/admin/dashboard');
-        } else {
-            navigate('/user/profile');
-        }
+      if (response.data.role === 'Admin') {
+        navigate('/admin/dashboard');
+      } else {
+        navigate('/');
+      }
     } catch (error) {
-        console.error("Error occurred:", error);
-        dispatch(logInFailure());
-        dispatch(logInSuccess(false));
-        setLoginError("An error occurred while logging in");
+      console.error("Error occurred:", error);
+      dispatch(logInFailure());
+      setLoginError("An error occurred while logging in");
     }
-};
+  };
+  
 
 
   return (
