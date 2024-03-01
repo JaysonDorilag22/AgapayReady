@@ -49,7 +49,7 @@ export const register = async (req, res, next) => {
 
 //login
 
-export const login = async (req, res) => {
+export const login = async (req, res, next) => {
   const { email, password } = req.body;
   try {
     const validUser = await User.findOne({ email });
@@ -117,13 +117,17 @@ export const updateUser = async (req, res, next) => {
 };
 
 export const logout = async (req, res, next) => {
-  res.cookie("token", null, {
-    expires: new Date(Date.now()),
-    httpOnly: true,
-  });
-
-  res.status(200).json({
-    success: true,
-    message: "Logged out",
-  });
+  try {
+    // Clear the access_token cookie
+    res.clearCookie("access_token", { httpOnly: true });
+    
+    // Respond with a success message
+    res.status(200).json({
+      success: true,
+      message: "Logged out successfully",
+    });
+  } catch (error) {
+    next(error); // Pass any error to the error handler middleware
+  }
 };
+
