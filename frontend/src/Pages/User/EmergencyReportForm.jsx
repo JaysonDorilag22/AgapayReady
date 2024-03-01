@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useSelector } from 'react-redux';
+import io from 'socket.io-client';
+
+const socket = io('http://localhost:4000'); // Connect to your Socket.IO server
 
 const EmergencyReportForm = () => {
+  const { currentUser } = useSelector((state) => state.user);
+ console.log(currentUser._id)
   const [location, setLocation] = useState('');
   const [description, setDescription] = useState('');
-  const [image, setImage] = useState(null); // State to store the selected image file
+  const [image, setImage] = useState(null);
 
   const handleLocationChange = (e) => {
     setLocation(e.target.value);
@@ -17,31 +23,47 @@ const EmergencyReportForm = () => {
   };
 
   const handleImageChange = (e) => {
-    setImage(e.target.files[0]); // Capture the selected image file
+    setImage(e.target.files[0]);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const formData = new FormData(); // Create a FormData object
+      const formData = new FormData();
       formData.append('location', location);
       formData.append('description', description);
-      formData.append('image', image); // Append the selected image file
+      formData.append('image', image);
+      formData.append('userId', currentUser._id);
 
       await axios.post('/api/v1/report', formData, {
         headers: {
-          'Content-Type': 'multipart/form-data', // Set content type to multipart/form-data for file upload
+          'Content-Type': 'multipart/form-data',
         },
       });
+      
       setLocation('');
       setDescription('');
-      setImage(null); // Reset the selected image
+      setImage(null);
       toast.success('Emergency report sent successfully!');
     } catch (error) {
       console.error('Error submitting emergency report:', error);
       toast.error('Failed to submit emergency report');
     }
   };
+
+  useEffect(() => {
+    // Listen for report confirmed events from the server
+    socket.on('reportConfirmed', ({ reportId }) => {
+      // Display notification to the user when their report is confirmed
+      toast.success('Your emergency report has been confirmed!');
+      // Optionally, you can update your UI or take other actions based on the confirmation
+    });
+
+    // Clean up event listeners when the component unmounts
+    return () => {
+      socket.off('reportConfirmed');
+    };
+  }, []);
 
   return (
     <div className="max-w-md mx-auto mt-8">
@@ -71,9 +93,9 @@ const EmergencyReportForm = () => {
           <label className="block mb-1 font-medium">Image</label>
           <input
             type="file"
-            accept="image/*"
             onChange={handleImageChange}
-            className="border rounded-md p-2"
+            accept="image/*"
+            className="w-full"
           />
         </div>
         <button

@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import { io } from "socket.io-client";
 import { BrowserRouter as Router, Routes, Route, useLocation} from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // Components
 import Navbar from './Navbar';
 import AdminNavbar from './Pages/Admin/AdminNavbar';
@@ -92,6 +94,42 @@ function App() {
 
   const [isAdmin, setIsAdmin] = useState(false);
   const [newReport, setNewReport] = useState(null);
+  const [comfirmReport] = useState(null);
+
+ 
+  const user = useSelector(state => state.user.currentUser);
+
+  useEffect(() => {
+    socket.on("reportConfirmed", (confirmedReport) => {
+      setNewReport(confirmedReport);
+      if (confirmedReport && user && confirmedReport.user === user.id) {
+        toast.success('Your report has been confirmed!', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    });
+    
+    return () => {
+      socket.off("reportConfirmed");
+    }
+  }, [user]);
+  
+
+  useEffect(() =>{
+    socket.on("reportConfirmed", (comfirmReport) => {
+      setNewReport(comfirmReport);
+    });
+    
+    return () => {
+      socket.off("reportConfirmed");
+    }
+  })
 
   useEffect(() =>{
     socket.on("newEmergencyReport", (newReport) => {
@@ -110,6 +148,7 @@ function App() {
   return (
     <Router>
     <HeaderComponent/>
+    <ToastContainer comfirmReport={comfirmReport}/>
       <Routes>
       <Route path='/' element={<LandingPage/>} />
       <Route path='/register' element={<Register/>} />

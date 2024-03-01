@@ -75,11 +75,29 @@ server.listen(PORT, () => {
 });
 
 
+const connectedUsers = new Map(); // Map to store user IDs and their corresponding socket IDs
+
 io.on('connection', (socket) => {
   console.log(`User connected: ${socket.id}`);
 
+  // Handle user authentication and associate socket with user ID
+  socket.on('authenticate', (userId) => {
+    // Assuming you have authenticated the user and received their ID
+    // Associate the socket ID with the user ID
+    connectedUsers.set(userId, socket.id);
+    console.log(`User authenticated: ${userId}`);
+  });
+
   socket.on('disconnect', () => {
-    console.log(`User disconnected: ${socket.id}`);
+    // Remove the user ID from the map when the socket disconnects
+    connectedUsers.forEach((value, key) => {
+      if (value === socket.id) {
+        connectedUsers.delete(key);
+        console.log(`User disconnected: ${key}`);
+      }
+    });
   });
 });
-export { io };
+
+export { io, connectedUsers };
+
