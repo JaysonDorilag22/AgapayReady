@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 // Components
 import Navbar from './Navbar';
 import AdminNavbar from './Pages/Admin/AdminNavbar';
+import EarthquakeGuidelines from './Pages/Common/EarthquakeGuidelines';
 
 import UserFooter from './UserFooter'
 import LandingPage from './Pages/Common/LandingPage';
@@ -156,6 +157,8 @@ function App() {
       <Route path='/blog' element={<BlogPage/>} />
       <Route path='/evacuation/guidelines' element={<EvacuationGuideines/>} />
       <Route path='/user/profile' element={<Profile/>} />
+      <Route path='/EarthquakeGuidelines' element={<EarthquakeGuidelines/>} />
+
 
       <Route path='/admin/*' element = {
         <AdminRouterWrapper

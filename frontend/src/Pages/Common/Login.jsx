@@ -32,32 +32,40 @@ export default function Login() {
     e.preventDefault();
 
     try {
-      dispatch(logInStart());
+        dispatch(logInStart());
 
-      const response = await axios.post(`/api/v1/login`, formData);
-      if (response.data.success === false) {
-        dispatch(logInFailureInFailure("Invalid email or password."));
-        dispatch(logInSuccess(false));
+        const response = await axios.post(`/api/v1/login`, formData, {
+            headers: {
+                "Content-Type": "application/json",
+            },
+            withCredentials: true,
+        });
 
-        toast.error("Invalid email or password. Please try again.");
+        if (response.data.success === false) {
+            dispatch(logInFailure("Invalid email or password."));
+            dispatch(logInSuccess(false));
 
-        return;
-      }
-      Cookies.set('access_token', response.data.access_token);
-      dispatch(logInSuccess(response.data));
+            toast.error("Invalid email or password. Please try again.");
 
-      if (response.data.role === 'Admin') {
-        navigate('/admin/dashboard');
-      } else {
-        navigate('/user/profile');
-      }
+            return;
+        }
+
+        Cookies.set('access_token', response.data.access_token);
+        dispatch(logInSuccess(response.data));
+
+        if (response.data.role === 'Admin') {
+            navigate('/admin/dashboard');
+        } else {
+            navigate('/user/profile');
+        }
     } catch (error) {
-      console.error("Error occurred:", error);
-      dispatch(logInFailure());
-      dispatch(logInSuccess(false));
-      setLoginError("An error occurred while logging in");
+        console.error("Error occurred:", error);
+        dispatch(logInFailure());
+        dispatch(logInSuccess(false));
+        setLoginError("An error occurred while logging in");
     }
-  };
+};
+
 
   return (
     <section className="bg-white">
