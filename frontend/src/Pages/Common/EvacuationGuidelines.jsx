@@ -2,11 +2,13 @@ import React from "react";
 import { FiCreditCard, FiMail, FiUser, FiUsers } from "react-icons/fi";
 import { MdTsunami, MdLocalFireDepartment,  } from "react-icons/md";
 import { RiEarthquakeFill } from "react-icons/ri";
+import EarthquakeGuidelines from "./EarthquakeGuidelines";
+
 const guidelines = [
   {
     id: 1,
     title: 'Fire emergency',
-    href: '#',
+    href: '/earthquake/guidelines',
     description:
       'Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.',
     date: 'Feb 11, 2024',
