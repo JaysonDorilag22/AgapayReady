@@ -42,7 +42,7 @@ export default function Login() {
         withCredentials: true,
       });
   
-      console.log("Response:", response); // Log the response to inspect the data returned
+      console.log("Response:", response); 
   
       if (response.data.success === false) {
         dispatch(logInFailure("Invalid email or password."));

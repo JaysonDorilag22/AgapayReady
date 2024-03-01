@@ -6,7 +6,7 @@ import LineChart from "./charts/LineChart";
 // import { Canvas } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
 import Stats from "./stats/Stats";
-import ReportTable from "./report/ReportTable";
+import EmergencyReport from "./EmergencyReport";
 // import CustomKanban from "./CustomKanban";
 
 function Model({ url }) {
@@ -151,7 +151,7 @@ export default function AdminDashboard() {
         {/* <CustomKanban /> */}
       </div>
       <h1 className="m-10 text-3xl font-bold">Reports</h1>
-      <ReportTable className="m-10" />
+      <EmergencyReport/>
     </div>
   );
 }
