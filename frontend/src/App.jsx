@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import { io } from "socket.io-client";
 import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
@@ -53,7 +52,6 @@ import UpdateDepartment from './Pages/Admin/department/UpdateDepartment';
 import ToastNotification from './Pages/Admin/ToastNotification';
 import GuidelineTable from './Pages/Admin/guidelines/GuidelineTable';
 
-const socket = io(process.env.REACT_APP_BACKEND_URL);
 
 const AdminRouterWrapper = ({ element }) => {
   const userRole = useSelector((state) => state.user.currentUser?.role);
@@ -102,47 +100,6 @@ function App() {
  
   const user = useSelector(state => state.user.currentUser);
 
-  useEffect(() => {
-    socket.on("reportConfirmed", (confirmedReport) => {
-      setNewReport(confirmedReport);
-      if (confirmedReport && user && confirmedReport.user === user.id) {
-        toast.success('Your report has been confirmed!', {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-      }
-    });
-    
-    return () => {
-      socket.off("reportConfirmed");
-    }
-  }, [user]);
-  
-
-  useEffect(() =>{
-    socket.on("reportConfirmed", (comfirmReport) => {
-      setNewReport(comfirmReport);
-    });
-    
-    return () => {
-      socket.off("reportConfirmed");
-    }
-  })
-
-  useEffect(() =>{
-    socket.on("newEmergencyReport", (newReport) => {
-      setNewReport(newReport);
-    });
-    
-    return () => {
-      socket.off("newEmergencyReport");
-    }
-  })
 
   useEffect(() => {
     setIsAdmin(window.location.pathname.startsWith("/admin"));
