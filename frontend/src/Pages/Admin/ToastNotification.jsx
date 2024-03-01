@@ -25,7 +25,7 @@ const ToastNotification = ({ newReport }) => {
         </button>
       </div>
       {/* Render the image */}
-      {newReport && newReport.image && <img src={newReport.image} alt="Emergency Report" className="w-full h-auto mt-2" />}
+      {newReport && newReport.image && <img src={newReport.image} alt="Emergency Report" className="w-auto h-10 mt-2" />}
     </div>
   );
 };
