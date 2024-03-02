@@ -4,16 +4,16 @@ AOS.init();
 
 const FAQData = [
     {
-        question: "How secure is my insurance information?",
-        answer: "We prioritize the security of your insurance information. We use advanced encryption and strict data protection measures to ensure your data is safe and confidential."
+        question: "What information does the AgapayReady app offer to campus users?",
+        answer: "AgapayReady provides essential emergency information tailored specifically for our campus community. This includes details such as campus evacuation routes, contact information for campus organizations, and guidelines for handling emergencies like first aid procedures."
     },
     {
-        question: "How can I customize my insurance coverage?",
-        answer: "Our insurance plans are customizable. You can tailor your coverage to meet your specific needs and budget."
+        question: "How do I access campus emergency information through the AgapayReady app?",
+        answer: "Accessing crucial emergency information is simple with AgapayReady. Users within our campus community can open the app to find detailed maps outlining evacuation routes for campus buildings. Additionally, contact information for key campus organizations involved in emergency response is readily available, ensuring quick access to necessary resources during emergencies."
     },
     {
-        question: "Is there a waiting period for insurance claims?",
-        answer: "There may be a waiting period for certain insurance claims, depending on the policy terms and conditions. Please refer to your policy documents for details."
+        question: "Is the information in the AgapayReady app regularly reviewed and updated for our campus community?",
+        answer: "Absolutely. At AgapayReady, we prioritize the accuracy and relevance of the information provided to our campus users. While real-time updates may not be necessary, our team regularly reviews and updates the content within the app to ensure it reflects the latest evacuation routes, contact details, and emergency guidelines specific to our campus. We're committed to keeping our campus community informed and prepared for any emergency scenario."
     }
 ];
 
