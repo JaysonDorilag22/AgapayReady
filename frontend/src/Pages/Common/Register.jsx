@@ -178,7 +178,7 @@ export default function Register() {
                   </Form>
                 )}
               </Formik>
-              <p className="mt-5 text-center text-sm text-gray-500">
+              <p className="mt-5 text-center text-sm mb-5 text-gray-500">
                 Already have an account?{" "}
                 <Link to={"/login"} className="font-semibold leading-6 text-red-600 hover:text-red-500">
                   Log in

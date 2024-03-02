@@ -1,12 +1,16 @@
 import React from "react";
 import ShuffleHero from "./ShuffleHero";
-// import AgapayComb from "../../assets/agapayComb.svg"
-// import Features from "../../components/Features";
+import Features from "../../components/Features";
+import EarthquakeGuidelines from "./EarthquakeGuidelines";
+import Teams from "./Teams";
+import FAQSection from "./FAQSection";
 export default function landingPage() {
   return (
     <div>
     <ShuffleHero/>
-    {/* <Features/> */}
+    <Features/>
+    <Teams/>
+    <FAQSection/>
     </div>
   );
 }

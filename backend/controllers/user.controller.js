@@ -3,7 +3,6 @@ import Department from "../models/department.model.js";
 import jwt from "jsonwebtoken";
 import bcryptjs from "bcryptjs";
 import cloudinary from "cloudinary";
-import { sendToken } from "../utils/jswtToken.js";
 import { errorHandler } from "../utils/error.js";
 import dotenv from "dotenv";
 
