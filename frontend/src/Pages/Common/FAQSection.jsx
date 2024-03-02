@@ -33,8 +33,8 @@ function FAQItem({ faq }) {
         >
             <span className="flex-1 text-base-content">{faq.question}</span>
             <svg className="flex-shrink-0 w-4 h-4 ml-auto fill-current" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                <rect y="7" width="16" height="2" rx="1" className={`transform origin-center transition duration-200 ease-out ${expanded ? '' : 'rotate-0'}`} />
-                <rect y="7" width="16" height="2" rx="1" className={`transform origin-center rotate-90 transition duration-200 ease-out ${expanded ? 'rotate-0' : ''}`} />
+                <rect y="7" width="16" height="2" rx="1" className={`transform origin-center rotate-0  transition duration-200 ease-out ${expanded ? '' : 'rotate-90'}`} />
+                <rect y="7" width="16" height="2" rx="1" className={`transform origin-center rotate-0 transition duration-200 ease-out ${expanded ? 'rotate-0' : ''}`} />
             </svg>
         </button>
         <div

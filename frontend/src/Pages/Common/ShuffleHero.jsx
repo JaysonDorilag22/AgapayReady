@@ -15,7 +15,7 @@ const ShuffleHero = () => {
   return (
     <section className="w-full px-8 py-12 grid grid-cols-1 md:grid-cols-2 items-center gap-8 max-w-6xl mx-auto">
       <div>
-        {/* <span className="block mb-4 text-xs md:text-sm text-red-500 font-extrabold">
+        {/* <span className="block mb-4 text-xs md:text-sm text-red-500 font-lg">
           Welcome to
         </span> */}
         <h3 data-aos="fade-right" className="text-4xl md:text-6xl font-semibold">

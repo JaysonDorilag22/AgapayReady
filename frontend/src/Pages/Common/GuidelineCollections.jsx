@@ -1,176 +1,80 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
+import { FaRegCheckCircle, FaSearch } from "react-icons/fa";
 
-export default function GuidelineCollections() {
+const GuidelineCollections = () => {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    fetch("/api/v1/categories")
+      .then((response) => response.json())
+      .then((data) => setCategories(data))
+      .catch((error) => console.error("Error fetching categories:", error));
+  }, []);
+
   return (
-    <section>
-  <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-    <header>
-      <h2 className="text-xl font-bold text-gray-900 sm:text-3xl">Product Collection</h2>
-
-      <p className="mt-4 max-w-md text-gray-500">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque praesentium cumque iure
-        dicta incidunt est ipsam, officia dolor fugit natus?
+    <div className="p-4 mb-10 mt-5">
+      <div className="text-4xl text-center md:text-6xl font-semibold mb-10">
+        Guideline Categories
+      </div>
+      <p className="mb-10 text-center">
+        Welcome to our Guidelines Page, where we prioritize safety and
+        preparedness. Here, you'll find a comprehensive array of categories
+        designed to equip you with the knowledge and tools needed to navigate
+        various emergency situations effectively.
       </p>
-    </header>
-
-    <div className="mt-8">
-      <p className="text-sm text-gray-500">Showing <span> 4 </span> of 40</p>
+      <div className="flex flex-1 items-center justify-center mb-10">
+        <div className="w-full max-w-lg">
+          <form className="sm:flex sm:items-center">
+            <input
+              id="q"
+              name="q"
+              className="inline w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-3 leading-5 placeholder-gray-500 focus:border-red-500 focus:placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-red-500 sm:text-sm"
+              placeholder="Search Guideline . . ."
+              type="search"
+              autoFocus=""
+              value=""
+            />
+            <button
+              type="submit"
+              className="mt-3 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+            >
+              <FaSearch/>
+            </button>
+          </form>
+        </div>
+      </div>
+      <div className="grid gap-4 grid-cols-2 lg:grid-cols-4">
+        {categories.map((category) => (
+          <Card
+            key={category._id}
+            title={category.name}
+            subtitle={category.short_description}
+            Icon={FaRegCheckCircle}
+          />
+        ))}
+      </div>
     </div>
+  );
+};
 
-    <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      <li>
-        <a href="#" className="group block overflow-hidden">
-          <img
-            src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-            alt=""
-            className="h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[450px]"
-          />
+const Card = ({ title, subtitle, Icon, href }) => {
+  return (
+    <a
+      href={href}
+      className="w-full p-4 rounded border-[1px] border-slate-300 relative overflow-hidden group bg-white shadow-md hover:shadow-lg transition-shadow duration-300"
+    >
+      <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-          <div className="relative bg-white pt-3">
-            <h3 className="text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4">
-              Basic Tee
-            </h3>
+      <Icon className="absolute z-10 -top-12 -right-12 text-9xl text-slate-100 group-hover:text-red-400 group-hover:rotate-12 transition-transform duration-300" />
+      <Icon className="mb-2 text-2xl text-red-600 group-hover:text-white transition-colors relative z-10 duration-300" />
+      <h3 className="font-medium text-lg text-slate-950 group-hover:text-white relative z-10 duration-300">
+        {title}
+      </h3>
+      <p className="text-slate-400 group-hover:text-red-200 relative z-10 duration-300">
+        {subtitle}
+      </p>
+    </a>
+  );
+};
 
-            <p className="mt-2">
-              <span className="sr-only"> Regular Price </span>
-
-              <span className="tracking-wider text-gray-900"> £24.00 GBP </span>
-            </p>
-          </div>
-        </a>
-      </li>
-
-      <li>
-        <a href="#" className="group block overflow-hidden">
-          <img
-            src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-            alt=""
-            className="h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[450px]"
-          />
-
-          <div className="relative bg-white pt-3">
-            <h3 className="text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4">
-              Basic Tee
-            </h3>
-
-            <p className="mt-2">
-              <span className="sr-only"> Regular Price </span>
-
-              <span className="tracking-wider text-gray-900"> £24.00 GBP </span>
-            </p>
-          </div>
-        </a>
-      </li>
-
-      <li>
-        <a href="#" className="group block overflow-hidden">
-          <img
-            src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-            alt=""
-            className="h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[450px]"
-          />
-
-          <div className="relative bg-white pt-3">
-            <h3 className="text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4">
-              Basic Tee
-            </h3>
-
-            <p className="mt-2">
-              <span className="sr-only"> Regular Price </span>
-
-              <span className="tracking-wider text-gray-900"> £24.00 GBP </span>
-            </p>
-          </div>
-        </a>
-      </li>
-
-      <li>
-        <a href="#" className="group block overflow-hidden">
-          <img
-            src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-            alt=""
-            className="h-[350px] w-full object-cover transition duration-500 group-hover:scale-105 sm:h-[450px]"
-          />
-
-          <div className="relative bg-white pt-3">
-            <h3 className="text-xs text-gray-700 group-hover:underline group-hover:underline-offset-4">
-              Basic Tee
-            </h3>
-
-            <p className="mt-2">
-              <span className="sr-only"> Regular Price </span>
-
-              <span className="tracking-wider text-gray-900"> £24.00 GBP </span>
-            </p>
-          </div>
-        </a>
-      </li>
-    </ul>
-
-    <ol className="mt-8 flex justify-center gap-1 text-xs font-medium">
-      <li>
-        <a
-          href="#"
-          className="inline-flex size-8 items-center justify-center rounded border border-gray-100"
-        >
-          <span className="sr-only">Prev Page</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-3 w-3"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fillRule="evenodd"
-              d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </a>
-      </li>
-
-      <li>
-        <a href="#" className="block size-8 rounded border border-gray-100 text-center leading-8">
-          1
-        </a>
-      </li>
-
-      <li className="block size-8 rounded border-black bg-black text-center leading-8 text-white">2</li>
-
-      <li>
-        <a href="#" className="block size-8 rounded border border-gray-100 text-center leading-8">
-          3
-        </a>
-      </li>
-
-      <li>
-        <a href="#" className="block size-8 rounded border border-gray-100 text-center leading-8">
-          4
-        </a>
-      </li>
-
-      <li>
-        <a
-          href="#"
-          className="inline-flex size-8 items-center justify-center rounded border border-gray-100"
-        >
-          <span className="sr-only">Next Page</span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-3 w-3"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fillRule="evenodd"
-              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </a>
-      </li>
-    </ol>
-  </div>
-</section>
-  )
-}
+export default GuidelineCollections;

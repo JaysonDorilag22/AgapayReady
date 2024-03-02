@@ -3,7 +3,7 @@ import logo from "./assets/services/vite.png";
 
 function UserFooter() {
   return (
-    <div className="footer p-10 bg-base-200 text-base-content">
+    <footer className="footer p-10 bg-base-200 text-base-content">
       <aside>
         <img src={logo} alt="Vite Logo" className="h-20 w-auto" />
         <p>
@@ -32,7 +32,7 @@ function UserFooter() {
         <a className="link link-hover">Privacy policy</a>
         <a className="link link-hover">Cookie policy</a>
       </nav>
-    </div>
+    </footer>
   );
 }
 

@@ -15,7 +15,7 @@ import AgapayReadylogo from './assets/services/AgapayReadylogo.png';
 
 const navigation = [
   { name: "Evacuation Guidelines", to: "/user/evacuation/guidelines", current: false }, 
-  { name: "Guidelines", to: "/user/guidelines", current: false },
+  { name: "Guidelines", to: "/guidelines", current: false },
   { name: "Contacts", to: "/user/contacts", current: false }, 
 ];
 
