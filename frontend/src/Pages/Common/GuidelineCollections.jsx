@@ -13,15 +13,21 @@ const GuidelineCollections = () => {
 
   return (
     <div className="p-4 mb-10 mt-5">
-      <div className="text-4xl text-center md:text-6xl font-semibold mb-10">
-        Guideline Categories
-      </div>
-      <p className="mb-10 text-center">
-        Welcome to our Guidelines Page, where we prioritize safety and
+    <div className="max-w-xl mx-auto space-y-3 sm:text-center mb-5">
+                    <h3 className="text-red-600 font-semibold">
+                    Guideline Categories
+
+                    </h3>
+                    <p className="text-gray-800 text-3xl font-semibold sm:text-4xl">
+                    Connecting You to Safety
+                    </p>
+                    <p>
+                    We prioritize safety and
         preparedness. Here, you'll find a comprehensive array of categories
         designed to equip you with the knowledge and tools needed to navigate
         various emergency situations effectively.
-      </p>
+                    </p>
+                </div>
       <div className="flex flex-1 items-center justify-center mb-10">
         <div className="w-full max-w-lg">
           <form className="sm:flex sm:items-center">
