@@ -11,7 +11,7 @@ import EarthquakeGuidelines from './Pages/Common/EarthquakeGuidelines';
 import UserFooter from './UserFooter'
 import LandingPage from './Pages/Common/LandingPage';
 import GuidelineCollections from './Pages/Common/GuidelineCollections';
-import Contacts from './Pages/Common/Contacts';
+import ContactsCollections from './Pages/Common/ContactsCollections';
 import BlogPage from './Pages/Common/BlogPage';
 import Register from './Pages/Common/Register';
 import Login from './Pages/Common/Login';
@@ -117,7 +117,7 @@ function App() {
       <Route path='/login' element={<Login/>} />
       <Route path='/blog' element={<BlogPage/>} />
       <Route path='/guidelines' element={<GuidelineCollections/>} />
-      <Route path='/contacts' element={<Contacts/>} />
+      <Route path='/contacts' element={<ContactsCollections/>} />
       <Route path='/evacuation/guidelines' element={<EvacuationGuideines/>} />
       <Route path='/user/profile' element={<Profile/>} />
       <Route path='/EarthquakeGuidelines' element={<EarthquakeGuidelines/>} />
