@@ -17,7 +17,7 @@ router.get('/guidelines', getAllGuidelines);
 router.get('/guidelines/:id', getGuidelineById);
 
 // Get a guideline by CategoryId
-router.get('/category/guidelines/:id', getGuidelinesByCategory);
+router.get('/category/guidelines/:categoryId', getGuidelinesByCategory);
 
 // Update a guideline by ID
 router.put('/guidelines/:id', upload.single('image'), verifyToken, isAdmin, updateGuidelineById);

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { FaRegCheckCircle, FaSearch } from "react-icons/fa";
-
+import {Link} from 'react-router-dom'
 const GuidelineCollections = () => {
   const [categories, setCategories] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     fetch("/api/v1/categories")
@@ -10,6 +11,14 @@ const GuidelineCollections = () => {
       .then((data) => setCategories(data))
       .catch((error) => console.error("Error fetching categories:", error));
   }, []);
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const filteredCategories = categories.filter(category =>
+    category.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div className="p-4 mb-10 mt-5">
@@ -38,7 +47,8 @@ const GuidelineCollections = () => {
               placeholder="Search Guideline . . ."
               type="search"
               autoFocus=""
-              value=""
+              value={searchQuery}
+              onChange={handleSearchChange}
             />
             <button
               type="submit"
@@ -50,12 +60,14 @@ const GuidelineCollections = () => {
         </div>
       </div>
       <div className="grid gap-4 grid-cols-2 lg:grid-cols-4">
-        {categories.map((category) => (
+        {filteredCategories.map((category) => (
           <Card
             key={category._id}
             title={category.name}
             subtitle={category.short_description}
             Icon={FaRegCheckCircle}
+            categoryId={category._id}
+
           />
         ))}
       </div>
@@ -63,10 +75,10 @@ const GuidelineCollections = () => {
   );
 };
 
-const Card = ({ title, subtitle, Icon, href }) => {
+const Card = ({ title, subtitle, Icon, categoryId }) => {
   return (
-    <a
-      href={href}
+    <Link
+      to={`/guidelines/category/guideline/${categoryId}`}
       className="w-full p-4 rounded border-[1px] border-slate-300 relative overflow-hidden group bg-white shadow-md hover:shadow-lg transition-shadow duration-300"
     >
       <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -79,7 +91,7 @@ const Card = ({ title, subtitle, Icon, href }) => {
       <p className="text-slate-400 group-hover:text-red-200 relative z-10 duration-300">
         {subtitle}
       </p>
-    </a>
+    </Link>
   );
 };
 

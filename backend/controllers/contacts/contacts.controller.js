@@ -1,6 +1,7 @@
 import cloudinary from 'cloudinary';
 import Contacts from '../../models/contacts.model.js';
 import CategoryContacts from '../../models/category.contacts.model.js';
+import Contact from '../../models/contacts.model.js';
 
 
 export const createContacts = async (req, res) => {
@@ -50,6 +51,19 @@ export const getContactById = async (req, res) => {
     res.json(contact);
   } catch (error) {
     res.status(500).json({ message: error.message });
+  }
+};
+
+export const getContactsByCategory = async (req, res) => {
+  try {
+      const { categoryId } = req.params;
+
+      // Find guidelines by category
+      const contacts = await Contact.find({ category: categoryId });
+
+      res.status(200).json(contacts);
+  } catch (error) {
+      errorHandler(res, error);
   }
 };
 

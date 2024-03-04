@@ -56,6 +56,7 @@ import UpdateDepartment from './Pages/Admin/department/UpdateDepartment';
 
 import ToastNotification from './Pages/Admin/ToastNotification';
 import GuidelineTable from './Pages/Admin/guidelines/GuidelineTable';
+import GuidelinesbyCategory from './Pages/Common/GuidelinesbyCategory';
 
 const socket = io("http://localhost:4000")
 
@@ -135,6 +136,7 @@ function App() {
       <Route path='/user/profile' element={<Profile/>} />
       <Route path='/user/dashboard' element={<UserDashboard/>} />
       <Route path='/EarthquakeGuidelines' element={<EarthquakeGuidelines/>} />
+      <Route path='/guidelines/category/guideline/:categoryId' element={<GuidelinesbyCategory/>} />
 
 
       <Route path='/admin/*' element = {

@@ -34,45 +34,48 @@ export const createGuideline = async (req, res) => {
 
 export const getGuidelinesByCategory = async (req, res) => {
     try {
-        const { categoryId } = req.params; // Assuming category is passed in URL params
+        const { categoryId } = req.params;
 
         // Find guidelines by category
-        const guidelines = await Guideline.find({ categoryId });
+        const guidelines = await Guideline.find({ category: categoryId });
 
         res.status(200).json(guidelines);
     } catch (error) {
         errorHandler(res, error);
     }
 };
-// Get all guidelines
-// export const getAllGuidelines = async (req, res) => {
-//     try {
-//         const guidelines = await Guideline.find();
-//         res.status(200).json(guidelines);
-//     } catch (error) {
-//         errorHandler(res, error);
-//     }
-// };
 
-// Get all guidelines with pagination
+
+
+// Get all guidelines
 export const getAllGuidelines = async (req, res) => {
     try {
-        const page = parseInt(req.query.page) || 1;
-        const limit = parseInt(req.query.limit) || 5;
-        const skip = (page - 1) * limit;
-
-        const guidelines = await Guideline.find().skip(skip).limit(limit);
-        const totalGuidelines = await Guideline.countDocuments();
-
-        res.status(200).json({
-            guidelines,
-            currentPage: page,
-            totalPages: Math.ceil(totalGuidelines / limit)
-        });
+        const guidelines = await Guideline.find();
+        res.status(200).json(guidelines);
     } catch (error) {
         errorHandler(res, error);
     }
 };
+
+// Get all guidelines with pagination
+// export const getAllGuidelines = async (req, res) => {
+//     try {
+//         const page = parseInt(req.query.page) || 1;
+//         const limit = parseInt(req.query.limit) || 5;
+//         const skip = (page - 1) * limit;
+
+//         const guidelines = await Guideline.find().skip(skip).limit(limit);
+//         const totalGuidelines = await Guideline.countDocuments();
+
+//         res.status(200).json({
+//             guidelines,
+//             currentPage: page,
+//             totalPages: Math.ceil(totalGuidelines / limit)
+//         });
+//     } catch (error) {
+//         errorHandler(res, error);
+//     }
+// };
 
 
 // Get a single guideline by ID

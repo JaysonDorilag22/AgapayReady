@@ -1,18 +1,16 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import axios from 'axios';
 
 export default function ContactsCollection() {
-const [categories, setCategories] = useState([]);
-const [contacts, setContacts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
-    fetchGuidelines();
-    fetchContacts();
-
+    fetchCategories();
   }, []);
 
-  const fetchGuidelines = async () => {
+  const fetchCategories = async () => {
     try {
       const response = await axios.get(`/api/v2/categories`);
       setCategories(response.data);
@@ -21,15 +19,13 @@ const [contacts, setContacts] = useState([]);
     }
   };
 
-  const fetchContacts = async () => {
-    try {
-      const response = await axios.get(`/api/v1/contacts`);
-      setContacts(response.data);
-    } catch (error) {
-      console.error("Error fetching contacts:", error);
-    }
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
   };
 
+  const filteredCategories = categories.filter(category =>
+    category.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <section className="py-14">
@@ -45,36 +41,36 @@ const [contacts, setContacts] = useState([]);
             to us.
           </p>
         </div>
-        <div className="flex  items-center justify-center mb-10">
+        <div className="flex items-center justify-center mb-10">
           <div className="w-full max-w-lg">
             <form className="sm:flex sm:items-center">
               <input
                 id="q"
                 name="q"
-                className=" w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-3 leading-5 placeholder-gray-500 focus:border-red-500 focus:placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-red-500 sm:text-sm"
-                placeholder="Search Contacts . . ."
+                className="w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-3 leading-5 placeholder-gray-500 focus:border-red-500 focus:placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-red-500 sm:text-sm"
+                placeholder="Search Categories . . ."
                 type="search"
                 autoFocus=""
-                value=""
+                value={searchQuery}
+                onChange={handleSearchChange}
               />
-              <span
+              <button
                 type="submit"
                 className="mt-3 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
               >
                 <FaSearch />
-              </span>
+              </button>
             </form>
           </div>
         </div>
         <div className="mt-12">
-        <p className="text-gray-800 text-3xl font-semibold sm:text-4xl mb-5">
+          <p className="text-gray-800 text-3xl font-semibold sm:text-4xl mb-5">
             Categories
           </p>
           <ul className="grid gap-y-8 gap-x-12 sm:grid-cols-2 lg:grid-cols-3">
-            {categories.map(category => (
+            {filteredCategories.map(category => (
               <li key={category._id} className="flex gap-x-4 p-5 rounded-md shadow-xl hover:bg-slate-200">
-                <img src={category.image} className="flex-none w-12 h-12 bg-red-50 text-red-600 rounded-lg flex items-center justify-center">
-                </img>
+                <img src={category.image} className="flex-none w-12 h-12 bg-red-50 text-red-600 rounded-lg flex items-center justify-center" alt={category.name} />
                 <div>
                   <h4 className="text-lg text-red-600 font-bold">
                     {category.name}
