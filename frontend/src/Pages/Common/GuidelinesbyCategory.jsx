@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Modal from '../../components/Modal';
+import Modal from './Modal';
 import axios from 'axios';
 import { FaSearch } from "react-icons/fa";
 
