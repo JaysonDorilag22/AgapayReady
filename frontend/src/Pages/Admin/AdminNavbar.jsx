@@ -13,12 +13,12 @@ import AgapayReadylogo from "../../assets/services/AgapayReadylogo.png";
 
 const navigation = [
   { name: "Dashboard", to: "/admin/dashboard", current: false }, 
-  { name: "Guidelines", to: "/admin/create/guidelines", current: false }, // Modify href to to
-  { name: "Contacts", to: "/admin/create/contacts", current: false }, // Modify href to to
+  { name: "Guidelines", to: "/admin/create/guidelines", current: false }, 
+  { name: "Contacts", to: "/admin/create/contacts", current: false },
   // { name: "Evacuation", to: "/admin/evacuation", current: false },
   // { name: "Annoucement", to: "/announcement", current: false }, 
   { name: "Reports", to: "/admin/report", current: false }, // Modify href to to
-  { name: "Departments", to: "/admin/create/departments", current: false }, // Modify href to to
+  { name: "Departments", to: "/admin/create/departments", current: false }, 
 
 ];
 
@@ -98,7 +98,6 @@ export default function AdminNavbar() {
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
 
-                {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   <div>
                     <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">

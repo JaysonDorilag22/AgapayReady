@@ -1,6 +1,6 @@
 import express from 'express';
 import multer from 'multer';
-import { createGuideline, getAllGuidelines, getGuidelineById, updateGuidelineById, deleteGuidelineById, getGuidelineWithSteps } from '../../controllers/guidelines/guidelines.controller.js';
+import { createGuideline, getAllGuidelines, getGuidelineById, updateGuidelineById, deleteGuidelineById, getGuidelineWithSteps, getGuidelineByCategory } from '../../controllers/guidelines/guidelines.controller.js';
 import { isAdmin } from '../../middleware/isAdmin.js';
 import { verifyToken } from '../../middleware/verify.js';
 
@@ -15,6 +15,9 @@ router.get('/guidelines', getAllGuidelines);
 
 // Get a guideline by ID
 router.get('/guidelines/:id', getGuidelineById);
+
+// Get a guideline by CategoryId
+router.get('/category/guidelines/:id', getGuidelineByCategory);
 
 // Update a guideline by ID
 router.put('/guidelines/:id', upload.single('image'), verifyToken, isAdmin, updateGuidelineById);
