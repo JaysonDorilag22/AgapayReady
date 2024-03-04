@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from 'react-redux';
-import io from 'socket.io-client';
 
-const socket = io('http://localhost:4000'); // Connect to your Socket.IO server
 
 const EmergencyReportForm = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -51,19 +49,6 @@ const EmergencyReportForm = () => {
     }
   };
 
-  useEffect(() => {
-    // Listen for report confirmed events from the server
-    socket.on('reportConfirmed', ({ reportId }) => {
-      // Display notification to the user when their report is confirmed
-      toast.success('Your emergency report has been confirmed!');
-      // Optionally, you can update your UI or take other actions based on the confirmation
-    });
-
-    // Clean up event listeners when the component unmounts
-    return () => {
-      socket.off('reportConfirmed');
-    };
-  }, []);
 
   return (
     <div className="max-w-md mx-auto mt-8">

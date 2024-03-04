@@ -50,7 +50,7 @@ export default function Login() {
       if (response.data.role === 'Admin') {
         navigate('/admin/dashboard');
       } else {
-        navigate('/user/profile');
+        navigate('/user/dashboard');
       }
     } catch (error) {
       console.error("Error occurred:", error);

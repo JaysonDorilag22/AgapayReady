@@ -32,6 +32,18 @@ export const createGuideline = async (req, res) => {
     }
 };
 
+export const getGuidelinesByCategory = async (req, res) => {
+    try {
+        const { categoryId } = req.params; // Assuming category is passed in URL params
+
+        // Find guidelines by category
+        const guidelines = await Guideline.find({ categoryId });
+
+        res.status(200).json(guidelines);
+    } catch (error) {
+        errorHandler(res, error);
+    }
+};
 // Get all guidelines
 // export const getAllGuidelines = async (req, res) => {
 //     try {

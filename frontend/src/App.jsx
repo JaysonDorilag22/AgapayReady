@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from
 import { useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+//socket io
+import { io } from 'socket.io-client'
 // Components
 import Navbar from './Navbar';
 import AdminNavbar from './Pages/Admin/AdminNavbar';
@@ -19,6 +21,7 @@ import EvacuationGuideines from './Pages/Common/EvacuationGuidelines';
 
 //User
 import Profile from './Pages/User/Profile';
+import UserDashboard from './Pages/User/UserDashboard';
 
 //Admin
 import AdminDashboard from './Pages/Admin/AdminDashboard';
@@ -54,6 +57,7 @@ import UpdateDepartment from './Pages/Admin/department/UpdateDepartment';
 import ToastNotification from './Pages/Admin/ToastNotification';
 import GuidelineTable from './Pages/Admin/guidelines/GuidelineTable';
 
+const socket = io("http://localhost:4000")
 
 const AdminRouterWrapper = ({ element }) => {
   const userRole = useSelector((state) => state.user.currentUser?.role);
@@ -102,6 +106,15 @@ function App() {
  
   const user = useSelector(state => state.user.currentUser);
 
+  useEffect(() =>{
+    socket.on("newEmergencyReport", (newReport) => {
+      setNewReport(newReport)
+    })
+    
+    return() => {
+      socket.off("newEmergencyReport")
+    }
+  })
 
   useEffect(() => {
     setIsAdmin(window.location.pathname.startsWith("/admin"));
@@ -120,6 +133,7 @@ function App() {
       <Route path='/contacts' element={<ContactsCollections/>} />
       <Route path='/evacuation/guidelines' element={<EvacuationGuideines/>} />
       <Route path='/user/profile' element={<Profile/>} />
+      <Route path='/user/dashboard' element={<UserDashboard/>} />
       <Route path='/EarthquakeGuidelines' element={<EarthquakeGuidelines/>} />
 
 
