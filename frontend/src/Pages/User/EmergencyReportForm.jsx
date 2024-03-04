@@ -30,15 +30,17 @@ const EmergencyReportForm = () => {
       const formData = new FormData();
       formData.append('location', location);
       formData.append('description', description);
-      formData.append('image', image);
+      if (image) {
+        formData.append('image', image);
+      }
       formData.append('userId', currentUser._id);
-
+  
       await axios.post('/api/v1/report', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-      
+  
       setLocation('');
       setDescription('');
       setImage(null);
@@ -48,11 +50,12 @@ const EmergencyReportForm = () => {
       toast.error('Failed to submit emergency report');
     }
   };
+  
 
 
   return (
-    <div className="max-w-md mx-auto mt-8">
-      <h2 className="text-2xl font-bold mb-4">Emergency Report Form</h2>
+    <div className="max-w-md mx-auto mt-8 bg-slate-200 p-5 rounded-md shadow-lg">
+      <h2 className="text-2xl font-bold mb-4 text-center">Emergency Report Form</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block mb-1 font-medium">Location</label>
@@ -85,7 +88,7 @@ const EmergencyReportForm = () => {
         </div>
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white font-bold py-2 rounded-md transition duration-300 hover:bg-blue-600"
+          className="w-full bg-red-500 text-white font-bold py-2 rounded-md transition duration-300 hover:bg-blue-600"
         >
           Submit
         </button>
