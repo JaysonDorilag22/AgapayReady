@@ -17,7 +17,7 @@ import ContactsCollections from './Pages/Common/ContactsCollections';
 import BlogPage from './Pages/Common/BlogPage';
 import Register from './Pages/Common/Register';
 import Login from './Pages/Common/Login';
-import EvacuationGuideines from './Pages/Common/EvacuationGuidelines';
+import EvacuationGuidelines from './Pages/Common/EvacuationGuidelines';
 
 //User
 import Profile from './Pages/User/Profile';
@@ -133,7 +133,7 @@ function App() {
       <Route path='/blog' element={<BlogPage/>} />
       <Route path='/guidelines' element={<GuidelineCollections/>} />
       <Route path='/contacts' element={<ContactsCollections/>} />
-      <Route path='/evacuation/guidelines' element={<EvacuationGuideines/>} />
+      <Route path='/user/evacuation/guidelines' element={<EvacuationGuidelines/>} />
       <Route path='/user/profile' element={<Profile/>} />
       <Route path='/user/dashboard' element={<UserDashboard/>} />
       <Route path='/EarthquakeGuidelines' element={<EarthquakeGuidelines/>} />
