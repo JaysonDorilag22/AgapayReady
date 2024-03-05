@@ -12,7 +12,9 @@ export default function UserDashboard() {
       <div>
       <EmergencyReportForm/>
       </div>
-      
+      <div>
+      <ContactsCollection/>
+      </div>
     </div>
   )
 }

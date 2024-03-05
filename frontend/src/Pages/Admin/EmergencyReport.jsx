@@ -41,9 +41,6 @@ export default function EmergencyReport() {
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Image
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Actions
-              </th>
             </tr>
           </thead>
           <tbody>
@@ -54,7 +51,6 @@ export default function EmergencyReport() {
                 <td className="px-6 py-4 whitespace-nowrap">
                   <img src={report.image} alt="Report" className="h-12" />
                 </td>
-                {/* Add actions here if needed */}
               </tr>
             ))}
           </tbody>
