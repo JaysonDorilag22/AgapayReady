@@ -15,6 +15,9 @@ const navigation = [
   { name: "Dashboard", to: "/admin/dashboard", current: false }, 
   { name: "Guidelines", to: "/admin/create/guidelines", current: false }, 
   { name: "Contacts", to: "/admin/create/contacts", current: false },
+  { name: "Guideline Category", to: "/admin/create/category/guidelines", current: false },
+  { name: "Contacts Category", to: "/admin/create/category/contacts", current: false },
+
   // { name: "Evacuation", to: "/admin/evacuation", current: false },
   // { name: "Annoucement", to: "/announcement", current: false }, 
   { name: "Reports", to: "/admin/report", current: false }, // Modify href to to

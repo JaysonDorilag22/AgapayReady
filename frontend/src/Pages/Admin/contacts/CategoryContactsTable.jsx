@@ -23,7 +23,6 @@ export default function CategoryContactsTable() {
   const handleDelete = async (categoryId) => {
     try {
       await axios.delete(`/api/v2/categories/${categoryId}`);
-      // If deletion is successful, update the state to remove the deleted category
       setCategories(categories.filter(category => category._id !== categoryId));
     } catch (error) {
       console.error('Error deleting category:', error);
@@ -36,6 +35,7 @@ export default function CategoryContactsTable() {
         <thead>
           <tr>
             <th className="px-4 py-2">Name</th>
+            <th className="px-4 py-2">Short description</th>
             <th className="px-4 py-2">Description</th>
             <th className="px-4 py-2">Image</th>
             <th className="px-4 py-2">Actions</th>
@@ -45,6 +45,8 @@ export default function CategoryContactsTable() {
           {categories.map(category => (
             <tr key={category._id}>
               <td className="border px-4 py-2">{category.name}</td>
+              <td className="border px-4 py-2">{category.short_description}</td>
+
               <td className="border px-4 py-2 w-auto">{category.description}</td>
               <td className="border px-4 py-2">
                 <img src={category.image} alt={category.name} className="h-10 w-10 object-cover" />

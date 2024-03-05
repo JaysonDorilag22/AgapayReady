@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import axios from 'axios';
+import {Link} from 'react-router-dom'
 
 export default function ContactsCollection() {
   const [categories, setCategories] = useState([]);
@@ -67,8 +68,11 @@ export default function ContactsCollection() {
           <p className="text-gray-800 text-3xl font-semibold sm:text-4xl mb-5">
             Categories
           </p>
+          
           <ul className="grid gap-y-8 gap-x-12 sm:grid-cols-2 lg:grid-cols-3">
             {filteredCategories.map(category => (
+              <Link
+      to={`/contacts/category/contact/${category._id}`}>
               <li key={category._id} className="flex gap-x-4 p-5 rounded-md shadow-xl hover:bg-slate-200">
                 <img src={category.image} className="flex-none w-12 h-12 bg-red-50 text-red-600 rounded-lg flex items-center justify-center" alt={category.name} />
                 <div>
@@ -78,8 +82,12 @@ export default function ContactsCollection() {
                   <p className="mt-3">{category.description}</p>
                 </div>
               </li>
+          </Link>
+
             ))}
+
           </ul>
+
         </div>
       </div>
     </section>

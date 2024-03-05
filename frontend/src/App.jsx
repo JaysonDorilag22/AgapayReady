@@ -47,7 +47,7 @@ import EmergencyReport from './Pages/Admin/EmergencyReport';
 import CreateCategoryGuidelines from './Pages/Admin/guidelines/CreateCategoryGuidelines';
 import UpdateCategoryGuidelines from './Pages/Admin/guidelines/UpdateCategoryGuidelines';
 
-import CreateCategoryContacts from './Pages/Admin/contacts/UpdateCategoryContacts';
+import CreateCategoryContacts from './Pages/Admin/contacts/CreateCategoryContacts';
 import UpdateCategoryContacts from './Pages/Admin/contacts/UpdateCategoryContacts';
 
 import CreateDepartment from './Pages/Admin/department/CreateDepartment';
@@ -57,6 +57,7 @@ import UpdateDepartment from './Pages/Admin/department/UpdateDepartment';
 import ToastNotification from './Pages/Admin/ToastNotification';
 import GuidelineTable from './Pages/Admin/guidelines/GuidelineTable';
 import GuidelinesbyCategory from './Pages/Common/GuidelinesbyCategory';
+import ContactsbyCategory from './Pages/Common/ContactsbyCategory';
 
 const socket = io("http://localhost:4000")
 
@@ -137,6 +138,8 @@ function App() {
       <Route path='/user/dashboard' element={<UserDashboard/>} />
       <Route path='/EarthquakeGuidelines' element={<EarthquakeGuidelines/>} />
       <Route path='/guidelines/category/guideline/:categoryId' element={<GuidelinesbyCategory/>} />
+      <Route path='/contacts/category/contact/:categoryId' element={<ContactsbyCategory/>} />
+
 
 
       <Route path='/admin/*' element = {
