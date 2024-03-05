@@ -3,6 +3,25 @@ import AOS from "aos";
 import { FaMapMarkedAlt } from "react-icons/fa";
 import { FaPhoneAlt } from "react-icons/fa";
 import { RiGuideFill } from "react-icons/ri";
+import * as THREE from "three";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { useGLTF } from "@react-three/drei";
+import { OrbitControls } from '@react-three/drei'
+import { motion } from "framer-motion"
+
+function Model({ url }) {
+  const glb = useGLTF(url);
+  const ref = React.useRef();
+
+  useFrame(({ clock }) => {
+    if (ref.current) {
+      ref.current.rotation.y += 0.01;
+    }
+  });
+
+  return <primitive object={glb.scene} dispose={null} ref={ref} />;
+}
+
 export default function Features() {
   AOS.init();
   const features = [
@@ -59,14 +78,23 @@ export default function Features() {
               </dl>
             </div>
           </div>
-          <img
+          {/* <img
           src='/TUP MAP.svg'
             data-aos="fade-left"
             alt="Product screenshot"
             className="w-[48rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0"
             width={2432}
             height={1442}
-          />
+          /> */}
+          <div className="w-[48rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0">
+        <Canvas style={{ width: "768px", height: "768px" }} camera={{ position: [90, 70, 60] }}>
+          <ambientLight intensity={5} />
+          <spotLight position={[20, 10, 10]} angle={0.15} penumbra={1} />
+          <pointLight position={[-10, -10, -10]} />
+          <Model url="/models/tupnga.glb" />
+          <OrbitControls />
+        </Canvas>
+      </div>
         </div>
       </div>
     </div>
