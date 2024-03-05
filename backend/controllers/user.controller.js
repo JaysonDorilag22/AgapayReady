@@ -13,7 +13,6 @@ export const register = async (req, res, next) => {
   const hashedPassword = bcryptjs.hashSync(password, 12);
 
   try {
-    // Check if the email already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ error: "Email is already taken" });
