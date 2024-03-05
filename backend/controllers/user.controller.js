@@ -46,6 +46,25 @@ export const register = async (req, res, next) => {
 };
 
 //login
+// export const login = async (req, res, next) => {
+//   const { email, password } = req.body;
+//   try {
+//     const validUser = await User.findOne({ email });
+//     if (!validUser) return next(errorHandler(404, 'User not found!'));
+
+//     const validPassword = bcryptjs.compareSync(password, validUser.password);
+//     if (!validPassword) return next(errorHandler(401, 'Wrong credentials!'));
+
+//     // Using sendToken function to send token in response
+//     sendToken(validUser, 200, res); // Passing validUser, status code, and response object to sendToken function
+    
+//     // Set the access_token cookie
+//     const token = jwt.sign({ id: validUser._id, role: validUser.role }, process.env.JWT_SECRET);
+//     res.cookie('access_token', token, { httpOnly: true });
+//   } catch (error) {
+//     next(error);
+//   }
+// };
 
 export const login = async (req, res, next) => {
   const { email, password } = req.body;
