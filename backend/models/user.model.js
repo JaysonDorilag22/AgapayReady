@@ -7,9 +7,9 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
     lastname: {
-        type: String,
-        required: true,
-      },
+      type: String,
+      required: true,
+    },
     email: {
       type: String,
       required: true,
@@ -26,13 +26,18 @@ const userSchema = new mongoose.Schema(
     },
     department: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Department'
+      ref: "Department",
     },
     role: {
       type: String,
       enum: ["Admin", "User"],
-      default: "Admin",
+      default: "User",
     },
+    isConfirmed: {
+      type: Boolean,
+      default: false,
+    },
+    emailConfirmationToken: String,
   },
   { timestamps: true }
 );

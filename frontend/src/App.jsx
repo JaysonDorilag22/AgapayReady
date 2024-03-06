@@ -16,6 +16,7 @@ import GuidelineCollections from './Pages/Common/GuidelineCollections';
 import ContactsCollections from './Pages/Common/ContactsCollections';
 import BlogPage from './Pages/Common/BlogPage';
 import Register from './Pages/Common/Register';
+import ConfirmationPage from './Pages/Common/ConfirmationPage';
 import Login from './Pages/Common/Login';
 import EvacuationGuidelines from './Pages/Common/EvacuationGuidelines';
 
@@ -58,6 +59,7 @@ import ToastNotification from './Pages/Admin/ToastNotification';
 import GuidelineTable from './Pages/Admin/guidelines/GuidelineTable';
 import GuidelinesbyCategory from './Pages/Common/GuidelinesbyCategory';
 import ContactsbyCategory from './Pages/Common/ContactsbyCategory';
+import EmailConfirmation from './Pages/Common/EmailConfirmation';
 
 const socket = io("http://localhost:4000")
 
@@ -129,6 +131,10 @@ function App() {
       <Routes>
       <Route path='/' element={<LandingPage/>} />
       <Route path='/register' element={<Register/>} />
+      <Route path='/email-verification' element={<EmailConfirmation/>} />
+      <Route path="/email-confirm/:userId/:token" element={<ConfirmationPage />} />
+      {/* <Route path="/email-confirm" element={<ConfirmationPage />} /> */}
+
       <Route path='/login' element={<Login/>} />
       <Route path='/blog' element={<BlogPage/>} />
       <Route path='/guidelines' element={<GuidelineCollections/>} />

@@ -94,7 +94,7 @@ export default function Register() {
                       },
                     });
                     console.log("User registered successfully");
-                    navigate("/login");
+                    navigate("/email-verification");
                   } catch (error) {
                     console.error("Registration failed", error);
                   }

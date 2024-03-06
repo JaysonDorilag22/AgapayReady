@@ -5,6 +5,7 @@ import bcryptjs from "bcryptjs";
 import cloudinary from "cloudinary";
 import { errorHandler } from "../utils/error.js";
 import dotenv from "dotenv";
+import transporter from "../utils/transporter.js";
 
 dotenv.config();
 
@@ -18,53 +19,66 @@ export const register = async (req, res, next) => {
       return res.status(400).json({ error: "Email is already taken" });
     }
 
-    let avatarUrl;
-    if (req.file) {
-      const result = await cloudinary.uploader.upload(req.file.path);
-      avatarUrl = result.secure_url;
-    }
+    const confirmationToken = jwt.sign({ email }, process.env.JWT_SECRET, {
+      expiresIn: "1d",
+    });
 
-    const department = await Department.findById(departmentId);
-    if (!department) {
-      return res.status(404).json({ error: "Department not found" });
-    }
+    const { path } = req.file; 
+    const result = await cloudinary.uploader.upload(path);
+    const avatarUrl = result.secure_url;
 
     const newUser = new User({
       firstname,
       lastname,
       email,
       password: hashedPassword,
-      avatar: avatarUrl,
       department: departmentId,
+      avatar: avatarUrl,
+      isConfirmed: false,
+      emailConfirmationToken: confirmationToken,
     });
-    await newUser.save();
 
-    res.status(201).json("Successfully created a User");
+    const savedUser = await newUser.save(); 
+
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: "Email Confirmation",
+      html: `<p>Please click <a href="http://localhost:5173/email-confirm/${savedUser.id}/${confirmationToken}">here</a> to confirm your email.</p>`,
+    });
+
+    // Respond with success message
+    res.status(201).json({
+      message: "A confirmation email has been sent. Please check your email to confirm your registration.",
+    });
+    
   } catch (error) {
-    errorHandler(error);
+    console.error("Registration failed:", error);
+    res.status(500).json({ error: "Registration failed. Please try again later." });
   }
 };
 
-//login
-// export const login = async (req, res, next) => {
-//   const { email, password } = req.body;
-//   try {
-//     const validUser = await User.findOne({ email });
-//     if (!validUser) return next(errorHandler(404, 'User not found!'));
 
-//     const validPassword = bcryptjs.compareSync(password, validUser.password);
-//     if (!validPassword) return next(errorHandler(401, 'Wrong credentials!'));
 
-//     // Using sendToken function to send token in response
-//     sendToken(validUser, 200, res); // Passing validUser, status code, and response object to sendToken function
-    
-//     // Set the access_token cookie
-//     const token = jwt.sign({ id: validUser._id, role: validUser.role }, process.env.JWT_SECRET);
-//     res.cookie('access_token', token, { httpOnly: true });
-//   } catch (error) {
-//     next(error);
-//   }
-// };
+export const confirmEmail = async (req, res, next) => {
+  const { userId, token } = req.params; // Separate user ID and token
+
+  try {
+    const user = await User.findById(userId); // Find user by ID
+    if (!user || user.emailConfirmationToken !== token) { // Check if user or token is invalid
+      return res.status(404).json({ error: "Invalid confirmation link" });
+    }
+
+    // Update user confirmation status
+    user.isConfirmed = true;
+    await user.save();
+
+    // res.redirect(`${process.env.CLIENT_URL}/login`);
+  } catch (error) {
+    errorHandler(error);
+    res.status(400).json({ error: "Invalid or expired token" });
+  }
+};
 
 export const login = async (req, res, next) => {
   const { email, password } = req.body;
@@ -78,6 +92,7 @@ export const login = async (req, res, next) => {
     const token = jwt.sign({ id: validUser._id, role: validUser.role }, process.env.JWT_SECRET);
     const { password: pass, ...rest } = validUser._doc;
 
+    // Set the token in a cookie and send it back to the client
     res
       .cookie('access_token', token, { httpOnly: true })
       .status(200)
@@ -87,8 +102,10 @@ export const login = async (req, res, next) => {
   }
 };
 
+
+
 export const updateUser = async (req, res, next) => {
-  const userId = req.user.id; // Assuming you have middleware to extract user ID from JWT token
+  const userId = req.user.id; 
   const { firstname, lastname, email, password, departmentId } = req.body;
 
   try {

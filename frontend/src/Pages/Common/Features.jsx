@@ -6,8 +6,8 @@ import { RiGuideFill } from "react-icons/ri";
 import * as THREE from "three";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
-import { OrbitControls } from '@react-three/drei'
-import { motion } from "framer-motion"
+import { OrbitControls } from "@react-three/drei";
+import { motion } from "framer-motion";
 
 function Model({ url }) {
   const glb = useGLTF(url);
@@ -61,7 +61,10 @@ export default function Features() {
                 prepared to respond effectively in any emergency.
               </p>
 
-              <dl data-aos="fade-right" className="mt-10 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none">
+              <dl
+                data-aos="fade-right"
+                className="mt-10 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none"
+              >
                 {features.map((feature) => (
                   <div key={feature.name} className="relative pl-9">
                     <dt className="inline font-semibold text-gray-900">
@@ -86,15 +89,19 @@ export default function Features() {
             width={2432}
             height={1442}
           /> */}
-          <div className="w-[48rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0">
-        <Canvas style={{ width: "768px", height: "768px" }} camera={{ position: [90, 70, 60] }}>
-          <ambientLight intensity={5} />
-          <spotLight position={[20, 10, 10]} angle={0.15} penumbra={1} />
-          <pointLight position={[-10, -10, -10]} />
-          <Model url="/models/tupnga.glb" />
-          <OrbitControls />
-        </Canvas>
-      </div>
+          <div className="flex justify-center items-center w-[48rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0">
+  <Canvas
+    style={{ width: "768px", height: "768px" }}
+    camera={{ position: [90, 70, 60] }}
+  >
+    <ambientLight intensity={5} />
+    <spotLight position={[20, 10, 10]} angle={0.15} penumbra={1} />
+    <pointLight position={[-10, -10, -10]} />
+    <Model url="/models/tupnga.glb"/>
+    <OrbitControls />
+  </Canvas>
+</div>
+
         </div>
       </div>
     </div>
