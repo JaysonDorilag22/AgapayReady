@@ -6,7 +6,7 @@ const GuidelineCollections = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
-    fetch("/api/v1/categories")
+    fetch("${import.meta.env.VITE_BACKEND_URL}/api/v1/categories")
       .then((response) => response.json())
       .then((data) => setCategories(data))
       .catch((error) => console.error("Error fetching categories:", error));

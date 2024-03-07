@@ -22,7 +22,7 @@ export default function UpdateContacts() {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get(`/api/v2/categories`);
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v2/categories`);
       setCategories(response.data); 
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -31,7 +31,7 @@ export default function UpdateContacts() {
 
   const fetchGuidelineData = async () => {
     try {
-      const response = await axios.get(`/api/v1/contacts/${contactId}`);
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/contacts/${contactId}`);
       const { name, description, image, category } = response.data; // Assuming your API returns guideline data
       setFormData({ name, description, image, category }); 
       if (image) {
@@ -75,7 +75,7 @@ console.log(formData.image);
     formDataToSend.append("category", formData.category); 
 
     try {
-      const response = await axios.put(`/api/v1/contacts/${contactId}`, formDataToSend, {
+      const response = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/v1/contacts/${contactId}`, formDataToSend, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

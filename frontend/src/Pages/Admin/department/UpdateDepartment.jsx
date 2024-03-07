@@ -13,7 +13,7 @@ export default function UpdateDepartment() {
   useEffect(() => {
     const fetchDepartment = async () => {
       try {
-        const response = await axios.get(`/api/v1/departments/${departmentId}`);
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/departments/${departmentId}`);
         const departmentData = response.data;
         setFormData({
           name: departmentData.name,
@@ -37,7 +37,7 @@ export default function UpdateDepartment() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`/api/v1/departments/${departmentId}`, formData);
+      await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/v1/departments/${departmentId}`, formData);
       console.log('Department updated successfully');
       navigate("/admin/create/departments")
     } catch (error) {

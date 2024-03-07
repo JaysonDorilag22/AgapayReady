@@ -16,7 +16,7 @@ export default function UpdateCategoryGuidelines() {
       useEffect(() => {
         async function fetchCategoryDetails() {
           try {
-            const response = await axios.get(`/api/v1/categories/${categoryId}`);
+            const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/categories/${categoryId}`);
             const { name, short_description, description, image } = response.data;
             setFormData({ name, short_description, description, image });
             if (image) {
@@ -63,7 +63,7 @@ export default function UpdateCategoryGuidelines() {
         formDataToSend.append("image", formData.image);
     
         try {
-          const response = await axios.put(`/api/v1/categories/${categoryId}`, formDataToSend, {
+          const response = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/v1/categories/${categoryId}`, formDataToSend, {
             headers: {
               "Content-Type": "multipart/form-data",
             },

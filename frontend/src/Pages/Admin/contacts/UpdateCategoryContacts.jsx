@@ -16,7 +16,7 @@ export default function UpdateCategoryContacts() {
       useEffect(() => {
         async function fetchCategoryDetails() {
           try {
-            const response = await axios.get(`/api/v2/categories/${categoryId}`);
+            const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v2/categories/${categoryId}`);
             const { name, short_description, description, image } = response.data;
             setFormData({ name, short_description, description, image });
             if (image) {
@@ -63,7 +63,7 @@ export default function UpdateCategoryContacts() {
         formDataToSend.append("image", formData.image);
     
         try {
-          const response = await axios.put(`/api/v2/categories/${categoryId}`, formDataToSend, {
+          const response = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/v2/categories/${categoryId}`, formDataToSend, {
             headers: {
               "Content-Type": "multipart/form-data",
             },

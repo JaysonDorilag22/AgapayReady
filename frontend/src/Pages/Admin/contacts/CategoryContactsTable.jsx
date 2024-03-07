@@ -13,7 +13,7 @@ export default function CategoryContactsTable() {
 
   const fetchGuidelines = async () => {
     try {
-      const response = await axios.get(`/api/v2/categories`);
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v2/categories`);
       setCategories(response.data);
     } catch (error) {
       console.error('Error fetching guidelines:', error);
@@ -22,7 +22,7 @@ export default function CategoryContactsTable() {
 
   const handleDelete = async (categoryId) => {
     try {
-      await axios.delete(`/api/v2/categories/${categoryId}`);
+      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/v2/categories/${categoryId}`);
       setCategories(categories.filter(category => category._id !== categoryId));
     } catch (error) {
       console.error('Error deleting category:', error);

@@ -34,8 +34,8 @@ const EmergencyReportForm = () => {
         formData.append('image', image);
       }
       formData.append('userId', currentUser._id);
-  
-      await axios.post('/api/v1/report', formData, {
+      // ${import.meta.env.VITE_BACKEND_URL}
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/report`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

@@ -14,7 +14,7 @@ export default function GuidelinesbyCategory() {
   useEffect(() => {
     const fetchGuidelinesByCategory = async () => {
       try {
-        const response = await axios.get(`/api/v1/category/guidelines/${categoryId}`);
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/category/guidelines/${categoryId}`);
         setGuidelines(response.data);
       } catch (error) {
         console.error('Error fetching guidelines:', error);

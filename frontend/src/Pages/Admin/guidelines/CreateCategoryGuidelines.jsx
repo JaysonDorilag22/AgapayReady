@@ -32,7 +32,7 @@ export default function CreateCategoryGuidelines() {
     formDataToSend.append("image", formData.image);
 
     try {
-      const response = await axios.post(`/api/v1/categories`, formDataToSend, {
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/categories`, formDataToSend, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

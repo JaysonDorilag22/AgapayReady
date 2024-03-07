@@ -11,7 +11,7 @@ export default function CreateDepartment() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/v1/departments', formData);
+      const response = await axios.post('${import.meta.env.VITE_BACKEND_URL}/api/v1/departments', formData);
       console.log('Department created:', response.data);
     } catch (error) {
       console.error('Error creating department:', error);

@@ -36,7 +36,7 @@ export default function AdminNavbar() {
   const handlelogout = async () => {
     try {
       dispatch(logOutUserStart());
-      const response = await axios.get(`/api/v1/logout`);
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/logout`);
       const data = await response.data;
 
       if (data.success === false) {

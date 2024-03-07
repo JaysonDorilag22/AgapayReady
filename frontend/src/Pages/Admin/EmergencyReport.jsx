@@ -13,7 +13,7 @@ export default function EmergencyReport() {
 
   const fetchReports = async () => {
     try {
-      const response = await axios.get("/api/v1/report");
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/report`);
       setReports(response.data);
       setLoading(false);
     } catch (error) {
