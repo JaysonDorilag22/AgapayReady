@@ -88,7 +88,7 @@ export default function Register() {
                     Object.entries(values).forEach(([key, value]) => {
                       formDataToSend.append(key, value);
                     });
-                    await axios.post(`/api/v1/register`, formDataToSend, {
+                    await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/register`, formDataToSend, {
                       headers: {
                         "Content-Type": "multipart/form-data",
                       },
