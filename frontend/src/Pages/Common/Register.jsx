@@ -35,7 +35,7 @@ export default function Register() {
 
   const fetchDepartments = async () => {
     try {
-      const response = await axios.get(`api/v1/departments`);
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/departments`);
       setFormData((prevState) => ({
         ...prevState,
         departments: response.data,

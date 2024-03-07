@@ -27,38 +27,56 @@ export default function Login() {
     password: Yup.string().required('Password is equired')
   });
 
-  const onSubmit = async (values, { setSubmitting }) => {
-    try {
-      dispatch(logInStart());
-      const response = await axios.post(`/api/v1/login`, values, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        withCredentials: true,
-      });
-  
-      console.log("Response:", response);
-  
-      if (response.data.success === false) {
-        dispatch(logInFailure("Invalid email or password."));
-        setSubmitting(false);
-        return;
-      }
-  
-      dispatch(logInSuccess(response.data));
-  
-      if (response.data.role === 'Admin') {
-        navigate('/admin/dashboard');
-      } else {
-        navigate('/user/dashboard');
-      }
-    } catch (error) {
-      console.error("Error occurred:", error);
-      dispatch(logInFailure());
-      setLoginError("Invalid credentials");
+const onSubmit = async (values, { setSubmitting }) => {
+  try {
+    dispatch(logInStart());
+    const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/login`, values, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      withCredentials: true,
+    });
+    
+    const { data } = response;
+
+    if (data.success === false) {
+      dispatch(logInFailure("Invalid email or password."));
+      setLoginError("Invalid email or password.");
       setSubmitting(false);
+      return;
     }
-  };
+
+    // Extract token from cookie
+    const cookies = document.cookie.split(';');
+    let token = null;
+    cookies.forEach(cookie => {
+      const [name, value] = cookie.trim().split('=');
+      if (name === 'access_token') {
+        token = value;
+      }
+    });
+
+    // Store token in session storage
+    sessionStorage.setItem('token', token);
+    // Store token in local storage
+    localStorage.setItem('token', token);
+
+    dispatch(logInSuccess(data));
+
+    if (data.role === 'Admin') {
+      navigate('/admin/dashboard');
+    } else {
+      navigate('/user/dashboard');
+    }
+  } catch (error) {
+    console.error("Error occurred:", error);
+    dispatch(logInFailure());
+    setLoginError("An error occurred. Please try again.");
+    setSubmitting(false);
+  }
+};
+
+  
   
 
   return (
