@@ -23,7 +23,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "https://agapay-ready.vercel.app",
+    origin: "http://localhost:5173",
     methods: ["GET", "POST"]
   }
 });
@@ -79,19 +79,10 @@ server.listen(PORT, () => {
 const connectedUsers = new Map(); 
 
 io.on('connection', (socket) => {
-  console.log(`User connected: ${socket.id}`);
+  console.log('A user connected');
 
-  socket.on('authenticate', (userId) => {
-    connectedUsers.set(userId, socket.id);
-    console.log(`User authenticated: ${userId}`);
-  });
   socket.on('disconnect', () => {
-    connectedUsers.forEach((value, key) => {
-      if (value === socket.id) {
-        connectedUsers.delete(key);
-        console.log(`User disconnected: ${key}`);
-      }
-    });
+    console.log('User disconnected');
   });
 });
 

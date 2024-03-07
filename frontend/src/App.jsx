@@ -61,7 +61,7 @@ import GuidelinesbyCategory from './Pages/Common/GuidelinesbyCategory';
 import ContactsbyCategory from './Pages/Common/ContactsbyCategory';
 import EmailConfirmation from './Pages/Common/EmailConfirmation';
 
-const socket = io(`${import.meta.env.VITE_BACKEND_URL}`)
+const socket = io(import.meta.env.VITE_BACKEND_URL)
 
 const AdminRouterWrapper = ({ element }) => {
   const userRole = useSelector((state) => state.user.currentUser?.role);

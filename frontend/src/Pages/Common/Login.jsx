@@ -46,21 +46,6 @@ const onSubmit = async (values, { setSubmitting }) => {
       return;
     }
 
-    // Extract token from cookie
-    const cookies = document.cookie.split(';');
-    let token = null;
-    cookies.forEach(cookie => {
-      const [name, value] = cookie.trim().split('=');
-      if (name === 'access_token') {
-        token = value;
-      }
-    });
-
-    // Store token in session storage
-    sessionStorage.setItem('token', token);
-    // Store token in local storage
-    localStorage.setItem('token', token);
-
     dispatch(logInSuccess(data));
 
     if (data.role === 'Admin') {

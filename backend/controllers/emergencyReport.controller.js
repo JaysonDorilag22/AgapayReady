@@ -14,12 +14,11 @@ export const createEmergencyReport = async (req, res) => {
       location,
       description,
       image: uploadedImage.secure_url,
-      user: userId // Associate the report with the user who created it
+      user: userId 
     });
     
     await newEmergencyReport.save();
 
-    // Notify the user who submitted the report
     io.emit('newEmergencyReport', newEmergencyReport);
 
 
@@ -34,17 +33,14 @@ export const confirmEmergencyReport = async (req, res) => {
   try {
     const { reportId, userId } = req.body;
 
-    // Find the report by ID
     const report = await EmergencyReport.findById(reportId);
     if (!report) {
       return res.status(404).json({ error: 'Report not found' });
     }
 
-    // Update the confirmation status
     report.confirmed = true;
     await report.save();
     
-    // Notify the user who sent the report
     const userSocketId = getUserSocketId(userId);
     if (userSocketId) {
       emitConfirmationNotification(userSocketId, reportId);
