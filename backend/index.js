@@ -22,10 +22,10 @@ const app = express();
 const server = http.createServer(app);
 
 const io = new Server(server, {
-  cors: {
-    origin: "https://agapay-ready.vercel.app",
-    methods: ["GET", "POST"]
-  }
+  // cors: {
+  //   origin: "https://agapay-ready.vercel.app",
+  //   methods: ["GET", "POST"]
+  // }
 });
 
 
@@ -33,7 +33,7 @@ const PORT = process.env.PORT || 4000;
 
 
 app.use(cors({
-  origin: "https://agapayready.onrender.com",
+  origin: true,
   credentials: true}))
 
 app.use(express.json());
