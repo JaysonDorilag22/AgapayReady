@@ -44,12 +44,10 @@ export const register = async (req, res, next) => {
       from: process.env.EMAIL_USER,
       to: email,
       subject: "Email Confirmation",
-      html: `<p>Please click <a href="https://agapay-ready.vercel.app/email-confirm/${savedUser.id}/${confirmationToken}">here</a> to confirm your email.</p>`,
-      // html: `<p>Please click <a href="http://localhost:5173/email-confirm/${savedUser.id}/${confirmationToken}">here</a> to confirm your email.</p>`,
+      html: `<p>Please click for vercel <a href="https://agapay-ready.vercel.app/email-confirm/${savedUser.id}/${confirmationToken}">here</a> to confirm your email.</p>`,
+      html: `<p>Please click for localhost <a href="http://localhost:5173/email-confirm/${savedUser.id}/${confirmationToken}">here</a> to confirm your email.</p>`,
 
     });
-    // https://agapay-ready.vercel.app
-    // Respond with success message
     res.status(201).json({
       message: "A confirmation email has been sent. Please check your email to confirm your registration.",
     });

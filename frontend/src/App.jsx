@@ -66,7 +66,7 @@ const socket = io(import.meta.env.VITE_BACKEND_URL)
 const AdminRouterWrapper = ({ element }) => {
   const userRole = useSelector((state) => state.user.currentUser?.role);
   const navigate = useNavigate();
-  console.log(userRole); // Log userRole instead of role
+  console.log(userRole); 
   useEffect(() => {
     if (userRole !== "Admin") {
       navigate("/");
@@ -81,25 +81,16 @@ function HeaderComponent() {
   const location = useLocation();
   const user = useSelector(state => state.user.currentUser);
 
-  // Determine if the current route is an admin route
   const isAdminRoute = location.pathname.startsWith('/admin');
-  
-  // Add a null check for the user object
-  const isAdminUser = user && user.role === 'Admin'; // Ensure user exists before accessing its properties
+  const isAdminUser = user && user.role === 'Admin';
 
   return (
     <>
-      {/* Render Navbar only if the route is not an admin route */}
       {!isAdminRoute && <Navbar />}
-      
-      {/* Render AdminNavbar only if the route is an admin route and the user is an admin */}
       {isAdminRoute && isAdminUser && <AdminNavbar />}
     </>
   );
 }
-
-
-
 
 function App() {
 
