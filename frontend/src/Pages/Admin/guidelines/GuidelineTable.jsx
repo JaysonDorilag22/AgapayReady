@@ -12,7 +12,7 @@ export default function GuidelineTable() {
   
   const fetchGuidelines = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/guidelines`);
+      const response = await axios.get(`/api/v1/guidelines`);
       console.log("Fetched guidelines:", response.data);
       setGuidelines(response.data);
     } catch (error) {
@@ -23,7 +23,7 @@ export default function GuidelineTable() {
 
   const handleDelete = async (guidelineId) => {
     try {
-      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/v1/guidelines/${guidelineId}`);
+      await axios.delete(`/api/v1/guidelines/${guidelineId}`);
       setGuidelines((prevGuidelines) =>
         prevGuidelines.filter((guideline) => guideline._id !== guidelineId)
       );

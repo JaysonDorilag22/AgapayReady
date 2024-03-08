@@ -20,7 +20,7 @@ export default function CreateContacts() {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v2/categories`);
+      const response = await axios.get(`/api/v2/categories`);
       setCategories(response.data); // Set categories in state
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -46,7 +46,7 @@ export default function CreateContacts() {
     formDataToSend.append("category", formData.category); // Use formData.category directly
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/contacts`, formDataToSend, {
+      const response = await axios.post(`/api/v1/contacts`, formDataToSend, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

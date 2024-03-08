@@ -9,7 +9,11 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/api': process.env.VITE_BACKEND_URL 
-    }
-  }
+      '/api': {
+        target: 'http://localhost:4000', 
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+    },
+  },
 });

@@ -11,7 +11,7 @@ const ConfirmationPage = () => {
   useEffect(() => {
     const confirmEmail = async () => {
       try {
-        const response = await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/v1/confirm/${userId}/${token}`);
+        const response = await axios.put(`/api/v1/confirm/${userId}/${token}`);
         console.log("Email confirmed:", response.data);
       } catch (error) {
         console.error("Email confirmation failed:", error);

@@ -22,7 +22,7 @@ export default function GuidelineSteps() {
     const fetchGuidelineAndSteps = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/api/v1/guidelines/${guidelineId}/steps`
+          `/api/v1/guidelines/${guidelineId}/steps`
         );
         const { guideline, steps } = response.data;
         setGuideline(guideline);
@@ -55,7 +55,7 @@ export default function GuidelineSteps() {
     try {
       setSubmitting(true);
       console.log(guidelineId);
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/v1/steps`, formDataToSend, {
+      const response = await axios.post(`/api/v1/steps`, formDataToSend, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -70,7 +70,7 @@ export default function GuidelineSteps() {
   };
   const handleDeleteClick = async (stepId) => {
     try {
-      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/v1/steps/${stepId}`);
+      await axios.delete(`/api/v1/steps/${stepId}`);
       setSteps(steps.filter((step) => step._id !== stepId));
     } catch (error) {
       console.error("Error deleting step:", error);

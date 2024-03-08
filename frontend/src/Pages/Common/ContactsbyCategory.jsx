@@ -12,7 +12,7 @@ export default function ContactsbyCategory() {
 
   const fetchContactsByCategory = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/category/contacts/${categoryId}`);
+      const response = await axios.get(`/api/v1/category/contacts/${categoryId}`);
       setContacts(response.data);
     } catch (error) {
       console.error('Error fetching contacts:', error);

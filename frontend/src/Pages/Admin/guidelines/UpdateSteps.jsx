@@ -19,7 +19,7 @@ export default function UpdateSteps() {
   useEffect(() => {
     const fetchStep = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/steps/${stepId}`);
+        const response = await axios.get(`/api/v1/steps/${stepId}`);
         setStep(response.data);
         setFormData({
           stepNumber: response.data.stepNumber,
@@ -92,7 +92,7 @@ export default function UpdateSteps() {
         }
       );
       setStep(response.data);
-      navigate(`${import.meta.env.VITE_BACKEND_URL}/admin/guidelines/${step.guideline}`); // Navigate to the specific guideline
+      navigate(`/admin/guidelines/${step.guideline}`); // Navigate to the specific guideline
     } catch (error) {
       console.error("Error updating step:", error);
     }

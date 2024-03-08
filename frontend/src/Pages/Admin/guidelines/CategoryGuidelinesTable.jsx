@@ -16,7 +16,7 @@ export default function CategoryGuidelinesTable() {
 
   const fetchGuidelines = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/categories/pagination?page=${currentPage}&limit=${itemsPerPage}`);
+      const response = await axios.get(`/api/v1/categories/pagination?page=${currentPage}&limit=${itemsPerPage}`);
       setCategories(response.data.categories);
       setTotalPages(response.data.totalPages);
     } catch (error) {
@@ -25,7 +25,7 @@ export default function CategoryGuidelinesTable() {
   };
   const handleDelete = async (categoryId) => {
     try {
-      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/v1/categories/${categoryId}`);
+      await axios.delete(`/api/v1/categories/${categoryId}`);
       setCategories(categories.filter(category => category._id !== categoryId));
     } catch (error) {
       console.error('Error deleting category:', error);

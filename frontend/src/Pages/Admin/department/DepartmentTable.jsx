@@ -10,7 +10,7 @@ export default function DepartmentTable() {
     // Fetch departments data when the component mounts
     const fetchDepartments = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/departments`);
+        const response = await axios.get(`/api/v1/departments`);
         setDepartments(response.data);
       } catch (error) {
         console.error('Error fetching departments:', error);
@@ -23,7 +23,7 @@ export default function DepartmentTable() {
 
   const handleDelete = async (departmentId) => {
     try {
-      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/v1/departments/${departmentId}`);
+      await axios.delete(`/api/v1/departments/${departmentId}`);
       console.log('Department deleted successfully');
       // Remove the deleted department from the local state
       setDepartments(departments.filter(department => department._id !== departmentId));

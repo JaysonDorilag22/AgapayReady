@@ -12,7 +12,7 @@ export default function ContactsTable() {
 
   const fetchContacts = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/contacts`);
+      const response = await axios.get(`/api/v1/contacts`);
       setContacts(response.data);
     } catch (error) {
       console.error("Error fetching contacts:", error);
@@ -21,7 +21,7 @@ export default function ContactsTable() {
 
   const handleDelete = async (contactId) => {
     try {
-      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/v1/contacts/${contactId}`);
+      await axios.delete(`/api/v1/contacts/${contactId}`);
       // If deletion is successful, update the state to remove the deleted guideline
       setContacts(contacts.filter(contact => contact._id !== contactId));
     } catch (error) {

@@ -151,8 +151,8 @@ export const updateUser = async (req, res, next) => {
 
 export const logout = async (req, res, next) => {
   try {
-    res.clearCookie('access_token');
-    res.status(200).json('User has been logged out!');
+    res.clearCookie('access_token', { httpOnly: true });
+    res.status(200).json({ message: 'User has been logged out' });
   } catch (error) {
     next(error);
   }
