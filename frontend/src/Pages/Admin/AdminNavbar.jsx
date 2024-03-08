@@ -12,18 +12,29 @@ import { Link } from "react-router-dom";
 import AgapayReadylogo from "../../assets/services/AgapayReadylogo.png";
 
 const navigation = [
-  { name: "Dashboard", to: "/admin/dashboard", current: false }, 
-  { name: "Guidelines", to: "/admin/create/guidelines", current: false }, 
-  { name: "Contacts", to: "/admin/create/contacts", current: false },
-  { name: "Guideline Category", to: "/admin/create/category/guidelines", current: false },
-  { name: "Contacts Category", to: "/admin/create/category/contacts", current: false },
-
-  // { name: "Evacuation", to: "/admin/evacuation", current: false },
-  // { name: "Annoucement", to: "/announcement", current: false }, 
-  { name: "Reports", to: "/admin/report", current: false }, // Modify href to to
-  { name: "Departments", to: "/admin/create/departments", current: false }, 
-
+  { name: "Dashboard", to: "/admin/dashboard", current: false },
+  {
+    name: "Guidelines",
+    to: "/admin/create/guidelines",
+    current: false,
+    subItems: [
+      { name: "Guidelines", to: "/admin/create/guidelines", current: false },
+      { name: "Category", to: "/admin/create/category/guidelines", current: false },
+    ],
+  },
+  {
+    name: "Contacts",
+    to: "/admin/create/contacts",
+    current: false,
+    subItems: [
+      { name: "Contacts", to: "/admin/create/contacts", current: false },
+      { name: "Category", to: "/admin/create/category/contacts", current: false },
+    ],
+  },
+  { name: "Reports", to: "/admin/report", current: false },
+  { name: "Departments", to: "/admin/create/departments", current: false },
 ];
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -36,7 +47,7 @@ export default function AdminNavbar() {
   const handlelogout = async () => {
     try {
       dispatch(logOutUserStart());
-      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/logout`);
+      const response = await axios.get(`/api/v1/logout`);
       const data = await response.data;
 
       if (data.success === false) {
@@ -73,21 +84,40 @@ export default function AdminNavbar() {
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
-                    {navigation.map((item) => (
-                      <Link
-                        key={item.name}
-                        to={item.to} // Change href to to
-                        className={classNames(
-                          item.current
-                            ? "bg-gray-900 text-white"
-                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                          "rounded-md px-3 py-2 text-sm font-medium"
-                        )}
-                        aria-current={item.current ? "page" : undefined}
-                      >
-                        {item.name}
-                      </Link>
-                    ))}
+                  {navigation.map((item) => (
+  <div key={item.name} className="relative">
+    <Link
+      to={item.to}
+      className={classNames(
+        item.current
+          ? "bg-gray-900 text-white"
+          : "text-gray-300 hover:bg-gray-700 hover:text-white",
+        "rounded-md px-3 py-2 text-sm font-medium"
+      )}
+      aria-current={item.current ? "page" : undefined}
+    >
+      {item.name}
+    </Link>
+    {item.subItems && (
+      <div className="absolute z-10 left-0 mt-2 w-48 origin-top-left rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5">
+        {item.subItems.map((subItem) => (
+          <Link
+            key={subItem.name}
+            to={subItem.to}
+            className={classNames(
+              "block px-4 py-2 text-sm text-gray-700",
+              subItem.current ? "bg-gray-100" : ""
+            )}
+            aria-current={subItem.current ? "page" : undefined}
+          >
+            {subItem.name}
+          </Link>
+        ))}
+      </div>
+    )}
+  </div>
+))}
+
                   </div>
                 </div>
               </div>

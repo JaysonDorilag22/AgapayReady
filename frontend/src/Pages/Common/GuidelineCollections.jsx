@@ -14,7 +14,7 @@ const GuidelineCollections = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/v1/categories`);
+      const response = await fetch(`/api/v1/categories`);
       const data = await response.json();
       setCategories(data);
     } catch (error) {

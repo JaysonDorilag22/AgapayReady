@@ -92,7 +92,6 @@ export const login = async (req, res, next) => {
     const token = jwt.sign({ id: validUser._id, role: validUser.role }, process.env.JWT_SECRET);
     const { password: pass, ...rest } = validUser._doc;
 
-    // Set the token in a cookie and send it back to the client
     res
       .cookie('access_token', token, { httpOnly: true })
       .status(200)
@@ -152,16 +151,10 @@ export const updateUser = async (req, res, next) => {
 
 export const logout = async (req, res, next) => {
   try {
-    // Clear the access_token cookie
-    res.clearCookie("access_token", { httpOnly: true });
-    
-    // Respond with a success message
-    res.status(200).json({
-      success: true,
-      message: "Logged out successfully",
-    });
+    res.clearCookie('access_token');
+    res.status(200).json('User has been logged out!');
   } catch (error) {
-    next(error); // Pass any error to the error handler middleware
+    next(error);
   }
 };
 
