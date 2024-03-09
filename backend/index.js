@@ -16,6 +16,7 @@ import stepRouter from './routes/guidelines/step.route.js';
 import departmentRouter from './routes/department.route.js';
 import categoryGuidelinesRouter from './routes/guidelines/category.guidelines.route.js';
 import categoryContactsRouter from "./routes/contacts/category.contacts.route.js";
+import feedbackRouter from "./routes/feedback.route.js"
 
 dotenv.config();
 const app = express();
@@ -51,6 +52,7 @@ mongoose.connect(process.env.MONGODB_URI)
 
 // Routes
 app.use('/api/v1', testRouter);
+app.use('/api/v1', feedbackRouter);
 app.use('/api/v1', contactRouter);
 app.use('/api/v1', guidelineRouter);
 app.use('/api/v1', stepRouter);

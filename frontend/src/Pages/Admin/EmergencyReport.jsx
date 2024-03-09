@@ -27,7 +27,7 @@ export default function EmergencyReport() {
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
-    setCurrentPage(1); // Reset pagination when search query changes
+    setCurrentPage(1); 
   };
 
   const filteredReports = reports.filter((report) =>
