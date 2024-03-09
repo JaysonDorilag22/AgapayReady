@@ -2,6 +2,7 @@ import React from 'react'
 import EmergencyReportForm from './EmergencyReportForm'
 import GuidelineCollections from '../Common/GuidelineCollections'
 import ContactsCollection from '../Common/ContactsCollections'
+import FeedbackForm from './FeedbackForm'
 
 export default function UserDashboard() {
   return (
@@ -14,6 +15,9 @@ export default function UserDashboard() {
       </div>
       <div>
       <ContactsCollection/>
+      </div>
+      <div>
+      <FeedbackForm/>
       </div>
     </div>
   )
