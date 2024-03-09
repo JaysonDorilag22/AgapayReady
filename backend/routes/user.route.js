@@ -11,6 +11,8 @@ router.put('/confirm/:userId/:token', confirmEmail);
 
 router.post('/login', login);
 router.get('/logout', logout);
-router.put('/update', verifyToken, updateUser); 
+
+// Modify this route to accept the 'coverPhoto' field
+router.put('/update/:userId', verifyToken, upload.single('coverPhoto'), updateUser); 
 
 export default router;

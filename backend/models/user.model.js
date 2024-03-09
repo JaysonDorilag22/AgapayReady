@@ -38,6 +38,12 @@ const userSchema = new mongoose.Schema(
       default: false,
     },
     emailConfirmationToken: String,
+    coverPhoto: {
+      type: String,
+      default:
+        "https://dsuj2mkiosyd2.cloudfront.net/unified-gallery/160219/5816/9a1d263b/co.png?t=1486630687",
+    },
+    phoneNumber: String,
   },
   { timestamps: true }
 );

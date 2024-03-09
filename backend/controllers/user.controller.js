@@ -104,17 +104,16 @@ export const login = async (req, res, next) => {
 
 
 export const updateUser = async (req, res, next) => {
-  const userId = req.user.id; 
-  const { firstname, lastname, email, password, departmentId } = req.body;
+  const userId = req.user.id;
+  const { firstname, lastname, email, password, departmentId, phoneNumber } = req.body;
+  let { avatar, coverPhoto } = req.body; 
 
   try {
-    // Check if the user exists
-    const user = await User.findById(userId);
+    const user = await User.findById(userId).populate('department');
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
 
-    // If email is being updated, check if the new email is not already taken
     if (email && email !== user.email) {
       const existingUser = await User.findOne({ email });
       if (existingUser) {
@@ -122,9 +121,16 @@ export const updateUser = async (req, res, next) => {
       }
     }
 
-    // Update user information
     if (firstname) user.firstname = firstname;
     if (lastname) user.lastname = lastname;
+    if (avatar) {
+      const result = await cloudinary.uploader.upload(avatar);
+      user.avatar = result.secure_url;
+    }
+    if (coverPhoto) {
+      const result = await cloudinary.uploader.upload(coverPhoto);
+      user.coverPhoto = result.secure_url;
+    }
     if (email) user.email = email;
     if (password) {
       const hashedPassword = bcryptjs.hashSync(password, 12);
@@ -137,8 +143,8 @@ export const updateUser = async (req, res, next) => {
       }
       user.department = departmentId;
     }
+    if (phoneNumber) user.phoneNumber = phoneNumber;
 
-    // Save updated user information
     await user.save();
 
     res
