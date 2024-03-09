@@ -3,6 +3,7 @@ import { FaSearch } from "react-icons/fa";
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Loader from "../Loader"
+import baseURL from "../ApiService";
 
 export default function ContactsCollection() {
   const [categories, setCategories] = useState([]);
@@ -15,7 +16,7 @@ export default function ContactsCollection() {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get(`/api/v2/categories`);
+      const response = await axios.get(`${baseURL}/api/v2/categories`);
       setCategories(response.data);
     } catch (error) {
       console.error('Error fetching guidelines:', error);
