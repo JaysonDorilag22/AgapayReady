@@ -12,7 +12,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: backendUrl,
+        target: "https://agapayready.onrender.com",
         secure: false,
         changeOrigin: true,
       },
