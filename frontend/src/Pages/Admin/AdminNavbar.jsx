@@ -1,48 +1,37 @@
-import React, { Fragment } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState } from 'react';
+import { useDispatch } from "react-redux";
 import axios from "axios";
 import {
   logOutUserStart,
   deleteUserFailure,
   deleteUserSuccess,
 } from "../../redux/Users/userSlice";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Link } from "react-router-dom"; 
-import AgapayReadylogo from "../../assets/services/AgapayReadylogo.png";
+import { HiOutlineHome, HiOutlineUser} from 'react-icons/hi';
+import { IoIosLogOut } from "react-icons/io";
+import { RiGuideLine } from "react-icons/ri";
+import { BiCategory } from "react-icons/bi";
+import { RiContactsBook2Line } from "react-icons/ri";
+import { MdOutlinePhone } from "react-icons/md";
+import { Link, useLocation } from "react-router-dom"; 
+import AgapayReadylogo from "../../assets/services/vite.png";
 
 const navigation = [
-  { name: "Dashboard", to: "/admin/dashboard", current: false },
-  {
-    name: "Guidelines",
-    to: "/admin/create/guidelines",
-    current: false,
-    subItems: [
-      { name: "Guidelines", to: "/admin/create/guidelines", current: false },
-      { name: "Category", to: "/admin/create/category/guidelines", current: false },
-    ],
-  },
-  {
-    name: "Contacts",
-    to: "/admin/create/contacts",
-    current: false,
-    subItems: [
-      { name: "Contacts", to: "/admin/create/contacts", current: false },
-      { name: "Category", to: "/admin/create/category/contacts", current: false },
-    ],
-  },
-  { name: "Reports", to: "/admin/report", current: false },
-  { name: "Departments", to: "/admin/create/departments", current: false },
+  { name: "Dashboard", to: "/admin/dashboard", icon: HiOutlineHome },
+  { name: "Departments", to: "/admin/department/table", icon: HiOutlineUser },
+  { name: "Contacts", to: "/admin/contact/table", icon: MdOutlinePhone },
+  { name: "Guidelines", to: "/admin/guideline/table", icon: RiGuideLine },
+  { name: "Contacts Category", to: "/admin/contact/category/table", icon: RiContactsBook2Line },
+  { name: "Guidelines Category", to: "/admin/guideline/category/table", icon: BiCategory },
 ];
-
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
 
 export default function AdminNavbar() {
   const dispatch = useDispatch();
-  const { currentUser } = useSelector((state) => state.user);
+  const location = useLocation();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
 
   const handlelogout = async () => {
     try {
@@ -60,167 +49,92 @@ export default function AdminNavbar() {
       dispatch(deleteUserFailure(error.message));
     }
   };
+
   return (
-    <Disclosure as="nav" className="bg-gray-950">
-      {({ open }) => (
-        <>
-          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-            <div className="relative flex h-16 items-center justify-between">
-              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                {/* Mobile menu button*/}
-                <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                  <span className="absolute -inset-0.5" />
-                  <span className="sr-only">Open main menu</span>
-                  {open ? (
-                    <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
-                  ) : (
-                    <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
-                  )}
-                </Disclosure.Button>
-              </div>
-              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                <div className="flex flex-shrink-0 items-center">
-                  <img className="h-8 w-auto" src={AgapayReadylogo} alt="AgapayReady" />
-                </div>
-                <div className="hidden sm:ml-6 sm:block">
-                  <div className="flex space-x-4">
-                  {navigation.map((item) => (
-  <div key={item.name} className="relative">
-    <Link
-      to={item.to}
-      className={classNames(
-        item.current
-          ? "bg-gray-900 text-white"
-          : "text-gray-300 hover:bg-gray-700 hover:text-white",
-        "rounded-md px-3 py-2 text-sm font-medium"
-      )}
-      aria-current={item.current ? "page" : undefined}
-    >
-      {item.name}
-    </Link>
-    {item.subItems && (
-      <div className="absolute z-10 left-0 mt-2 w-48 origin-top-left rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5">
-        {item.subItems.map((subItem) => (
-          <Link
-            key={subItem.name}
-            to={subItem.to}
-            className={classNames(
-              "block px-4 py-2 text-sm text-gray-700",
-              subItem.current ? "bg-gray-100" : ""
-            )}
-            aria-current={subItem.current ? "page" : undefined}
-          >
-            {subItem.name}
+    <>
+      <button
+        type="button"
+        onClick={toggleSidebar}
+        className="text-gray-500 hover:text-gray-600 mt-2 ml-2"
+        aria-controls="docs-sidebar"
+        aria-label="Toggle navigation"
+      >
+        <span className="sr-only">Toggle Navigation</span>
+        <svg className="flex-shrink-0 size-4" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path fillRule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+        </svg>
+      </button>
+      <div
+        id="docs-sidebar"
+        className={`hs-overlay transition-all duration-300 transform fixed top-0 start-0 bottom-0 z-[60] w-64 bg-white border-e border-gray-200 pt-7 pb-10 overflow-y-auto lg:block lg:translate-x-0 lg:end-auto lg:bottom-0 ${
+          sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        } [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300`}
+      >
+        <div className="px-6 flex justify-center">
+          <Link to="#" className="flex-none text-xl font-semibold" aria-label="Brand">
+            <img src={AgapayReadylogo} className='w-20'/>
           </Link>
-        ))}
-      </div>
-    )}
-  </div>
-))}
-
-                  </div>
-                </div>
-              </div>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button
-                  type="button"
-                  className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                >
-                  <span className="absolute -inset-1.5" />
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
-
-                <Menu as="div" className="relative ml-3">
-                  <div>
-                    <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                      <span className="absolute -inset-1.5" />
-                      <span className="sr-only">Open user menu</span>
-                      <img
-                        className="h-8 w-8 rounded-full"
-                        src={currentUser.avatar}
-                        alt="avatar"
-                      />
-                    </Menu.Button>
-                  </div>
-                  <Transition
-                    as={Fragment}
-                    enter="transition ease-out duration-100"
-                    enterFrom="transform opacity-0 scale-95"
-                    enterTo="transform opacity-100 scale-100"
-                    leave="transition ease-in duration-75"
-                    leaveFrom="transform opacity-100 scale-100"
-                    leaveTo="transform opacity-0 scale-95"
-                  >
-                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <Menu.Item>
-                        {({ active }) => (
-                          <Link
-                            to="/admin/profile"
-                            className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
-                            )}
-                          >
-                            Your Profile
-                          </Link>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <Link
-                            to="#"
-                            className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
-                            )}
-                          >
-                            Settings
-                          </Link>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <Link
-                            to="/"
-                            onClick={handlelogout}
-                            className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
-                            )}
-                          >
-                            Log out
-                          </Link>
-                        )}
-                      </Menu.Item>
-                    </Menu.Items>
-                  </Transition>
-                </Menu>
-              </div>
-            </div>
-          </div>
-
-          <Disclosure.Panel className="sm:hidden">
-            <div className="space-y-1 px-2 pb-3 pt-2">
-              {navigation.map((item) => (
+          <button
+            type="button"
+            onClick={toggleSidebar}
+            className="absolute top-0 right-0 mt-2 mr-2 lg:hidden"
+            aria-label="Close"
+          >
+            <svg
+              className="w-6 h-6 text-gray-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+        <nav className="hs-accordion-group p-6 w-full flex flex-col flex-wrap" data-hs-accordion-always-open>
+          <ul className="space-y-1.5">
+            {navigation.map((item, index) => (
+              <li key={index}>
                 <Link
-                  key={item.name}
-                  to={item.to} // Change href to to
-                  className={classNames(
-                    item.current
-                      ? "bg-gray-900 text-white"
-                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                    "block rounded-md px-3 py-2 text-base font-medium"
-                  )}
-                  aria-current={item.current ? "page" : undefined}
+                  to={item.to}
+                  className={`flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg  hover:bg-slate-300 ${
+                    location.pathname === item.to ? 'bg-slate-300' : ''
+                  }`}
                 >
-                  {item.name}
+                  {item.icon && <item.icon className="size-4" />}
+                  <span>{item.name}</span>
                 </Link>
-              ))}
-            </div>
-          </Disclosure.Panel>
-        </>
-      )}
-    </Disclosure>
+              </li>
+            ))}
+            <li>
+              <Link
+                to="/admin/profile"
+                className={`flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg  hover:bg-slate-400 ${
+                  location.pathname === "/admin/profile" ? 'bg-slate-300' : ''
+                }`}
+              >
+                <HiOutlineUser className="size-4" />
+                <span>Admin Profile</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/"
+                onClick={handlelogout}
+                className={`flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-slate-700 rounded-lg hover:bg-slate-400`}
+              >
+                <IoIosLogOut className="size-4" />
+                <span>Logout</span>
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </>
   );
 }

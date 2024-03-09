@@ -28,6 +28,7 @@ import UserDashboard from './Pages/User/UserDashboard';
 import AdminDashboard from './Pages/Admin/AdminDashboard';
 import AdminProfile from './Pages/Admin/AdminProfile';
 
+//Create and Update forms===========================================================
 //Guidelines
 import CreateGuidelines from './Pages/Admin/guidelines/CreateGuidelines';
 import UpdateGuidelines from './Pages/Admin/guidelines/UpdateGuidelines';
@@ -39,10 +40,7 @@ import UpdateSteps from './Pages/Admin/guidelines/UpdateSteps';
 
 //Contacts
 import CreateContacts from './Pages/Admin/contacts/CreateContacts';
-import UpdateContacts from './Pages/Admin/contacts/UpdateCategoryContacts';
-
-//Report
-import EmergencyReport from './Pages/Admin/EmergencyReport';
+import UpdateContacts from './Pages/Admin/contacts/UpdateContacts';
 
 //Categories
 import CreateCategoryGuidelines from './Pages/Admin/guidelines/CreateCategoryGuidelines';
@@ -53,13 +51,24 @@ import UpdateCategoryContacts from './Pages/Admin/contacts/UpdateCategoryContact
 
 import CreateDepartment from './Pages/Admin/department/CreateDepartment';
 import UpdateDepartment from './Pages/Admin/department/UpdateDepartment';
+// ===================================================================================
+
+//Report
+import EmergencyReport from './Pages/Admin/EmergencyReport';
 
 
 import ToastNotification from './Pages/Admin/ToastNotification';
+//Admin tables
 import GuidelineTable from './Pages/Admin/guidelines/GuidelineTable';
+
+//use pages
 import GuidelinesbyCategory from './Pages/Common/GuidelinesbyCategory';
 import ContactsbyCategory from './Pages/Common/ContactsbyCategory';
 import EmailConfirmation from './Pages/Common/EmailConfirmation';
+import ContactsTable from './Pages/Admin/contacts/ContactsTable';
+import DepartmentTable from './Pages/Admin/department/DepartmentTable';
+import CategoryContactsTable from './Pages/Admin/contacts/CategoryContactsTable';
+import CategoryGuidelinesTable from './Pages/Admin/guidelines/CategoryGuidelinesTable';
 
 const socket = io("http://localhost:4000")
 
@@ -143,6 +152,7 @@ function App() {
         <AdminRouterWrapper
         element={<Routes>
       <Route path='dashboard' element={<AdminDashboard/>} />
+      <Route path='profile' element={<Profile/>} />
       <Route path='report' element={<EmergencyReport/>} />
       <Route path='create/steps' element={<CreateSteps/>} />
       <Route path='create/contacts' element={<CreateContacts/>} />
@@ -152,11 +162,23 @@ function App() {
       <Route path='create/departments' element={<CreateDepartment/>} />
       <Route path='update/steps/:stepId' element={<UpdateSteps/>} />
       <Route path='update/departments/:departmentId' element={<UpdateDepartment/>} />
-      <Route path='update/contacts/:contactId' element={<UpdateContacts/>} />
+      <Route path='update/contact/:contactId' element={<UpdateContacts/>} />
       <Route path='update/guidelines/:guidelineId' element={<UpdateGuidelines/>} />
       <Route path='update/category/contacts/:categoryId' element={<UpdateCategoryContacts/>} />
       <Route path='update/category/guidelines/:categoryId' element={<UpdateCategoryGuidelines/>} />
+
+      {/* Table routes */}
       <Route path='guideline/table' element={<GuidelineTable/>} />
+      <Route path='guideline/category/table' element={<CategoryGuidelinesTable/>} />
+      <Route path='contact/table' element={<ContactsTable/>} />
+      <Route path='contact/category/table' element={<CategoryContactsTable/>} />
+      <Route path='department/table' element={<DepartmentTable/>} />
+
+
+
+
+      {/* Table routes */}
+
       <Route path='guidelines/:guidelineId' element={<Guidelinesteps/>} />
       <Route path='profile' element={<AdminProfile/>} />
       </Routes>
