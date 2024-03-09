@@ -75,7 +75,7 @@ export default function ContactsTable() {
               </thead>
               <tbody className="text-sm">
                 {currentContacts.map((contact) => (
-                  <tr key={contact._id} className="dark:border-gray-200 hover:bg-slate-300">
+                  <tr key={contact._id} className="dark:border-gray-200">
                     <td className="px-4 py-3 text-center">{contact.name}</td>
                     <td className="px-4 py-3 text-center">{contact.description}</td>
                     <td className="px-4 py-3 text-center">{contact.phone}</td>

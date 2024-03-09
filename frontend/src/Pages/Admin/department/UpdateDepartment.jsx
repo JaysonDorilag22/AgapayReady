@@ -100,7 +100,7 @@ export default function UpdateDepartment() {
             <button
               type="submit"
               disabled={loading}
-              className={`rounded-md bg-blue-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+              className={`rounded-md bg-red-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
               {loading ? 'Updating...' : 'Update Department'}
             </button>

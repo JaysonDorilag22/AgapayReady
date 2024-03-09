@@ -11,7 +11,7 @@ import { IoIosLogOut } from "react-icons/io";
 import { RiGuideLine } from "react-icons/ri";
 import { BiCategory } from "react-icons/bi";
 import { RiContactsBook2Line } from "react-icons/ri";
-import { MdOutlinePhone } from "react-icons/md";
+import { MdOutlinePhone, MdOutlineEmergencyShare } from "react-icons/md";
 import { Link, useLocation } from "react-router-dom"; 
 import AgapayReadylogo from "../../assets/services/vite.png";
 
@@ -22,6 +22,7 @@ const navigation = [
   { name: "Guidelines", to: "/admin/guideline/table", icon: RiGuideLine },
   { name: "Contacts Category", to: "/admin/contact/category/table", icon: RiContactsBook2Line },
   { name: "Guidelines Category", to: "/admin/guideline/category/table", icon: BiCategory },
+  { name: "Emergency Report", to: "/admin/report", icon: MdOutlineEmergencyShare },
 ];
 
 export default function AdminNavbar() {

@@ -35,12 +35,13 @@ export default function () {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-slate-300">
+    <div className="flex items-center justify-center h-screen">
       <div className="max-w-lg w-full bg-slate-100 p-4 rounded-md outline outline-1 outline-slate-400 m-4">
         <form onSubmit={handleSubmit}>
           <div className="space-y-12">
             <div className="border-b border-gray-900/10 pb-12">
               <h2 className="text-base font-semibold leading-7 text-gray-900">Create Department</h2>
+              <p className="mt-1 text-sm leading-6 text-gray-600">Provide details about the department.</p>
   
               <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2">
                 <div className="col-span-full">

@@ -56,7 +56,7 @@ export default function CategoryContactsTable() {
                 />
               </div>
               <Link
-                to="#"
+                to={'/admin/create/category/contacts'}
                 className="flex m-3 items-center px-3 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:ring-blue-200"
                 title="Add Category"
               >

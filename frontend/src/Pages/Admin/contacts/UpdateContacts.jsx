@@ -84,7 +84,7 @@ export default function UpdateContacts() {
       });
       console.log("Contact updated:", response.data);
       toast.success("Contact updated successfully");
-      navigate("/admin/contact/table"); // Redirect to contacts list after successful update
+      navigate("/admin/contact/table"); 
     } catch (error) {
       console.error("Error updating contact:", error);
       toast.error("Error updating contact");
@@ -97,7 +97,7 @@ export default function UpdateContacts() {
         <form onSubmit={handleSubmit}>
           <div className="space-y-12">
             <div className="border-b border-gray-900/10 pb-12">
-              <h2 className="text-base font-semibold leading-7 text-gray-900">Contact Information</h2>
+              <h2 className="text-base font-semibold leading-7 text-gray-900">Update Contact</h2>
               <div className="mt-5">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">Name:</label>

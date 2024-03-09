@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import GuidelineTable from "./GuidelineTable";
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate, Link } from "react-router-dom";
+import { toast } from 'react-toastify';
+
 export default function CreateGuidelines() {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -51,78 +50,66 @@ export default function CreateGuidelines() {
           "Content-Type": "multipart/form-data",
         },
       });
-      toast.success("Guideline created successfully");
 
       console.log("Guideline created:", response.data);
       setLoading(false);
-
-      setFormData({
-        name: "",
-        description: "",
-        image: null,
-        category: "", 
-      });
-       navigate("/admin/create/guidelines")
+      toast.success("Guideline created successfully");
+      navigate("/admin/guideline/table"); 
     } catch (error) {
-      toast.error("Error creating guideline");
-
       console.error("Error creating guideline:", error);
-
+      toast.error("Error creating guideline");
     }
   };
 
   return (
-    <>
-    <div className="flex">
-      <div className="w-full m-3">
-    <ToastContainer/>
-        <h1 className="text-3xl font-bold mb-3 text-center">Guidelines</h1>
-        <div className="flex flex-col md:flex-row border rounded p-4"> {/* Added border and padding */}
-          <div className="md:mr-5 flex-1 mb-5 md:mb-0">
-            <form onSubmit={handleSubmit} className="space-y-4 text-sm">
-        <h1 className="text-3xl font-bold mb-3 text-center">CREATE GUIDELINES</h1>
+    <div className="flex items-center justify-center h-screen">
+      <div className="max-w-lg w-full bg-slate-100 p-4 rounded-md outline outline-1 outline-slate-400 m-4">
+        <form onSubmit={handleSubmit} className="space-y-4 text-sm">
+        <div className="space-y-12">
+          <div className="border-b border-gray-900/10 pb-12">
+          <h2 className="text-base font-semibold leading-7 text-gray-900">Create Guideline</h2>
+              <p className="mt-1 text-sm leading-6 text-gray-600">Provide details about the guideline.</p>
+
+            <div className="space-y-6">
               <div>
-                <label className="block mb-1 font-semibold">Name:</label>
+                <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">Name</label>
                 <input
                   type="text"
+                  id="name"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border rounded"
+                  className="block w-full rounded-md border-gray-300 shadow-sm focus:ring-red-600 focus:border-red-600 sm:text-sm"
                   required
                 />
               </div>
               <div>
-                <label className="block mb-1 font-semibold">
-                  Description:
-                </label>
+                <label htmlFor="description" className="block text-sm font-medium leading-6 text-gray-900">Description</label>
                 <textarea
+                  id="description"
                   name="description"
                   value={formData.description}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border rounded"
-                  rows="4"
+                  className="block w-full rounded-md border-gray-300 shadow-sm focus:ring-red-600 focus:border-red-600 sm:text-sm"
+                  rows="3"
                   required
-                />
+                ></textarea>
               </div>
+              <div className="col-span-full">
+                  <label htmlFor="image" className="block text-sm font-medium leading-6 text-gray-900">Image:</label>
+                  <div className="mt-2">
+                    <input type="file" id="image" name="image" onChange={handleChange} accept="image/*" className="file-input block file-input-bordered file-input-sm w-full" required />
+                  </div>
+                </div>
+
               <div>
-                <label className="block mb-1 font-semibold">Image:</label>
-                <input
-                  type="file"
-                  name="image"
-                  accept="image/*"
-                  onChange={handleChange}
-                  className="w-full px-3 py-2 border rounded"
-                  required
-                />
-              </div>
-              <div>
-                <label className="block mb-1 font-semibold">Category:</label>
+                <label htmlFor="category" className="block text-sm font-medium leading-6 text-gray-900">Category</label>
                 <select
+                  id="category"
                   name="category"
                   value={formData.category}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border rounded"
+                  className="block w-full rounded-md border-gray-300 shadow-sm focus:ring-red-600 focus:border-red-600 sm:text-sm"
                   required
                 >
                   <option value="">Select Category</option>
@@ -133,25 +120,18 @@ export default function CreateGuidelines() {
                   ))}
                 </select>
               </div>
-              <button
-          type="submit"
-          disabled={loading} // Disable button when loading
-          className={`bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 w-full md:w-auto ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
-        >
-          {loading ? 'Creating...' : 'Create Guideline'}
-        </button>
-            </form>
-          </div>
-          <div className="flex-1 border-t mt-5 md:mt-0 md:border-t-0 md:border-l md:pl-5">
-            <div>
-              <GuidelineTable />
             </div>
           </div>
-        </div>
+          <div className="mt-2 flex items-center justify-end gap-x-6">
+            <Link to="/admin/guideline/table" className="text-sm font-semibold leading-6 text-gray-900">Cancel</Link>
+            <button type="submit" disabled={loading} className={`rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}>
+              {loading ? 'Creating...' : 'Create Guideline'}
+            </button>
+          </div>
+          </div>
+
+        </form>
       </div>
     </div>
-  </>
-  
-  
   );
 }
