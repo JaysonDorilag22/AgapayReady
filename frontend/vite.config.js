@@ -1,8 +1,12 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import dotenv from 'dotenv';
 
-// Load environment variables
-const backendUrl = process.env.VITE_BACKEND_URL || 'http://localhost:4000';
+// Load environment variables from .env file
+dotenv.config();
+
+// Get environment variables
+const backendUrl = process.env.VITE_BACKEND_URL;
 
 export default defineConfig({
   server: {

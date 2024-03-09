@@ -7,7 +7,7 @@ import Loader from "../Loader"
 export default function ContactsCollection() {
   const [categories, setCategories] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [loading, setLoading] = useState(true); // Initially set loading to true
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
     fetchCategories();
@@ -20,7 +20,7 @@ export default function ContactsCollection() {
     } catch (error) {
       console.error('Error fetching guidelines:', error);
     } finally {
-      setLoading(false); // Set loading to false when fetching is complete
+      setLoading(false); 
     }
   };
 
@@ -35,7 +35,6 @@ export default function ContactsCollection() {
   return (
     <section className="py-14">
       <div className="max-w-screen-xl mx-auto px-4 text-gray-600 md:px-8">
-        {/* Render Loader if loading */}
         {loading ? (
           <Loader />
         ) : (
