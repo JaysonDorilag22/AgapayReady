@@ -60,8 +60,9 @@ const EmergencyReportForm = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-8 bg-slate-200 p-5 rounded-md shadow-lg">
-      <h2 className="text-2xl font-bold mb-4 text-center">Emergency Report Form</h2>
+    <div className="max-w-md mx-auto mt-8 bg-white p-5 rounded-md shadow-lg outline outline-1 outline-slate-400">
+       <h2 className="title-font mb-1 text-lg font-medium text-gray-900">Report Form</h2>
+       <p className="mb-5 leading-relaxed text-gray-600">Use this form to report emergencies and get immediate assistance. Your safety is our priority.</p>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block mb-1 font-medium">Location</label>
@@ -70,7 +71,7 @@ const EmergencyReportForm = () => {
             value={location}
             onChange={handleLocationChange}
             placeholder="Location"
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-slate-500"
           />
         </div>
         <div>
@@ -79,7 +80,7 @@ const EmergencyReportForm = () => {
             value={description}
             onChange={handleDescriptionChange}
             placeholder="Description"
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-slate-500"
             rows="4"
           ></textarea>
         </div>
@@ -95,11 +96,11 @@ const EmergencyReportForm = () => {
         <button
           type="submit"
           className={`w-full font-bold py-2 rounded-md transition duration-300 ${
-            submitSuccess ? 'bg-green-500 text-white hover:bg-green-600' : 'bg-red-500 text-white hover:bg-blue-600'
+            submitSuccess ? 'bg-green-500 text-white hover:bg-green-600' : 'bg-red-500 text-white hover:bg-slate-600'
           }`}
           disabled={loading}
         >
-          {loading ? 'Submitting...' : (submitSuccess ? 'Submitted' : 'Submit')}
+          {loading ? 'Submitting...' : (submitSuccess ? 'Submitted' : 'Submit Report')}
         </button>
       </form>
     </div>

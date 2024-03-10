@@ -107,9 +107,6 @@ export default function EmergencyReport() {
                   <th scope="col" className="px-4 py-3 hover:text-black">
                     Confirmation
                   </th>
-                  <th scope="col" className="px-4 py-3 hover:text-black">
-                    View
-                  </th> {/* Added View header */}
                 </tr>
               </thead>
               <tbody className="text-sm">
