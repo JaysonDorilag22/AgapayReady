@@ -32,7 +32,7 @@ export default function EvacuationGuidelines() {
             {/* Text */}
             <div className="hidden lg:relative lg:block lg:p-12">
               <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
-                PREPARE FOR AN EARTHQUAKE
+                PREPARE FOR AN EVACUATION
               </h2>
               <p className="mt-4 leading-relaxed text-white/90">
                 A step by step guidance for earthquake preparedness.
