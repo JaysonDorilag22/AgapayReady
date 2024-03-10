@@ -90,7 +90,7 @@ const EmergencyReportForm = () => {
             type="file"
             onChange={handleImageChange}
             accept="image/*"
-            className="w-full"
+            className=" file-input file-input-bordered file-input-sm w-full max-w-xs"
           />
         </div>
         <button

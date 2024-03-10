@@ -121,9 +121,6 @@ export default function EmergencyReport() {
                     </td>
                     <td className="px-4 py-3 text-center">{new Date(report.timestamp).toLocaleString()}</td>
                     <td className="px-4 py-3 text-center">{report.confirmed ? 'Confirmed' : 'Not Confirmed'}</td>
-                    <td className="px-4 py-3 text-center">
-                      <Link to={`/reports/${report._id}`} className="text-blue-500 hover:underline">View</Link>
-                    </td> {/* Added View button */}
                   </tr>
                 ))}
               </tbody>

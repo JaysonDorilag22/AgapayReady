@@ -7,6 +7,7 @@ import LineChart from "./charts/LineChart";
 import { useGLTF } from "@react-three/drei";
 import Stats from "./stats/Stats";
 import EmergencyReport from "./EmergencyReport";
+import SentimentAnalysis from "./charts/SentimentAnalysis";
 // import CustomKanban from "./CustomKanban";
 
 function Model({ url }) {
@@ -124,9 +125,12 @@ export default function AdminDashboard() {
             </div>
           </div>
         </div> */}
+        <div className=" rounded-md mr-3">
+          <SentimentAnalysis />
+        </div>
       <h1 className="m-10 text-3xl font-bold">Graphs</h1>
 
-      <div className="grid grid-cols-3 gap-4 py-10 mx-auto m-auto rounded-md">
+      <div className="grid grid-cols-2 gap-4 py-10 mx-auto m-auto rounded-md">
         <div className=" rounded-md ml-3">
           <PieChart />
         </div>
@@ -137,7 +141,7 @@ export default function AdminDashboard() {
           <LineChart />
         </div>
       </div>
-
+      
       {/* <div className="Container mx-auto py-14">
         <Canvas style={{ width: "400px", height: "400px" }}>
           <ambientLight intensity={5} />
