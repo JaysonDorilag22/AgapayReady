@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { RiPencilLine, RiDeleteBinLine, RiAddLine } from "react-icons/ri";
-import { LuTrash, LuPencil, LuPlus } from "react-icons/lu";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import baseURL from "../ApiService";
+import { io } from "socket.io-client";
+import { Link } from "react-router-dom";
+
+const socket = io("http://localhost:4000");
 
 export default function EmergencyReport() {
   const [reports, setReports] = useState([]);
@@ -14,19 +15,32 @@ export default function EmergencyReport() {
 
   useEffect(() => {
     fetchReports();
+
+    // Listen for newEmergencyReport event
+    socket.on("newEmergencyReport", handleNewEmergencyReport);
+
+    return () => {
+      // Clean up event listener
+      socket.off("newEmergencyReport");
+    };
   }, []);
+
+  const handleNewEmergencyReport = (newReport) => {
+    // Update reports state with the new report
+    setReports((prevReports) => [newReport, ...prevReports]);
+  };
 
   const fetchReports = async () => {
     try {
       const reportResponse = await axios.get(`/api/v1/report`);
       const userResponse = await axios.get(`/api/v1/users`);
 
-      const mergedReports = reportResponse.data.map(report => {
-        const user = userResponse.data.find(user => user._id === report.user);
+      const mergedReports = reportResponse.data.map((report) => {
+        const user = userResponse.data.find((user) => user._id === report.user);
         return {
           ...report,
           user: user ? `${user.firstname} ${user.lastname}` : "Unknown User",
-          number: user ? user.phoneNumber : "No number"
+          number: user ? user.phoneNumber : "No number",
         };
       });
 
@@ -40,7 +54,7 @@ export default function EmergencyReport() {
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
-    setCurrentPage(1); 
+    setCurrentPage(1);
   };
 
   const filteredReports = reports.filter((report) =>
@@ -93,6 +107,9 @@ export default function EmergencyReport() {
                   <th scope="col" className="px-4 py-3 hover:text-black">
                     Confirmation
                   </th>
+                  <th scope="col" className="px-4 py-3 hover:text-black">
+                    View
+                  </th> {/* Added View header */}
                 </tr>
               </thead>
               <tbody className="text-sm">
@@ -107,6 +124,9 @@ export default function EmergencyReport() {
                     </td>
                     <td className="px-4 py-3 text-center">{new Date(report.timestamp).toLocaleString()}</td>
                     <td className="px-4 py-3 text-center">{report.confirmed ? 'Confirmed' : 'Not Confirmed'}</td>
+                    <td className="px-4 py-3 text-center">
+                      <Link to={`/reports/${report._id}`} className="text-blue-500 hover:underline">View</Link>
+                    </td> {/* Added View button */}
                   </tr>
                 ))}
               </tbody>
