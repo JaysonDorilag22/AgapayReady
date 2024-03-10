@@ -104,9 +104,9 @@ const onSubmit = async (values, { setSubmitting }) => {
                   Password
                 </label>
                 <div className="text-sm">
-                  <a href="#" className="font-semibold text-red-600 hover:text-red-500">
+                  <Link to={'/forgot-password'} className="font-semibold text-red-600 hover:text-red-500">
                     Forgot password?
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="mt-2">

@@ -45,6 +45,8 @@ import ContactsTable from './Pages/Admin/contacts/ContactsTable';
 import DepartmentTable from './Pages/Admin/department/DepartmentTable';
 import CategoryContactsTable from './Pages/Admin/contacts/CategoryContactsTable';
 import CategoryGuidelinesTable from './Pages/Admin/guidelines/CategoryGuidelinesTable';
+import ForgotPassword from './Pages/Common/ForgotPassword';
+import ResetPassword from './Pages/Common/ResetPassword';
 
 const socket = io("http://localhost:4000");
 
@@ -103,6 +105,7 @@ function App() {
         <Route path='/' element={<LandingPage />} />
         <Route path='/register' element={<Register />} />
         <Route path='/email-verification' element={<EmailConfirmation />} />
+        <Route path='/forgot-password' element={<ForgotPassword />} />
         <Route path='/login' element={<Login />} />
         <Route path='/blog' element={<BlogPage />} />
         <Route path='/guidelines' element={<GuidelineCollections />} />
@@ -114,6 +117,8 @@ function App() {
         <Route path='/guidelines/category/guideline/:categoryId' element={<GuidelinesbyCategory />} />
         <Route path='/contacts/category/contact/:categoryId' element={<ContactsbyCategory />} />
         <Route path="/email-confirm/:userId/:token" element={<ConfirmationPage />} />
+        <Route path="/reset-password/:userId/:token" element={<ResetPassword />} />
+
 
         <Route path='/admin/*' element={
           <AdminRouterWrapper

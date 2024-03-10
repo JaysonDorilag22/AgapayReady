@@ -17,6 +17,6 @@ router.get('/users', verifyToken, isAdmin, getAllUsers);
 router.put('/update/:userId', verifyToken, upload.single('coverPhoto'), updateUser); 
 
 router.post('/forgot-password', forgotPassword); 
-router.put('/reset-password/:resetToken', resetPassword); 
+router.put('/reset-password/:userId/:resetToken', resetPassword); 
 
 export default router;

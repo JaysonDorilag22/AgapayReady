@@ -205,7 +205,7 @@ export const forgotPassword = async (req, res, next) => {
 
           <!-- Logo Section -->
           <div style="text-align: center;">
-            <img src="http://localhost:5173/src/assets/services/vite.png" alt="Your Logo" style="max-width: 200px; margin-bottom: 20px;">
+            <img src="https://scontent.fmnl33-2.fna.fbcdn.net/v/t1.15752-9/431069846_1132550754544007_2624880552037559972_n.png?_nc_cat=111&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeEkwEh8zJz9g8U1xwzDEzlB2vh06Anp8r_a-HToCenyv0Q5PUVMKXNi7a0CHEGb4rLzNfSstTsZnQooxNENbO_S&_nc_ohc=4g2vdyAhZqkAX_nbVNc&_nc_ht=scontent.fmnl33-2.fna&oh=03_AdSw8RzIziBQZyX0zkAMBjM_kkpkCqpaS2v53gVYSLQNtA&oe=6614BE08" alt="Your Logo" style="max-width: 200px; margin-bottom: 20px;">
           </div>
 
           <!-- Email Content -->
@@ -213,11 +213,11 @@ export const forgotPassword = async (req, res, next) => {
             <p>Dear User,</p>
             <p>We hope this email finds you well. You are receiving this message because a request has been made to reset the password for your account.</p>
             <p>To proceed with the password reset, please click on the following link or copy-paste it into your browser:</p>
-            <p><a href="${process.env.CLIENT_URL}/reset-password/${resetToken}">Reset Password</a></p>
+            <p><a href="${process.env.CLIENT_URL}/reset-password/${user._id}/${resetToken}">Reset Password</a></p>
             <p>If you did not initiate this request, you can safely disregard this email. Your password will remain unchanged.</p>
             <p>Thank you for your attention.</p>
             <p>Best regards,</p>
-            <p>Your Application Team</p>
+            <p>Agapay Ready</p>
           </div>
 
         </body>
@@ -233,6 +233,7 @@ export const forgotPassword = async (req, res, next) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
 
 export const resetPassword = async (req, res, next) => {
   const { resetToken } = req.params;
