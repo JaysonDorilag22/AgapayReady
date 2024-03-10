@@ -4,7 +4,7 @@ import { LuTrash, LuPencil, LuPlus } from "react-icons/lu";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import baseURL from "../ApiService";
 export default function EmergencyReport() {
   const [reports, setReports] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -17,7 +17,7 @@ export default function EmergencyReport() {
 
   const fetchReports = async () => {
     try {
-      const response = await axios.get(`/api/v1/report`);
+      const response = await axios.get(`${baseURL}/api/v1/report`);
       setReports(response.data);
     } catch (error) {
       console.error("Error fetching reports:", error);
