@@ -16,7 +16,7 @@ export default function ContactsCollection() {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/v2/categories`);
+      const response = await axios.get(`${baseURL}/api/v2/categories`);
       setCategories(response.data);
     } catch (error) {
       console.error('Error fetching guidelines:', error);

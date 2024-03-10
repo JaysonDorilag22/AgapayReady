@@ -31,7 +31,7 @@ export default function Login() {
 const onSubmit = async (values, { setSubmitting }) => {
   try {
     dispatch(logInStart());
-    const response = await axios.post(`${baseURL}/api/v1/login`, values, {
+    const response = await axios.post(`/api/v1/login`, values, {
       headers: {
         "Content-Type": "application/json",
       },

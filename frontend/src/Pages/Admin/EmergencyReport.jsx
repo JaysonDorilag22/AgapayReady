@@ -5,6 +5,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import baseURL from "../ApiService";
+
 export default function EmergencyReport() {
   const [reports, setReports] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -17,8 +18,20 @@ export default function EmergencyReport() {
 
   const fetchReports = async () => {
     try {
-      const response = await axios.get(`${baseURL}/api/v1/report`);
-      setReports(response.data);
+      const reportResponse = await axios.get(`/api/v1/report`);
+      const userResponse = await axios.get(`/api/v1/users`);
+
+      const mergedReports = reportResponse.data.map(report => {
+        const user = userResponse.data.find(user => user._id === report.user);
+        return {
+          ...report,
+          user: user ? `${user.firstname} ${user.lastname}` : "Unknown User",
+          number: user ? user.phoneNumber : "No number"
+        };
+      });
+
+      // Reverse the reports array to display the latest report first
+      setReports(mergedReports.reverse());
     } catch (error) {
       console.error("Error fetching reports:", error);
       toast.error("Failed to fetch reports");
@@ -55,16 +68,16 @@ export default function EmergencyReport() {
                   className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-200 m-3"
                 />
               </div>
-              <button
-                className="flex m-3 items-center px-3 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:ring-blue-200"
-                title="Add Product"
-              >
-                <LuPlus className="mr-1" /> Add Product
-              </button>
             </div>
             <table className="w-full">
               <thead className="text-sm text-center border text-slate-500">
                 <tr>
+                  <th scope="col" className="px-4 py-3 hover:text-black">
+                    User
+                  </th>
+                  <th scope="col" className="px-4 py-3 hover:text-black">
+                    Phone no.
+                  </th>
                   <th scope="col" className="px-4 py-3 hover:text-black">
                     Location
                   </th>
@@ -74,16 +87,26 @@ export default function EmergencyReport() {
                   <th scope="col" className="px-4 py-3 hover:text-black">
                     Image
                   </th>
+                  <th scope="col" className="px-4 py-3 hover:text-black">
+                    Timestamp
+                  </th>
+                  <th scope="col" className="px-4 py-3 hover:text-black">
+                    Confirmation
+                  </th>
                 </tr>
               </thead>
               <tbody className="text-sm">
                 {currentItems.map((report) => (
                   <tr key={report._id} className="dark:border-gray-200">
+                    <td className="px-4 py-3 text-center">{report.user}</td>
+                    <td className="px-4 py-3 text-center">{report.number}</td>
                     <td className="px-4 py-3 text-center">{report.location}</td>
                     <td className="px-4 py-3 text-center">{report.description}</td>
                     <td className="px-4 py-3 text-center">
                       <img src={report.image} alt="Report" className="h-16 w-auto mx-auto" />
                     </td>
+                    <td className="px-4 py-3 text-center">{new Date(report.timestamp).toLocaleString()}</td>
+                    <td className="px-4 py-3 text-center">{report.confirmed ? 'Confirmed' : 'Not Confirmed'}</td>
                   </tr>
                 ))}
               </tbody>

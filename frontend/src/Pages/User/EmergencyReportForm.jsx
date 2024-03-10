@@ -1,16 +1,14 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from 'react-redux';
-
 
 const EmergencyReportForm = () => {
   const { currentUser } = useSelector((state) => state.user);
- console.log(currentUser._id)
   const [location, setLocation] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState(null);
+  const [loading, setLoading] = useState(false); // State for loading
+  const [submitSuccess, setSubmitSuccess] = useState(false); // State for submission success
 
   const handleLocationChange = (e) => {
     setLocation(e.target.value);
@@ -26,7 +24,11 @@ const EmergencyReportForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
+      if (!currentUser || !currentUser._id) {
+        throw new Error('User information not available');
+      }
       const formData = new FormData();
       formData.append('location', location);
       formData.append('description', description);
@@ -34,24 +36,28 @@ const EmergencyReportForm = () => {
         formData.append('image', image);
       }
       formData.append('userId', currentUser._id);
-      // ${import.meta.env.VITE_BACKEND_URL}
+      
       await axios.post(`/api/v1/report`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-  
+      
+      setSubmitSuccess(true);
+      // Reset form fields after successful submission
       setLocation('');
       setDescription('');
       setImage(null);
-      toast.success('Emergency report sent successfully!');
+      // Reset form submission success state after 3 seconds
+      e.target.reset();
+      setTimeout(() => {
+        setSubmitSuccess(false);
+      }, 3000);
     } catch (error) {
       console.error('Error submitting emergency report:', error);
-      toast.error('Failed to submit emergency report');
     }
+    setLoading(false);
   };
-  
-
 
   return (
     <div className="max-w-md mx-auto mt-8 bg-slate-200 p-5 rounded-md shadow-lg">
@@ -88,12 +94,14 @@ const EmergencyReportForm = () => {
         </div>
         <button
           type="submit"
-          className="w-full bg-red-500 text-white font-bold py-2 rounded-md transition duration-300 hover:bg-blue-600"
+          className={`w-full font-bold py-2 rounded-md transition duration-300 ${
+            submitSuccess ? 'bg-green-500 text-white hover:bg-green-600' : 'bg-red-500 text-white hover:bg-blue-600'
+          }`}
+          disabled={loading}
         >
-          Submit
+          {loading ? 'Submitting...' : (submitSuccess ? 'Submitted' : 'Submit')}
         </button>
       </form>
-      <ToastContainer />
     </div>
   );
 };
