@@ -44,7 +44,7 @@ const WeatherCondition = () => {
   const iconUrl = `https://developer.accuweather.com/sites/default/files/${iconNumber}-s.png`;
 
   return (
-    <div className=" mx-auto bg-red-600 p-5 rounded-md shadow-lg outline outline-1 outline-slate-400">
+    <div className=" mx-auto bg-slate-900 p-5 rounded-md shadow-lg outline outline-1 outline-slate-400">
 
     <div className="flex flex-col items-center justify-between p-4">
         <h1 className="mb-4 text-4xl font-extrabold text-white">Taguig City</h1>
