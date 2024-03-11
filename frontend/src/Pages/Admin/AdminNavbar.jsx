@@ -73,7 +73,7 @@ export default function AdminNavbar() {
         } [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300`}
       >
         <div className="px-6 flex justify-center">
-          <Link to="#" className="flex-none text-xl font-semibold" aria-label="Brand">
+          <Link to="/" className="flex-none text-xl font-semibold" aria-label="Brand">
             <img src={AgapayReadylogo} className='w-20'/>
           </Link>
           <button

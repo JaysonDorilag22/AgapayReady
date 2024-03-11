@@ -2,6 +2,7 @@ import EmergencyReport from "../models/report.model.js";
 import User from "../models/user.model.js";
 import { io, connectedUsers } from '../index.js'; // Importing connectedUsers map from index.js
 import cloudinary from 'cloudinary';
+import moment from 'moment';
 
 export const createEmergencyReport = async (req, res) => {
   try {
@@ -61,6 +62,21 @@ export const getAllEmergencyReports = async (req, res) => {
     res.json(reports);
   } catch (error) {
     console.error('Error fetching emergency reports:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+export const getEmergencyReportsCount = async (req, res) => {
+  try {
+    // Calculate the date three months ago
+    const threeMonthsAgo = moment().subtract(3, 'months').toDate();
+
+    // Query MongoDB for emergency reports created after the calculated date
+    const count = await EmergencyReport.countDocuments({ createdAt: { $gte: threeMonthsAgo } });
+
+    res.json({ count });
+  } catch (error) {
+    console.error('Error fetching emergency reports count:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 };

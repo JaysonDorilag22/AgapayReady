@@ -97,7 +97,7 @@ export default function Features() {
     <ambientLight intensity={5} />
     <spotLight position={[20, 10, 10]} angle={0.15} penumbra={1} />
     <pointLight position={[-10, -10, -10]} />
-    <Model url="/models/tupnga.glb"/>
+    <Model url="/models/EarthquakeEvacuation/ITBUILDING.glb"/>
     <OrbitControls />
   </Canvas>
 </div>

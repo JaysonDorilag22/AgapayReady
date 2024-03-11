@@ -19,7 +19,7 @@ export default function AdminDashboard() {
   return (
     <div>
       <div>
-        <h1 className="m-10 text-3xl font-bold">Dashboard</h1>
+        {/* <h1 className="m-10 text-3xl font-bold">Dashboard</h1> */}
 
         <Stats />
       </div>
@@ -132,13 +132,13 @@ export default function AdminDashboard() {
 
       <div className="grid grid-cols-2 gap-4 py-10 mx-auto m-auto rounded-md">
         <div className=" rounded-md ml-3">
-          <PieChart />
+          {/* <PieChart /> */}
         </div>
         <div className=" rounded-md m-3">
-          <BarChart />
+          {/* <BarChart /> */}
         </div>
         <div className=" rounded-md mr-3">
-          <LineChart />
+          {/* <LineChart /> */}
         </div>
       </div>
       
