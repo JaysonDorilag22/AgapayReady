@@ -36,8 +36,13 @@ export default function SentimentAnalysis() {
     const pieChartData = {
       labels: ['Positive Words', 'Negative Words'],
       datasets: [{
-        label: 'Word Distribution',
+        labels: ['Positive Distribution', 'Negative Distribution'],
         backgroundColor: ['#4CAF50', '#F44336'],
+        borderColor: 'white',
+        borderWidth: 1,
+        hoverBackgroundColor: ['#4CAF50', '#F44336'],
+        hoverBorderColor: 'black',
+        hoverBorderWidth: 3,
         data: [feedbackStats.totalPositiveWords, feedbackStats.totalNegativeWords],
       }]
     };
@@ -58,7 +63,7 @@ export default function SentimentAnalysis() {
   }
 
   return (
-    <section className="bg-white outline outline-1 outline-slate-400 mx-auto max-w-screen-xl px-4 lg:px-12 rounded-md">
+    <section className="bg-white outline outline-1 outline-slate-400 mx-auto pb-8 max-w-screen-xl px-4 lg:px-12 rounded-md">
       <div className="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 md:py-16 lg:px-8">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">
@@ -76,54 +81,55 @@ export default function SentimentAnalysis() {
 
         <div className="mt-8 sm:mt-12">
           <dl className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-            <div className="flex flex-col rounded-lg bg-slate-50 px-4 py-8 text-center">
-              <dt className="order-last text-lg font-medium text-gray-500">
+            <div className="flex flex-col rounded-lg bg-slate-50 px-4 py-8 text-center hover:bg-red-200">
+              <dt className="order-last text-lg font-medium text-gray-500 hover:text-black">
                 Total Feedback Entries
               </dt>
-              <dd className="text-4xl font-extrabold text-slate-600 md:text-5xl">
+              <dd className="text-4xl font-extrabold text-slate-600 hover:text-black md:text-5xl">
                 {feedbackStats.totalEntries}
               </dd>
             </div>
 
-            <div className="flex flex-col rounded-lg bg-slate-50 px-4 py-8 text-center">
-              <dt className="order-last text-lg font-medium text-gray-500">
+            <div className="flex flex-col rounded-lg bg-slate-50 px-4 py-8 text-center hover:bg-red-200">
+              <dt className="order-last text-lg font-medium text-gray-500 hover:text-black">
                 Average Sentiment Score
               </dt>
-              <dd className="text-4xl font-extrabold text-slate-600 md:text-5xl">
+              <dd className="text-4xl font-extrabold text-slate-600 md:text-5xl hover:text-black">
                 {feedbackStats.averageSentimentScore}
               </dd>
             </div>
 
-            <div className="flex flex-col rounded-lg bg-slate-50 px-4 py-8 text-center">
-              <dt className="order-last text-lg font-medium text-gray-500">
+            <div className="flex flex-col rounded-lg bg-slate-50 px-4 py-8 text-center hover:bg-red-200">
+              <dt className="order-last text-lg font-medium text-gray-500 hover:text-black">
                 Average Comparative
               </dt>
-              <dd className="text-4xl font-extrabold text-slate-600 md:text-5xl">
+              <dd className="text-4xl font-extrabold text-slate-600 md:text-5xl hover:text-black">
                 {feedbackStats.averageComparative}
               </dd>
             </div>
 
-            <div className="flex flex-col rounded-lg bg-slate-50 px-4 py-8 text-center">
-              <dt className="order-last text-lg font-medium text-gray-500">
-                Total Positive Words:
-              </dt>
-              <dd className="text-4xl font-extrabold text-slate-600 md:text-5xl">
-                {feedbackStats.totalPositiveWords}
-              </dd>
-            </div>
-
-            <div className="flex flex-col rounded-lg bg-slate-50 px-4 py-8 text-center">
-              <dt className="order-last text-lg font-medium text-gray-500">
-                Total Negative Words:
-              </dt>
-              <dd className="text-4xl font-extrabold text-slate-600 md:text-5xl">
-                {feedbackStats.totalNegativeWords}
-              </dd>
+            <div className="flex flex-row col-start-1 col-end-4 rounded-lg bg-slate-50 px-4 py-8 gap-12 text-center justify-center hover:bg-red-200">
+              <div className="flex flex-col">
+                <dt className="order-last text-lg font-medium text-gray-500 hover:text-black">
+                  Total Positive Words:
+                </dt>
+                <dd className="text-4xl font-extrabold text-green-600 md:text-5xl hover:text-black">
+                  {feedbackStats.totalPositiveWords}
+                </dd>
+              </div>
+              <div className="flex flex-col">
+              <dt className="order-last text-lg font-medium text-gray-500 hover:text-black">
+                  Total Negative Words:
+                </dt>
+                <dd className="text-4xl font-extrabold text-red-600 md:text-5xl hover:text-black">
+                  {feedbackStats.totalNegativeWords}
+                </dd>
+              </div>
             </div>
           </dl>
         </div>
       </div>
-      <div className="mt-8">
+      <div className="my-8">
           <canvas id="pieChart" />
         </div>
     </section>

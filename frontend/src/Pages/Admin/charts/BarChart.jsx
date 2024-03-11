@@ -1,44 +1,54 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import Chart from 'chart.js/auto';
+import moment from 'moment';
 
 const BarChart = () => {
   const chartRef = useRef(null);
+  const chartInstanceRef = useRef(null); // New ref to store the chart instance
   const [emergencyReportsCount, setEmergencyReportsCount] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch emergency reports count from the server
         const response = await axios.get('/api/v1/reports-three-months');
-        setEmergencyReportsCount(response.data.count);
+        console.log(response.data); // Check the response data
+        setEmergencyReportsCount(response.data.counts.map(c => c.count));
       } catch (error) {
         console.error('Error fetching emergency reports count:', error);
       }
     };
-
+  
     fetchData();
   }, []);
-
+  
   useEffect(() => {
     const createChart = () => {
-      // Data for the chart
+      console.log('Creating chart'); // Check if the function is being called
       const chartData = {
-        labels: ['Past 3 Months'],
+        labels: Array.from({length: 7}, (_, i) => moment().subtract(7 - i, 'days').format('MMM DD')),
         datasets: [
           {
-            label: 'Emergency Reports Count',
-            backgroundColor: 'rgba(75, 192, 192, 0.7)',
-            borderColor: 'rgba(75, 192, 192, 1)',
+            label: 'Emergency Reports For The Last 7 Days',
+            backgroundColor: 'black',
+            borderColor: 'blue',
             borderWidth: 1,
-            data: [emergencyReportsCount],
+            hoverBackgroundColor: 'red',
+            hoverBorderColor: 'black',
+            hoverBorderWidth: 3,
+            data: emergencyReportsCount,
           },
         ],
       };
 
-      // Create the chart only if chartRef.current is available
+      console.log('chartRef.current', chartRef.current);
       if (chartRef.current) {
-        const myChart = new Chart(chartRef.current, {
+        // If a chart instance already exists, destroy it
+        if (chartInstanceRef.current) {
+          chartInstanceRef.current.destroy();
+        }
+
+        chartInstanceRef.current = new Chart(chartRef.current, {
           type: 'bar',
           data: chartData,
           options: {
@@ -50,9 +60,11 @@ const BarChart = () => {
           },
         });
 
-        // Cleanup on component unmount
         return () => {
-          myChart.destroy();
+          // Destroy the chart instance in the cleanup function
+          if (chartInstanceRef.current) {
+            chartInstanceRef.current.destroy();
+          }
         };
       }
     };
@@ -60,7 +72,7 @@ const BarChart = () => {
     createChart();
   }, [emergencyReportsCount]);
 
-  return <canvas ref={chartRef} style={{ width: '100%', height: '100%' }} />;
+  return <canvas ref={chartRef} style={{ width: '600px', height: '100px' }} />;
 };
 
 export default BarChart;

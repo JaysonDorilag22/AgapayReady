@@ -68,18 +68,32 @@ export const getAllEmergencyReports = async (req, res) => {
 
 export const getEmergencyReportsCount = async (req, res) => {
   try {
-    // Calculate the date three months ago
-    const threeMonthsAgo = moment().subtract(3, 'months').toDate();
+    const sevenDaysAgo = moment().subtract(7, 'days').toDate();
 
-    // Query MongoDB for emergency reports created after the calculated date
-    const count = await EmergencyReport.countDocuments({ createdAt: { $gte: threeMonthsAgo } });
+    const counts = await EmergencyReport.aggregate([
+      {
+        $match: {
+          timestamp: { $gte: sevenDaysAgo }
+        }
+      },
+      {
+        $group: {
+          _id: { $dayOfYear: "$timestamp" },
+          count: { $sum: 1 }
+        }
+      },
+      {
+        $sort: { _id: 1 }
+      }
+    ]);
 
-    res.json({ count });
+    res.json({ counts });
   } catch (error) {
     console.error('Error fetching emergency reports count:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 };
+
 
 function getUserSocketId(userId) {
   return connectedUsers.get(userId) || null;
