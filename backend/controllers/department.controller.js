@@ -1,6 +1,8 @@
 import Department from "../models/department.model.js";
 import User from "../models/user.model.js";
 
+import EmergencyReport from '../models/report.model.js';
+
 // Create Department
 export const createDepartment = async (req, res, next) => {
   const { name, description } = req.body;
@@ -76,5 +78,70 @@ export const deleteDepartment = async (req, res, next) => {
     res.status(200).json({ message: "Department deleted successfully" });
   } catch (error) {
     next(error);
+  }
+};
+
+export const getUsersPerDepartment = async (req, res) => {
+  try {
+    const counts = await User.aggregate([
+      {
+        $lookup: {
+          from: "departments", // use the collection name, not the model name
+          localField: "department",
+          foreignField: "_id",
+          as: "department"
+        }
+      },
+      { $unwind: "$department" },
+      {
+        $group: {
+          _id: '$department.name',
+          count: { $sum: 1 }
+        }
+      }
+    ]);
+
+    res.json({ counts });
+  } catch (error) {
+    console.error('Error fetching users per department:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+
+export const getReportsPerDepartment = async (req, res) => {
+  try {
+    const counts = await EmergencyReport.aggregate([
+      {
+        $lookup: {
+          from: "users",
+          localField: "user",
+          foreignField: "_id",
+          as: "user"
+        }
+      },
+      { $unwind: "$user" },
+      {
+        $lookup: {
+          from: "departments", // use the collection name, not the model name
+          localField: "user.department",
+          foreignField: "_id",
+          as: "department"
+        }
+      },
+      { $unwind: "$department" },
+      {
+        $group: {
+          _id: '$department.name', // Use department names as labels
+          count: { $sum: 1 }
+        }
+      },
+      { $sort: { _id: 1 } } // Sort by department to get the data in chronological order
+    ]);
+
+    res.json({ counts });
+  } catch (error) {
+    console.error('Error fetching reports per department:', error);
+    res.status(500).json({ error: 'Internal server error' });
   }
 };
