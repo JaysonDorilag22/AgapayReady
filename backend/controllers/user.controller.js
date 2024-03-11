@@ -284,3 +284,23 @@ export const resetPassword = async (req, res, next) => {
     res.status(400).json({ error: "Invalid or expired token" });
   }
 };
+
+
+export const getUserProfile = async (req, res, next) => {
+  try {
+    // Fetch user profile based on the user ID stored in the request object
+    const userProfile = await User.findById(req.user.id).populate('department');
+    
+    if (!userProfile) {
+      return res.status(404).json({ error: "User profile not found" });
+    }
+
+    // Exclude sensitive information like password before sending the response
+    const { password, ...profileData } = userProfile._doc;
+
+    res.status(200).json(profileData);
+  } catch (error) {
+    errorHandler(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};

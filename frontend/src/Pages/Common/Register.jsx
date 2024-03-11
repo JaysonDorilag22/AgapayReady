@@ -3,6 +3,8 @@ import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -47,17 +49,15 @@ export default function Register() {
 
   return (
     <>
+      <ToastContainer /> {/* Include ToastContainer to render toasts */}
       <section className="bg-white">
         <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
-          {/* Left section */}
           <section className="relative flex h-32 place-items-center justify-end mb-4 bg-gray-900 lg:col-span-5 lg:h-screen xl:col-span-6">
-            {/* Image */}
             <img
               alt="Night"
               src="https://the-post-assets.sgp1.digitaloceanspaces.com/2022/12/TUP_thumbnail.png"
               className="absolute inset-0 h-full w-full object-cover opacity-60"
             />
-            {/* Text */}
             <div className="hidden lg:relative lg:block lg:p-12">
               <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
                 Welcome to AgapayReady
@@ -97,13 +97,17 @@ export default function Register() {
                     navigate("/email-verification");
                   } catch (error) {
                     console.error("Registration failed", error);
+                    if (error.response && error.response.status === 409) {
+                      toast.error("Account already exists");
+                    } else {
+                      toast.error("Account already exists");
+                    }
                   }
                   setLoading(false);
                 }}
               >
                 {({ isSubmitting, setFieldValue }) => (
                   <Form className="mt-5 grid grid-cols-6 gap-6">
-                    {/* First Name */}
                     <div className="col-span-6 sm:col-span-3">
                       <label htmlFor="firstname" className="block text-sm font-medium text-gray-700">
                         First Name
@@ -111,7 +115,6 @@ export default function Register() {
                       <Field type="text" id="firstname" name="firstname" className="placeholder" />
                       <ErrorMessage name="firstname" component="div" className="text-red-600 text-sm mt-1" />
                     </div>
-                    {/* Last Name */}
                     <div className="col-span-6 sm:col-span-3">
                       <label htmlFor="lastname" className="block text-sm font-medium text-gray-700">
                         Last Name
@@ -119,7 +122,6 @@ export default function Register() {
                       <Field type="text" id="lastname" name="lastname" className="placeholder" />
                       <ErrorMessage name="lastname" component="div" className="text-red-600 text-sm mt-1" />
                     </div>
-                    {/* Email */}
                     <div className="col-span-6">
                       <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                         Email
@@ -127,7 +129,6 @@ export default function Register() {
                       <Field type="email" id="email" name="email" className="placeholder" />
                       <ErrorMessage name="email" component="div" className="text-red-600 text-sm mt-1" />
                     </div>
-                    {/* Password */}
                     <div className="col-span-6 sm:col-span-3">
                       <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                         Password
@@ -135,7 +136,6 @@ export default function Register() {
                       <Field type="password" id="password" name="password" className="placeholder" />
                       <ErrorMessage name="password" component="div" className="text-red-600 text-sm mt-1" />
                     </div>
-                    {/* Department */}
                     <div className="col-span-6 sm:col-span-3">
                       <label htmlFor="departmentId" className="block text-sm font-medium text-gray-700">
                         Department
@@ -148,7 +148,6 @@ export default function Register() {
                       </Field>
                       <ErrorMessage name="departmentId" component="div" className="text-red-600 text-sm mt-1" />
                     </div>
-                    {/* Avatar */}
                     <div className="col-span-6 sm:col-span-6">
                       <label htmlFor="avatar" className="block text-sm font-medium text-gray-700">
                         Profile
@@ -165,7 +164,6 @@ export default function Register() {
                       />
                       <ErrorMessage name="avatar" component="div" className="text-red-600 text-sm mt-1" />
                     </div>
-                    {/* Submit button */}
                     <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
                       <button
                         type="submit"

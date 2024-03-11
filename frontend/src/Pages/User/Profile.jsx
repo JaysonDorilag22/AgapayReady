@@ -1,43 +1,88 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import Loader from "../Loader";
 import axios from "axios";
+import EditProfileModal from "./EditProfileModal";
+import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux"; // Import Redux hooks
+import { updateUserStart, updateUserSuccess, updateUserFailure } from "../../redux/Users/userSlice";
 
 export default function Profile() {
-  const { currentUser } = useSelector((state) => state.user);
-  const [department, setDepartment] = useState(null);
-  const [loading, setLoading] = useState(false); // State to manage loading status
+  const [userDetails, setUserDetails] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [updating, setUpdating] = useState(false);
+  const [formData, setFormData] = useState({
+    firstname: "",
+    lastname: "",
+    email: "",
+    phoneNumber: "",
+    avatar: null,
+    coverPhoto: null
+  });
+
+  const dispatch = useDispatch(); // Get dispatch function from Redux
 
   useEffect(() => {
-    const fetchDepartment = async () => {
-      setLoading(true); // Set loading to true when fetching starts
+    const fetchUserDetails = async () => {
       try {
-        const response = await axios.get(`/api/v1/department/${currentUser.department}`);
-
-        const data = await response.json();
-        setDepartment(data);
+        const response = await axios.get("/api/v1/me");
+        setUserDetails(response.data);
+        setLoading(false);
       } catch (error) {
-        console.error("Error fetching department data:", error);
-        setLoading(false); 
-      } 
+        console.error("Error fetching user details:", error);
+        setLoading(false);
+      }
     };
 
-    if (currentUser && currentUser.department) {
-      fetchDepartment();
+    fetchUserDetails();
+  }, []);
+
+  const handleInputChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    const name = e.target.name;
+
+    setFormData({ ...formData, [name]: file });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      setUpdating(true);
+      dispatch(updateUserStart()); // Dispatch updateUserStart action
+
+      const response = await axios.post(`/api/v1/update/${userDetails._id}`, formData);
+
+      if (response.data.success) {
+        toast.success("User updated successfully!");
+        dispatch(updateUserSuccess(response.data)); // Dispatch updateUserSuccess action with response data
+        const updatedUserResponse = await axios.get("/api/v1/me");
+        setUserDetails(updatedUserResponse.data);
+      } else {
+        toast.success(response.data.message);
+      }
+    } catch (error) {
+      toast.error("An error occurred while updating user.");
+      dispatch(updateUserFailure(error)); // Dispatch updateUserFailure action with error
+    } finally {
+      setIsModalOpen(false); // Close the modal regardless of success or failure
+      setUpdating(false);
+      window.location.reload()
     }
-  }, [currentUser]);
+  };
 
   return (
     <div className="p-16 flex justify-center bg-slate-300">
-    {loading ? ( 
-            <Loader />
-          ) : (
-      <div className="relative w-full max-w-screen-lg">
-        <img className="w-full h-96 object-cover rounded-t-xl" src={currentUser.coverPhoto} alt="Cover Photo" />
-        <div className="absolute inset-0 bg-black opacity-50 rounded-t-xl"></div>
-        <div className="p-8 bg-white shadow -mt-20 relative">
-          
+      {loading ? (
+        <Loader />
+      ) : (
+        <div className="relative w-full max-w-screen-lg">
+          <img className="w-full h-96 object-cover rounded-t-xl" src={userDetails.coverPhoto} alt="Cover Photo" />
+          <div className="absolute inset-0 bg-black opacity-50 rounded-t-xl"></div>
+          <div className="p-8 bg-white shadow -mt-20 relative">
             <>
               <div className="grid grid-cols-1 md:grid-cols-3">
                 <div className="grid grid-cols-3 text-center order-last md:order-first mt-20 md:mt-0">
@@ -56,11 +101,11 @@ export default function Profile() {
                 </div>
                 <div className="relative">
                   <div className="w-48 h-48 bg-indigo-100 mx-auto rounded-full  absolute inset-x-0 top-0 -mt-24 flex items-center justify-center text-indigo-500">
-                    <img src={currentUser.avatar} alt="Avatar" className="w-48 h-48 rounded-full" />
+                    <img src={userDetails.avatar} alt="Avatar" className="w-48 h-48 rounded-full" />
                   </div>
                 </div>
                 <div className="space-x-8 flex justify-between mt-32 md:mt-0 md:justify-center">
-                  <button className="text-white py-2 px-4 rounded bg-red-400 hover:bg-red-500 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
+                  <button className="text-white py-2 px-4 rounded bg-red-400 hover:bg-red-500 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5" onClick={() => setIsModalOpen(true)}>
                     Edit Profile
                   </button>
                   <button className="text-white py-2 px-4 rounded bg-gray-700 hover:bg-gray-800 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
@@ -69,22 +114,31 @@ export default function Profile() {
                 </div>
               </div>
               <div className="mt-20 text-center border-b pb-12">
-                <h1 className="text-4xl font-medium text-gray-700">{currentUser.firstname} {currentUser.lastname}</h1>
-                <p className="font-light text-gray-600 mt-3">{currentUser.email}</p>
-                <p className="font-light text-gray-600 mt-3">{currentUser.phoneNumber}</p>
-                {department && (
-                  <>
-                    <p className="mt-8 text-gray-500">{department.name}</p>
-                    <p className="mt-2 text-gray-500">{department.description}</p>
-                  </>
-                )}
-                <p className="mt-2 text-gray-500">Technological University of the Philippines</p>
+                <h1 className="text-4xl font-medium text-gray-700">{userDetails.firstname} {userDetails.lastname}</h1>
+                <p className="font-light text-gray-600 mt-3">{userDetails.email}</p>
+                <p className="font-light text-gray-600 mt-3">{userDetails.phoneNumber}</p>
+                {/* Other user details */}
               </div>
             </>
+          </div>
         </div>
-      </div>
       )}
 
+      {isModalOpen && (
+        <EditProfileModal
+          userData={userDetails}
+          setIsModalOpen={setIsModalOpen}
+          handleInputChange={handleInputChange}
+          handleFileChange={handleFileChange}
+          handleSubmit={handleSubmit}
+        />
+      )}
+
+      {updating && (
+        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
+          <Loader />
+        </div>
+      )}
     </div>
   );
 }

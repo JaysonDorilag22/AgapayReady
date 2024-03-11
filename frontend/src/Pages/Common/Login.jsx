@@ -134,7 +134,7 @@ const onSubmit = async (values, { setSubmitting }) => {
         </Formik>
         <p className="mt-2 text-center text-sm text-gray-500">
           {loginError && (
-            <span className="text-red-600">{loginError}</span>
+            <span className="text-red-600">{'Invalid email or password'}</span>
           )}
         </p>
 
