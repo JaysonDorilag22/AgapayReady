@@ -71,7 +71,7 @@ const GuidelineCollections = () => {
               </form>
             </div>
           </div>
-          <div className="grid gap-4 grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-4 grid-cols-2 lg:grid-cols-3">
             {filteredCategories.map((category) => (
               <Card
                 key={category._id}
