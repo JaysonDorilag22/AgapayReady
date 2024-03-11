@@ -44,10 +44,37 @@ export const register = async (req, res, next) => {
       from: process.env.EMAIL_USER,
       to: email,
       subject: "Email Confirmation",
-      html: `<p>Please click for vercel <a href="https://agapay-ready.vercel.app/email-confirm/${savedUser.id}/${confirmationToken}">here</a> to confirm your email.</p>`,
-      html: `<p>Please click for localhost <a href="http://localhost:5173/email-confirm/${savedUser.id}/${confirmationToken}">here</a> to confirm your email.</p>`,
-
+      html: `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta http-equiv="X-UA-Compatible" content="IE=edge">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Email Confirmation</title>
+        </head>
+        <body style="font-family: Arial, sans-serif;">
+    
+          <!-- Logo Section -->
+          <div style="text-align: center;">
+            <img src="https://scontent.fmnl33-2.fna.fbcdn.net/v/t1.15752-9/431069846_1132550754544007_2624880552037559972_n.png?_nc_cat=111&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeEkwEh8zJz9g8U1xwzDEzlB2vh06Anp8r_a-HToCenyv0Q5PUVMKXNi7a0CHEGb4rLzNfSstTsZnQooxNENbO_S&_nc_ohc=4g2vdyAhZqkAX_nbVNc&_nc_ht=scontent.fmnl33-2.fna&oh=03_AdSw8RzIziBQZyX0zkAMBjM_kkpkCqpaS2v53gVYSLQNtA&oe=6614BE08" alt="Your Logo" style="max-width: 200px; margin-bottom: 20px;">
+          </div>
+    
+          <!-- Email Content -->
+          <div style="max-width: 600px; margin: 0 auto;">
+            <p>Dear User,</p>
+            <p>Please click <a href="http://localhost:5173/email-confirm/${savedUser.id}/${confirmationToken}">here</a> to confirm your email</p>
+            <p>If you did not create an account or did not request this email, you can safely ignore it.</p>
+            <p>Thank you for your attention.</p>
+            <p>Best regards,</p>
+            <p>Agapay Ready</p>
+          </div>
+    
+        </body>
+        </html>
+      `,
     });
+    
     res.status(201).json({
       message: "A confirmation email has been sent. Please check your email to confirm your registration.",
     });
