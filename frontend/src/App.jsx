@@ -47,7 +47,9 @@ import CategoryContactsTable from './Pages/Admin/contacts/CategoryContactsTable'
 import CategoryGuidelinesTable from './Pages/Admin/guidelines/CategoryGuidelinesTable';
 import ForgotPassword from './Pages/Common/ForgotPassword';
 import ResetPassword from './Pages/Common/ResetPassword';
-
+import EvacuationGuidelinesTable from './Pages/Admin/evacuationguidelines/EvacuationGuidelinesTable';
+import CreateEvacuationGuidelines from './Pages/Admin/evacuationguidelines/CreateEvacuationGuidelines';
+import UpdateEvacuationGuidelines from './Pages/Admin/evacuationguidelines/UpdateEvacuationGuidelines';
 const socket = io("http://localhost:4000");
 
 const AdminRouterWrapper = ({ element }) => {
@@ -128,6 +130,8 @@ function App() {
               <Route path='report' element={<EmergencyReport />} />
               <Route path='create/steps' element={<CreateSteps />} />
               <Route path='create/contacts' element={<CreateContacts />} />
+              <Route path='create/evacuation' element={<CreateEvacuationGuidelines />} />
+
               <Route path='create/guidelines' element={<CreateGuidelines />} />
               <Route path='create/category/contacts' element={<CreateCategoryContacts />} />
               <Route path='create/category/guidelines' element={<CreateCategoryGuidelines />} />
@@ -141,6 +145,8 @@ function App() {
               <Route path='guideline/table' element={<GuidelineTable />} />
               <Route path='guideline/category/table' element={<CategoryGuidelinesTable />} />
               <Route path='contact/table' element={<ContactsTable />} />
+              <Route path='evacuation/table' element={<EvacuationGuidelinesTable />} />
+              <Route path='update/evacuation/:guidelineId' element={<UpdateEvacuationGuidelines />} />
               <Route path='contact/category/table' element={<CategoryContactsTable />} />
               <Route path='department/table' element={<DepartmentTable />} />
               <Route path='guidelines/:guidelineId' element={<Guidelinesteps />} />

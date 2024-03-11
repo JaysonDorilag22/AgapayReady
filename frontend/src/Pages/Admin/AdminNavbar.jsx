@@ -23,6 +23,7 @@ const navigation = [
   { name: "Contacts Category", to: "/admin/contact/category/table", icon: RiContactsBook2Line },
   { name: "Guidelines Category", to: "/admin/guideline/category/table", icon: BiCategory },
   { name: "Emergency Report", to: "/admin/report", icon: MdOutlineEmergencyShare },
+  { name: "Evacuation Guidelines", to: "/admin/evacuation/table", icon: MdOutlineEmergencyShare },
 ];
 
 export default function AdminNavbar() {
