@@ -43,7 +43,8 @@ export const confirmEmergencyReport = async (req, res) => {
     
     const userSocketId = getUserSocketId(userId);
     if (userSocketId) {
-      emitConfirmationNotification(userSocketId, reportId);
+      // Emitting report confirmation notification to the user
+      io.to(userSocketId).emit('notification', { message: 'Your report has been confirmed!' });
     }
 
     res.status(200).json({ message: 'Emergency report confirmed successfully' });
@@ -52,6 +53,7 @@ export const confirmEmergencyReport = async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
+
 
 export const getAllEmergencyReports = async (req, res) => {
   try {
@@ -67,9 +69,6 @@ function getUserSocketId(userId) {
   return connectedUsers.get(userId) || null;
 }
 
-// function emitReportNotification(report) {
-//   io.emit('newEmergencyReport', report);
-// }
 
 function emitConfirmationNotification(userSocketId, reportId) {
   io.to(userSocketId).emit('reportConfirmed', { reportId });

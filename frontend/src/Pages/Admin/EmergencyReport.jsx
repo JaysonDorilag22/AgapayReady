@@ -57,6 +57,18 @@ export default function EmergencyReport() {
     setCurrentPage(1);
   };
 
+  const handleConfirmReport = async (reportId) => {
+    try {
+      await axios.post(`/api/v1/report-confirm`, { reportId });
+      toast.success("Report confirmed successfully");
+      // Refetch reports after confirmation
+      fetchReports();
+    } catch (error) {
+      console.error("Error confirming report:", error);
+      toast.error("Failed to confirm report");
+    }
+  };
+
   const filteredReports = reports.filter((report) =>
     report.location.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -107,6 +119,9 @@ export default function EmergencyReport() {
                   <th scope="col" className="px-4 py-3 hover:text-black">
                     Confirmation
                   </th>
+                  <th scope="col" className="px-4 py-3 hover:text-black">
+                    Action
+                  </th>
                 </tr>
               </thead>
               <tbody className="text-sm">
@@ -121,6 +136,16 @@ export default function EmergencyReport() {
                     </td>
                     <td className="px-4 py-3 text-center">{new Date(report.timestamp).toLocaleString()}</td>
                     <td className="px-4 py-3 text-center">{report.confirmed ? 'Confirmed' : 'Not Confirmed'}</td>
+                    <td className="px-4 py-3 text-center">
+                      {!report.confirmed && (
+                        <button
+                          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                          onClick={() => handleConfirmReport(report._id)}
+                        >
+                          Confirm
+                        </button>
+                      )}
+                    </td>
                   </tr>
                 ))}
               </tbody>

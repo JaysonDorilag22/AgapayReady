@@ -71,6 +71,7 @@ export default function Profile() {
               <div className="mt-20 text-center border-b pb-12">
                 <h1 className="text-4xl font-medium text-gray-700">{currentUser.firstname} {currentUser.lastname}</h1>
                 <p className="font-light text-gray-600 mt-3">{currentUser.email}</p>
+                <p className="font-light text-gray-600 mt-3">{currentUser.phoneNumber}</p>
                 {department && (
                   <>
                     <p className="mt-8 text-gray-500">{department.name}</p>
