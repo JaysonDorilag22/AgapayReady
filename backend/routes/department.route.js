@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.post('/departments', verifyToken, isAdmin, createDepartment);
 router.get('/departments', getAllDepartments);
-router.get('/departments/:id', getDepartmentById);
+router.get('/department/:id', getDepartmentById);
 router.put('/departments/:id',verifyToken, isAdmin, updateDepartment);
 router.delete('/departments/:id',verifyToken, isAdmin, deleteDepartment);
 

@@ -60,7 +60,7 @@ const EmergencyReportForm = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-8 bg-white p-5 rounded-md shadow-lg outline outline-1 outline-slate-400">
+    <div className=" mx-auto mt-1 bg-white p-5 rounded-md shadow-lg outline outline-1 outline-slate-400">
        <h2 className="title-font mb-1 text-lg font-medium text-gray-900">Report Form</h2>
        <p className="mb-5 leading-relaxed text-gray-600">Use this form to report emergencies and get immediate assistance. Your safety is our priority.</p>
       <form onSubmit={handleSubmit} className="space-y-4">

@@ -44,15 +44,19 @@ const WeatherCondition = () => {
   const iconUrl = `https://developer.accuweather.com/sites/default/files/${iconNumber}-s.png`;
 
   return (
-    <div className="max-w-md mx-auto mt-1 bg-white p-5 rounded-md shadow-lg outline outline-1 outline-slate-400">
-        <div className='items-center justify-between gap-8 p-4 border-t'>
-            <h2 className="title-font mb-1 text-lg font-medium text-gray-900 text-center">Weather in Taguig City</h2>
-            <img src={iconUrl} alt="Weather icon" className="mb-4 mt-7 w-full" />
-            <p className='mt-16'>{currentDate.toLocaleString()}</p>
-            <p className="text-lg">Weather: {weatherData.WeatherText}</p>
-            <p className="text-lg mb-2">Temperature: {weatherData.Temperature.Metric.Value}°{weatherData.Temperature.Metric.Unit}</p>
-        </div>
+    <div className=" mx-auto bg-red-600 p-5 rounded-md shadow-lg outline outline-1 outline-slate-400">
+
+    <div className="flex flex-col items-center justify-between p-4">
+        <h1 className="mb-4 text-4xl font-extrabold text-white">Taguig City</h1>
+        <img src={iconUrl} alt="Weather icon" className="w-72 mx-auto mb-4 mt-7" />
+        <p className="mt-7  text-white font-normal">{currentDate.toLocaleString()}</p>
+        <p className="text-lg mb-2 text-white font-semibold">{weatherData.WeatherText}</p>
+        <p className="text-lg text-white font-semibold ">{weatherData.Temperature.Metric.Value}°{weatherData.Temperature.Metric.Unit}</p>
     </div>
+</div>
+
+
+
   );
 };
 

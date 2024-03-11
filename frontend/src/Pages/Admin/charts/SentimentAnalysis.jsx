@@ -14,8 +14,8 @@ export default function SentimentAnalysis() {
           const feedback = data.feedback;
           setFeedbackStats({
             totalEntries: feedback.length,
-            averageSentimentScore: feedback.reduce((acc, feedback) => acc + feedback.sentimentScore, 0) / feedback.length,
-            averageComparative: feedback.reduce((acc, feedback) => acc + feedback.comparative, 0) / feedback.length,
+            averageSentimentScore: (feedback.reduce((acc, feedback) => acc + feedback.sentimentScore, 0) / feedback.length).toFixed(3),
+            averageComparative: (feedback.reduce((acc, feedback) => acc + feedback.comparative, 0) / feedback.length).toFixed(3),
             totalPositiveWords: feedback.reduce((acc, feedback) => acc + feedback.positiveWords.length, 0),
             totalNegativeWords: feedback.reduce((acc, feedback) => acc + feedback.negativeWords.length, 0),
           });
@@ -58,7 +58,7 @@ export default function SentimentAnalysis() {
   }
 
   return (
-    <section className="bg-white outline outline-1 outline-slate-400 mx-auto max-w-screen-xl px-4 lg:px-12">
+    <section className="bg-white outline outline-1 outline-slate-400 mx-auto max-w-screen-xl px-4 lg:px-12 rounded-md">
       <div className="mx-auto max-w-screen-xl px-4 py-12 sm:px-6 md:py-16 lg:px-8">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">

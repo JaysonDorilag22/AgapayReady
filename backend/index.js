@@ -17,6 +17,7 @@ import departmentRouter from './routes/department.route.js';
 import categoryGuidelinesRouter from './routes/guidelines/category.guidelines.route.js';
 import categoryContactsRouter from "./routes/contacts/category.contacts.route.js";
 import feedbackRouter from "./routes/feedback.route.js"
+import searchRouter from "./routes/search.route.js"
 
 dotenv.config();
 const app = express();
@@ -61,6 +62,8 @@ app.use('/api/v1', categoryGuidelinesRouter);
 app.use('/api/v2', categoryContactsRouter);
 app.use('/api/v1', userRouter);
 app.use('/api/v1', emergencyReportRouter);
+app.use('/api/v1', searchRouter);
+
 
 // Error Handling
 app.use((err, req, res, next) => {

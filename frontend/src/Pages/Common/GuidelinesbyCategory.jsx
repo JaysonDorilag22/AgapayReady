@@ -71,14 +71,14 @@ export default function GuidelinesbyCategory() {
           </form>
         </div>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-8 gap-4 p-5">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-4 p-5">
         {filteredGuidelines.map((guideline, index) => (
-          <div key={index} className="max-w-sm bg-slate-300 border p-5 border-gray-200 rounded-lg shadow-xl">
+          <div key={index} className="max-w-sm bg-white border p-5 border-gray-200 rounded-md outline outline-1 outline-slate-400">
             <button onClick={() => handleGuidelineClick(guideline._id)}>
-              <img className="rounded-t-lg w-full" src={guideline.image} alt={guideline.name} />
+              <img className="rounded-md w-full outline outline-1 outline-slate-500" src={guideline.image} alt={guideline.name} />
               <div className="p-5">
-                <h5 className="mb-2 text-sm font-medium  tracking-tight">{guideline.name}</h5>
-                <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{guideline.short_description}</p>
+                <h5 className="mb-2 text-lg font-semibold  tracking-tight">{guideline.name}</h5>
+                <p className="mb-3 text-sm">{guideline.description}</p>
               </div>
             </button>
           </div>

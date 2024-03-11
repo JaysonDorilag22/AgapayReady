@@ -35,7 +35,7 @@ export default function FeedbackForm() {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-8 bg-white p-5 rounded-md shadow-lg outline outline-1 outline-slate-400">
+    <div className=" mx-auto mt-1 bg-white p-5 rounded-md shadow-lg outline outline-1 outline-slate-400">
 
       <ToastContainer />
       <h2 className="title-font mb-1 text-lg font-medium text-gray-900">Feedback</h2>
@@ -51,7 +51,7 @@ export default function FeedbackForm() {
             maxLength={100} // Set the maximum character length
             className="h-64 w-full resize-none rounded border border-gray-300 bg-white py-1 px-3 text-base leading-6 text-gray-700 outline-none transition-colors duration-200 ease-in-out focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
           ></textarea>
-          <p className="text-sm text-gray-500">{formData.comment.length}/100 characters</p> {/* Display character count */}
+          <p className="text-sm text-gray-500 m-6">{formData.comment.length}/100 characters</p> {/* Display character count */}
         </div>
         <button type="submit" className="w-full font-bold py-2 rounded-md bg-red-500 text-white" disabled={loading}>
           {loading ? 'Submitting...' : 'Submit Feedback'}
