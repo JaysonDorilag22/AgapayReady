@@ -46,6 +46,10 @@ export default function CreateEvacuationGuidelines() {
     }
   };
 
+  const handleRemoveTip = (indexToRemove) => {
+    setTips(tips.filter((_, index) => index !== indexToRemove));
+  };
+
   const handleCancel = () => {
     // You can implement cancel functionality here,
     // such as clearing form inputs or redirecting to another page.
@@ -70,7 +74,12 @@ export default function CreateEvacuationGuidelines() {
               <button type="button" onClick={handleAddTip} className="mt-2 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">Add Tip</button>
               <ul className="mt-2">
                 {tips.map((tip, index) => (
-                  <li key={index} className="text-sm text-gray-900">{tip}</li>
+                  <li key={index} className="flex justify-between items-center text-sm text-gray-900">
+                    {tip}
+                    <button type="button" onClick={() => handleRemoveTip(index)} className="ml-2 text-red-600 hover:text-red-800 focus:outline-none">
+                      Remove
+                    </button>
+                  </li>
                 ))}
               </ul>
             </div>

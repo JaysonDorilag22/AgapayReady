@@ -14,7 +14,7 @@ import { RiContactsBook2Line } from "react-icons/ri";
 import { MdOutlinePhone, MdOutlineEmergencyShare } from "react-icons/md";
 import { Link, useLocation } from "react-router-dom"; 
 import AgapayReadylogo from "../../assets/services/vite.png";
-
+import { GrMap } from "react-icons/gr";
 const navigation = [
   { name: "Dashboard", to: "/admin/dashboard", icon: HiOutlineHome },
   { name: "Departments", to: "/admin/department/table", icon: HiOutlineUser },
@@ -23,7 +23,7 @@ const navigation = [
   { name: "Contacts Category", to: "/admin/contact/category/table", icon: RiContactsBook2Line },
   { name: "Guidelines Category", to: "/admin/guideline/category/table", icon: BiCategory },
   { name: "Emergency Report", to: "/admin/report", icon: MdOutlineEmergencyShare },
-  { name: "Evacuation Guidelines", to: "/admin/evacuation/table", icon: MdOutlineEmergencyShare },
+  { name: "Evacuation Guidelines", to: "/admin/evacuation/table", icon: GrMap },
 ];
 
 export default function AdminNavbar() {
