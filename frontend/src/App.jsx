@@ -50,6 +50,7 @@ import ResetPassword from './Pages/Common/ResetPassword';
 import EvacuationGuidelinesTable from './Pages/Admin/evacuationguidelines/EvacuationGuidelinesTable';
 import CreateEvacuationGuidelines from './Pages/Admin/evacuationguidelines/CreateEvacuationGuidelines';
 import UpdateEvacuationGuidelines from './Pages/Admin/evacuationguidelines/UpdateEvacuationGuidelines';
+import EvacuationById from './Pages/Common/EvacuationById';
 const socket = io("http://localhost:4000");
 
 const AdminRouterWrapper = ({ element }) => {
@@ -113,6 +114,9 @@ function App() {
         <Route path='/guidelines' element={<GuidelineCollections />} />
         <Route path='/contacts' element={<ContactsCollections />} />
         <Route path='/user/evacuation/guidelines' element={<EvacuationGuidelines />} />
+        <Route path='/evacuation/guidelines/:guidelineId' element={<EvacuationById />} />
+
+        {/* /evacuation/guidelines/ */}
         <Route path='/user/profile' element={<Profile />} />
         <Route path='/user/dashboard' element={<UserDashboard />} />
         <Route path='/EarthquakeGuidelines' element={<EarthquakeGuidelines />} />

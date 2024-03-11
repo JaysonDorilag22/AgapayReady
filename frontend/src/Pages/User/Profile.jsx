@@ -117,6 +117,10 @@ export default function Profile() {
                 <h1 className="text-4xl font-medium text-gray-700">{userDetails.firstname} {userDetails.lastname}</h1>
                 <p className="font-light text-gray-600 mt-3">{userDetails.email}</p>
                 <p className="font-light text-gray-600 mt-3">{userDetails.phoneNumber}</p>
+                <p className="font-light text-gray-600 mt-3">{userDetails.department.name}</p>
+                <p className="font-light text-gray-600 mt-3">{userDetails.department.description}</p>
+
+
                 {/* Other user details */}
               </div>
             </>

@@ -7,7 +7,7 @@ const EditProfileModal = ({ userData, setIsModalOpen, handleInputChange, handleF
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-50 rounded-md p-10">
       <div className="bg-white p-8 rounded-lg">
         <h2 className="text-2xl font-semibold mb-4">Edit Profile</h2>
         <form onSubmit={handleSubmit}>
