@@ -35,9 +35,9 @@ export default function UserDashboard() {
           <FeedbackForm />
         </div>
       </div>
-      <div className="container mx-auto px-4 sm:px-8 xl:px-20 mt-10 outline outline-1 outline-slate-500 rounded-md mb-5">
+      {/* <div className="container mx-auto px-4 sm:px-8 xl:px-20 mt-10 outline outline-1 outline-slate-500 rounded-md mb-5">
         <Collections />
-      </div>
+      </div> */}
     </div>
   );
 }
