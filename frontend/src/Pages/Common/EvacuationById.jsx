@@ -79,7 +79,9 @@ export default function Features() {
                     Tips
                   </dt>{" "}
                   <br />
-                  <dd className="inline w-[100px] overflow-ellipsis overflow-hidden">{guideline.tips}</dd>
+                  {JSON.parse(guideline.tips).map((tip, index) => (
+                  <dd key={index} className="w-[350px] overflow-ellipsis overflow-hidden">{tip}</dd>
+                ))}
                 </div>
               </dl>
             </div>
