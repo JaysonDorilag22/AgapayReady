@@ -24,7 +24,6 @@ export default function landingPage() {
     <Features/>
     <Teams/>
     <FAQSection/>
-    <WeatherCondition/>
     </div>
   );
 }
